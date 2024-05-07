@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/taste-food
+    username: postgres
+    password: postgres
+  flyway:
+    url: jdbc:postgresql://localhost:5432/taste-food
+    username: postgres
+    password: postgres
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: validate
+    properties:
+      hibernate:
+        generate_statistics: false
+        enable_lazy_load_no_trans: true
+      org:
+        hibernate:
+          envers:
+            store_data_at_delete: true
+    open-in-view: false
+

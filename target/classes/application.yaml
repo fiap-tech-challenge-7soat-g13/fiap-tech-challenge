@@ -1,0 +1,35 @@
+server:
+  port: 8083
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_param
+    include-exception: false
+
+logging:
+  level:
+    root: INFO
+
+spring:
+  application:
+    name: taste-foo
+  profiles:
+    default: postgres
+  logging:
+    level:
+      org.hibernate.SQL: DEBUG
+      org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  mvc:
+    pathmatch:
+      matching-strategy: "ant-path-matcher"
+  config:
+    import: application-postgres.yml
+  flyway:
+    enabled: true
+    validate-on-migrate: true
+    baseline-on-migrate: true
+  jpa:
+    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  jackson:
+    default-property-inclusion: non_null
