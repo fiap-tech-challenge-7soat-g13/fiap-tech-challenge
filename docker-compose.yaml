@@ -1,36 +1,21 @@
 version: '3.4'
-
 services:
   app:
     build: .
-    container_name: fiap-soat-project_project_api
-    environment:
-      - DB_HOST=db
-      - DB_USERNAME=user_tech
-      - DB_PASSWORD=testtest
-      - DB_NAME=fiap-soat-project_db
+    restart: always
     ports:
-      - "3000:3000"
+      - "8083:8083"
     depends_on:
-      - db
-    networks:
-      - fiap-project-network
-  db:
-    image: mysql
-    container_name: fiap-soat-project_db
+      - postgres
+  postgres:
+    image: postgres:16-alpine
+    restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=admin123
-      - MYSQL_DATABASE=fiap-soat-project_db
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: taste-food
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - db:/var/lib/mysql
-    networks:
-      - fiap-project-network
-
+      - postgres:/var/lib/postgresql/data
 volumes:
-   db:
-
-networks:
-  fiap-project-network:
-    driver: bridge
+  postgres:
