@@ -1,23 +1,9 @@
-FROM node:18-alpine AS build
-
+FROM maven:3-eclipse-temurin-21-alpine AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package
 
-COPY package.json yarn.lock tsconfig.json ./
-RUN yarn install --frozen-lockfile
-
-COPY src ./src
-
-RUN yarn run build
-
-FROM node:18-alpine as prod
-
-ENV NODE_ENV=production
-
+FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
-
-COPY --from=build /app/package.json /app/yarn.lock ./
-COPY --from=build /app/dist ./dist
-
-RUN yarn install --frozen-lockfile --production
-
-CMD [ "node", "dist/index.js" ]
+COPY --from=build /app/target/*.jar app.jar
+CMD [ "java", "-jar", "app.jar" ]
