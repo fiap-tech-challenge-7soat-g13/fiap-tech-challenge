@@ -1,0 +1,15 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: taste-food
+  datasource:
+    url: jdbc:postgresql://localhost:5432/taste_food
+    username: postgres
+    password: postgres
+  flyway:
+    enabled: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate

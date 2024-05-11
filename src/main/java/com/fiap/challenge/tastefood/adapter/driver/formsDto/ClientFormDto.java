@@ -1,14 +1,12 @@
 package com.fiap.challenge.tastefood.adapter.driver.formsDto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class ClientFormDto {
 
 	private String name;

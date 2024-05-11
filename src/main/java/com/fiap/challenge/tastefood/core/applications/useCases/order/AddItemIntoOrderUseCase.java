@@ -7,8 +7,8 @@ import com.fiap.challenge.tastefood.core.domain.entities.OrderEntity;
 import com.fiap.challenge.tastefood.core.domain.entities.ProductEntity;
 import com.fiap.challenge.tastefood.core.domain.exception.OrderException;
 import com.fiap.challenge.tastefood.core.domain.mapper.OrderMapper;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,20 +16,12 @@ import java.util.Optional;
 
 @Slf4j
 @Service
+@AllArgsConstructor
 public class AddItemIntoOrderUseCase {
 
     private final OrderGateway gateway;
     private final ProductGateway productGateway;
     private final OrderMapper orderMapper;
-
-    @Autowired
-    public AddItemIntoOrderUseCase(OrderGateway orderGateway,
-                                   ProductGateway productGateway,
-                                   OrderMapper orderMapper) {
-        this.gateway = orderGateway;
-        this.productGateway = productGateway;
-        this.orderMapper = orderMapper;
-    }
 
     public Order execute(Long orderId, Long productId) throws OrderException {
         Optional<ProductEntity> product = productGateway.findById(productId);

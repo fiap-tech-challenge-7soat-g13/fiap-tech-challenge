@@ -17,11 +17,13 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime dateOrder;
+    private LocalDateTime date;
 
-    private StatusOrderEnum statusOrderEnum;
+    @Enumerated(EnumType.STRING)
+    private StatusOrderEnum status;
 
     @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<ProductEntity> products;
 
     @ManyToOne(cascade=CascadeType.PERSIST)

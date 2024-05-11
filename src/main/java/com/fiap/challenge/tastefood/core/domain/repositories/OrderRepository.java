@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface OrderRepository extends CrudRepository<OrderEntity, Long> {
 
-    Optional<List<OrderEntity>> findByStatusOrderEnum(StatusOrderEnum statusOrderEnum);
+    Optional<List<OrderEntity>> findByStatus(StatusOrderEnum status);
 
 }

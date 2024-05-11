@@ -2,17 +2,17 @@ version: '3.4'
 services:
   app:
     build: .
-    restart: always
     ports:
       - "8083:8083"
     depends_on:
       - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/taste_food
   postgres:
     image: postgres:16-alpine
-    restart: always
     environment:
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: taste-food
+      POSTGRES_DB: taste_food
     ports:
       - "5432:5432"
     volumes:

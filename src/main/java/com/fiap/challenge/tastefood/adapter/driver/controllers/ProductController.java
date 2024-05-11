@@ -6,7 +6,7 @@ import com.fiap.challenge.tastefood.core.applications.useCases.product.*;
 import com.fiap.challenge.tastefood.core.domain.exception.OrderException;
 import com.fiap.challenge.tastefood.core.domain.mapper.ProductMapper;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 public class ProductController {
 
     private final CreateProductUseCase createProductUseCase;
@@ -22,21 +23,6 @@ public class ProductController {
     private final GetProductsByCategoryUseCase getProductsByCategoryUseCase;
     private final GetAllProductsUseCase getAllProductsUseCase;
     private final ProductMapper productMapper;
-
-    @Autowired
-    public ProductController(CreateProductUseCase createProductUseCase,
-                             UpdateProductUseCase updateProductUseCase,
-                             RemoveProductUseCase removeProductUseCase,
-                             GetProductsByCategoryUseCase getProductsByCategoryUseCase,
-                             GetAllProductsUseCase getAllProductsUseCase,
-                             ProductMapper productMapper){
-        this.createProductUseCase = createProductUseCase;
-        this.updateProductUseCase = updateProductUseCase;
-        this.removeProductUseCase = removeProductUseCase;
-        this.getProductsByCategoryUseCase = getProductsByCategoryUseCase;
-        this.getAllProductsUseCase = getAllProductsUseCase;
-	    this.productMapper = productMapper;
-    }
 
     @PostMapping(path = "/product/create")
     @Transactional
@@ -62,7 +48,7 @@ public class ProductController {
 
     @GetMapping(path = "/product")
     @Transactional
-    public ResponseEntity findAll() {
+    public ResponseEntity<?> findAll() {
         List<Product> products = getAllProductsUseCase.execute();
         if (products.isEmpty()) {
             return new ResponseEntity<>(products, HttpStatus.NO_CONTENT);
@@ -74,7 +60,7 @@ public class ProductController {
 
     @GetMapping(path = "/product/category/{category}")
     @Transactional
-    public ResponseEntity findByCategory(@PathVariable String category) {
+    public ResponseEntity<?> findByCategory(@PathVariable String category) {
         List<Product> products = getProductsByCategoryUseCase.execute(category);
         if (products.isEmpty()) {
             return new ResponseEntity<>(products, HttpStatus.NO_CONTENT);
@@ -86,7 +72,7 @@ public class ProductController {
 
     @DeleteMapping(path = "/product/{id}")
     @Transactional
-    public ResponseEntity remove(@PathVariable Long id) {
+    public ResponseEntity<?> remove(@PathVariable Long id) {
 	    try {
 		    removeProductUseCase.execute(id);
             return ResponseEntity.status(HttpStatus.OK).build();

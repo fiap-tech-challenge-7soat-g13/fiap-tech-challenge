@@ -1,9 +1,6 @@
 package com.fiap.challenge.tastefood.core.applications.dtos;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Value;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,6 +9,7 @@ import java.util.List;
 @Setter
 @Value
 @Builder(toBuilder = true)
+@AllArgsConstructor
 public class Checkout {
 
     private List<Product> products;

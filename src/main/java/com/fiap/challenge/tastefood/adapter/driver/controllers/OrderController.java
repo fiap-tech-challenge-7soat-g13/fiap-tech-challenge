@@ -11,8 +11,8 @@ import com.fiap.challenge.tastefood.core.domain.exception.OrderException;
 import com.fiap.challenge.tastefood.core.domain.mapper.CheckoutMapper;
 import com.fiap.challenge.tastefood.core.domain.mapper.OrderMapper;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +21,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@AllArgsConstructor
 public class OrderController {
 
     private final CheckoutOrderUseCase checkoutOrderUseCase;
@@ -31,25 +32,6 @@ public class OrderController {
     private final UpdateStatusOrderUseCase updateStatusOrderUseCase;
     private final CheckoutMapper checkoutMapper;
     private final OrderMapper orderMapper;
-
-    @Autowired
-    public OrderController(CheckoutOrderUseCase checkoutOrderUseCase,
-                           CreateOrderUseCase createOrderUseCase,
-                           AddItemIntoOrderUseCase addItemIntoOrderUseCase,
-                           GetAllOrdersUseCase getAllOrdersUseCase,
-                           GetAllOrdersByStatusUseCase getAllOrdersByStatusUseCase,
-                           UpdateStatusOrderUseCase updateStatusOrderUseCase,
-                           CheckoutMapper checkoutMapper,
-                           OrderMapper orderMapper) {
-        this.checkoutOrderUseCase = checkoutOrderUseCase;
-        this.createOrderUseCase = createOrderUseCase;
-        this.addItemIntoOrderUseCase = addItemIntoOrderUseCase;
-        this.getAllOrdersUseCase = getAllOrdersUseCase;
-        this.getAllOrdersByStatusUseCase = getAllOrdersByStatusUseCase;
-        this.updateStatusOrderUseCase = updateStatusOrderUseCase;
-	    this.checkoutMapper = checkoutMapper;
-	    this.orderMapper = orderMapper;
-    }
 
     @GetMapping(path = "/order")
     @Transactional
@@ -79,7 +61,7 @@ public class OrderController {
 
     @PostMapping(path = "/order/add/ingredient/{orderId}/{ingredientId}")
     @Transactional
-    public ResponseEntity addIngredient(@PathVariable Long orderId, @PathVariable Long ingredientId) {
+    public ResponseEntity<?> addIngredient(@PathVariable Long orderId, @PathVariable Long ingredientId) {
         try {
             return ResponseEntity.ok(addItemIntoOrderUseCase.execute(orderId, ingredientId));
         } catch (OrderException e) {
@@ -96,7 +78,7 @@ public class OrderController {
 
     @GetMapping(path = "/order/status/{status}")
     @Transactional
-    public ResponseEntity listAllByStatusOrder(@PathVariable String status) {
+    public ResponseEntity<?> listAllByStatusOrder(@PathVariable String status) {
         List<Order> orders = getAllOrdersByStatusUseCase.execute(status);
         if (orders.isEmpty())
             return new ResponseEntity<>(orders, HttpStatus.NO_CONTENT);
@@ -106,11 +88,11 @@ public class OrderController {
 
     @PostMapping(path = "/order/status/update")
     @Transactional
-    public ResponseEntity statusUpdate(@RequestBody UpdateStatusOrderFormDto updateStatusOrderFormDto) {
+    public ResponseEntity<?> statusUpdate(@RequestBody UpdateStatusOrderFormDto updateStatusOrderFormDto) {
         try {
             Order order = Order.builder()
                     .id(updateStatusOrderFormDto.getIdOrder())
-                    .statusOrderEnum(StatusOrderEnum.getStatusOrderEnum(updateStatusOrderFormDto.getStatusOrder()))
+                    .status(StatusOrderEnum.getStatusOrderEnum(updateStatusOrderFormDto.getStatusOrder()))
                     .build();
             return ResponseEntity.ok(updateStatusOrderUseCase.execute(order));
         } catch (OrderException e) {

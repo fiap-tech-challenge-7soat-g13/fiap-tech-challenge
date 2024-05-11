@@ -5,23 +5,17 @@ import com.fiap.challenge.tastefood.core.domain.entities.ProductEntity;
 import com.fiap.challenge.tastefood.core.domain.exception.OrderException;
 import com.fiap.challenge.tastefood.core.domain.mapper.ProductMapper;
 import com.fiap.challenge.tastefood.core.domain.repositories.ProductRepository;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
+@AllArgsConstructor
 public class CreateProductUseCase {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
-
-    @Autowired
-    public CreateProductUseCase(ProductRepository productRepository,
-                                ProductMapper productMapper){
-        this.productRepository = productRepository;
-        this.productMapper = productMapper;
-    }
 
     public Long execute(Product product) throws OrderException {
         if (productRepository.findByDescription(product.getDescription()).isPresent())

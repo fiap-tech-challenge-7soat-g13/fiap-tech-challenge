@@ -6,8 +6,8 @@ import com.fiap.challenge.tastefood.core.applications.useCases.client.CreateClie
 import com.fiap.challenge.tastefood.core.applications.useCases.client.GetAllClientUseCase;
 import com.fiap.challenge.tastefood.core.domain.mapper.ClientMapper;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,20 +19,12 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@AllArgsConstructor
 public class ClientController {
 
     private final CreateClientUseCase createClientUseCase;
     private final GetAllClientUseCase getAllClientUseCase;
     public final ClientMapper clientMapper;
-
-    @Autowired
-    public ClientController(CreateClientUseCase createClientUseCase,
-                            GetAllClientUseCase getAllClientUseCase,
-                            ClientMapper clientMapper) {
-        this.createClientUseCase = createClientUseCase;
-        this.getAllClientUseCase = getAllClientUseCase;
-	    this.clientMapper = clientMapper;
-    }
 
     @PostMapping(path = "/cliente/registre")
     @Transactional
@@ -48,7 +40,7 @@ public class ClientController {
 
     @GetMapping(path = "/client")
     @Transactional
-    public ResponseEntity findAll() {
+    public ResponseEntity<?> findAll() {
         List<Client> clients = getAllClientUseCase.execute();
         if (clients.isEmpty()) {
             log.info("Não há clientes!");

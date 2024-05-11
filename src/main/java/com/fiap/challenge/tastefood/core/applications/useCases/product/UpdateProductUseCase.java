@@ -36,7 +36,7 @@ public class UpdateProductUseCase {
                 p.setDescription(product.getDescription());
                 p.setBrand(product.getBrand());
                 p.setCategory(CategoryEnum.valueOf(product.getCategory().name()));
-                p.setValor(product.getValor());
+                p.setValue(product.getValue());
             }
         });
     }

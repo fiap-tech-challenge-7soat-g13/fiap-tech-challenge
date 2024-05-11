@@ -14,6 +14,6 @@ public class Product {
     private String description;
     private String brand;
     private CategoryEnum category;
-    private BigDecimal valor;
+    private BigDecimal value;
 
 }

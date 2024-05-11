@@ -5,24 +5,18 @@ import com.fiap.challenge.tastefood.core.applications.dtos.Product;
 import com.fiap.challenge.tastefood.core.domain.entities.ProductEntity;
 import com.fiap.challenge.tastefood.core.domain.mapper.ProductMapper;
 import com.fiap.challenge.tastefood.core.domain.repositories.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class GetProductsByCategoryUseCase {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
-
-    @Autowired
-    public GetProductsByCategoryUseCase(ProductRepository productRepository,
-                                        ProductMapper productMapper) {
-        this.productRepository = productRepository;
-	    this.productMapper = productMapper;
-    }
 
     public List<Product> execute(String category) {
         CategoryEnum categoryEnum1 = CategoryEnum.valueOf(category.toUpperCase());
