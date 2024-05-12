@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class UpdateStatusOrderFormDto {
 
-    private Long idOrder;
-    private String statusOrder;
+    private Long orderId;
+    private String status;
 
 }

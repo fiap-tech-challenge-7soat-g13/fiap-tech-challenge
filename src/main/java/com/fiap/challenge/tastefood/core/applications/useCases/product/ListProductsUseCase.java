@@ -5,27 +5,23 @@ import com.fiap.challenge.tastefood.core.applications.dtos.Product;
 import com.fiap.challenge.tastefood.core.domain.entities.ProductEntity;
 import com.fiap.challenge.tastefood.core.domain.mapper.ProductMapper;
 import com.fiap.challenge.tastefood.core.domain.repositories.ProductRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class GetProductsByCategoryUseCase {
+public class ListProductsUseCase {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
-    public List<Product> execute(String category) {
-        CategoryEnum categoryEnum1 = CategoryEnum.valueOf(category.toUpperCase());
-        Optional<List<ProductEntity>> products = productRepository.findByCategory(categoryEnum1);
-
-        if (products.isPresent() && !products.get().isEmpty())
-            return products.get().stream().map(this.productMapper::fromProductEntity).toList();
-
-        return List.of();
+    @Transactional
+    public List<Product> execute(CategoryEnum category) {
+        List<ProductEntity> products = category == null ? productRepository.findAll() : productRepository.findByCategory(com.fiap.challenge.tastefood.core.domain.entities.CategoryEnum.valueOf(category.name()));
+        return products.stream().map(this.productMapper::fromProductEntity).toList();
     }
 
 }

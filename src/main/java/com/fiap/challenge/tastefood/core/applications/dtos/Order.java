@@ -13,7 +13,7 @@ import java.util.List;
 public class Order {
 
     private Long id;
-    private StatusOrderEnum status;
+    private OrderStatusEnum status;
     private LocalDateTime date;
     private List<Product> products;
     private Client client;

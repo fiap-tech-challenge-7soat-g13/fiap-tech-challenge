@@ -5,9 +5,9 @@ import com.fiap.challenge.tastefood.adapter.driver.formsDto.OrderFormDto;
 import com.fiap.challenge.tastefood.adapter.driver.formsDto.UpdateStatusOrderFormDto;
 import com.fiap.challenge.tastefood.core.applications.dtos.Checkout;
 import com.fiap.challenge.tastefood.core.applications.dtos.Order;
-import com.fiap.challenge.tastefood.core.applications.dtos.StatusOrderEnum;
+import com.fiap.challenge.tastefood.core.applications.dtos.OrderStatusEnum;
 import com.fiap.challenge.tastefood.core.applications.useCases.order.*;
-import com.fiap.challenge.tastefood.core.domain.exception.OrderException;
+import com.fiap.challenge.tastefood.core.domain.exception.InvalidDataException;
 import com.fiap.challenge.tastefood.core.domain.mapper.CheckoutMapper;
 import com.fiap.challenge.tastefood.core.domain.mapper.OrderMapper;
 import jakarta.transaction.Transactional;
@@ -54,7 +54,7 @@ public class OrderController {
                 log.info("Pedido não cadastrado!");
                 return ResponseEntity.badRequest().body("Pedido não cadastrado!");
             }
-	    } catch (OrderException e) {
+	    } catch (InvalidDataException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
 	    }
     }
@@ -64,7 +64,7 @@ public class OrderController {
     public ResponseEntity<?> addIngredient(@PathVariable Long orderId, @PathVariable Long ingredientId) {
         try {
             return ResponseEntity.ok(addItemIntoOrderUseCase.execute(orderId, ingredientId));
-        } catch (OrderException e) {
+        } catch (InvalidDataException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
@@ -91,11 +91,11 @@ public class OrderController {
     public ResponseEntity<?> statusUpdate(@RequestBody UpdateStatusOrderFormDto updateStatusOrderFormDto) {
         try {
             Order order = Order.builder()
-                    .id(updateStatusOrderFormDto.getIdOrder())
-                    .status(StatusOrderEnum.getStatusOrderEnum(updateStatusOrderFormDto.getStatusOrder()))
+                    .id(updateStatusOrderFormDto.getOrderId())
+                    .status(OrderStatusEnum.getOrderStatusEnum(updateStatusOrderFormDto.getStatus()))
                     .build();
             return ResponseEntity.ok(updateStatusOrderUseCase.execute(order));
-        } catch (OrderException e) {
+        } catch (InvalidDataException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

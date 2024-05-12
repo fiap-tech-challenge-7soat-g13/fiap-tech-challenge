@@ -20,7 +20,7 @@ public class OrderEntity {
     private LocalDateTime date;
 
     @Enumerated(EnumType.STRING)
-    private StatusOrderEnum status;
+    private OrderStatusEnum status;
 
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))

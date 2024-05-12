@@ -3,8 +3,8 @@ package com.fiap.challenge.tastefood.core.applications.useCases.order;
 import com.fiap.challenge.tastefood.adapter.driven.infra.OrderGateway;
 import com.fiap.challenge.tastefood.core.applications.dtos.Order;
 import com.fiap.challenge.tastefood.core.domain.entities.OrderEntity;
-import com.fiap.challenge.tastefood.core.domain.entities.StatusOrderEnum;
-import com.fiap.challenge.tastefood.core.domain.exception.OrderException;
+import com.fiap.challenge.tastefood.core.domain.entities.OrderStatusEnum;
+import com.fiap.challenge.tastefood.core.domain.exception.InvalidDataException;
 import com.fiap.challenge.tastefood.core.domain.mapper.OrderMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,12 +19,12 @@ public class CreateOrderUseCase {
     private final OrderGateway gateway;
     private final OrderMapper orderMapper;
 
-    public Long execute(Order order) throws OrderException {
+    public Long execute(Order order) throws InvalidDataException {
         if (order.getProducts().isEmpty()) {
-            throw new OrderException("Pedido não pode ser criado sem produtos selecionados!");
+            throw new InvalidDataException("Pedido não pode ser criado sem produtos selecionados!");
         } else {
             OrderEntity orderEntity = this.orderMapper.toOrderEntity(order);
-            orderEntity.setStatus(StatusOrderEnum.RECEBIDO);
+            orderEntity.setStatus(OrderStatusEnum.RECEBIDO);
             return gateway.create(orderEntity);
         }
     }

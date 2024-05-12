@@ -2,7 +2,7 @@ package com.fiap.challenge.tastefood.core.domain.gateways;
 
 import com.fiap.challenge.tastefood.adapter.driven.infra.OrderGateway;
 import com.fiap.challenge.tastefood.core.domain.entities.OrderEntity;
-import com.fiap.challenge.tastefood.core.domain.entities.StatusOrderEnum;
+import com.fiap.challenge.tastefood.core.domain.entities.OrderStatusEnum;
 import com.fiap.challenge.tastefood.core.domain.repositories.OrderRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,7 @@ public class OrderGatewayImpl implements OrderGateway {
         return orderId.get().getId();
     }
 
-    public List<OrderEntity> findByStatus(StatusOrderEnum status) {
+    public List<OrderEntity> findByStatus(OrderStatusEnum status) {
         try {
             Optional<List<OrderEntity>> listOrderRepositoryDbs = orderRepository.findByStatus(status);
             return listOrderRepositoryDbs.orElseGet(ArrayList::new);
@@ -45,10 +45,10 @@ public class OrderGatewayImpl implements OrderGateway {
         return orderRepositoryDb.orElseGet(OrderEntity::new);
     }
 
-    public OrderEntity updateStatusOrder(Long id, StatusOrderEnum statusOrderEnum) {
+    public OrderEntity updateStatusOrder(Long id, OrderStatusEnum orderStatusEnum) {
         Optional<OrderEntity> order = orderRepository.findById(id);
         if (order.isPresent()) {
-            order.get().setStatus(StatusOrderEnum.getById(statusOrderEnum.getId()));
+            order.get().setStatus(OrderStatusEnum.valueOf(orderStatusEnum.name()));
             return orderRepository.save(order.get());
         }
         return null;

@@ -2,7 +2,7 @@ package com.fiap.challenge.tastefood.core.applications.useCases.order;
 
 import com.fiap.challenge.tastefood.core.applications.dtos.Order;
 import com.fiap.challenge.tastefood.adapter.driven.infra.OrderGateway;
-import com.fiap.challenge.tastefood.core.domain.entities.StatusOrderEnum;
+import com.fiap.challenge.tastefood.core.domain.entities.OrderStatusEnum;
 import com.fiap.challenge.tastefood.core.domain.mapper.OrderMapper;
 import com.fiap.challenge.tastefood.core.domain.entities.OrderEntity;
 import lombok.AllArgsConstructor;
@@ -20,8 +20,8 @@ public class GetAllOrdersByStatusUseCase {
     private final OrderMapper orderMapper;
 
     public List<Order> execute(String status) {
-        StatusOrderEnum statusOrderEnum = StatusOrderEnum.valueOf(status.toUpperCase());
-        List<OrderEntity> orders = gateway.findByStatus(statusOrderEnum);
+        OrderStatusEnum orderStatusEnum = OrderStatusEnum.valueOf(status.toUpperCase());
+        List<OrderEntity> orders = gateway.findByStatus(orderStatusEnum);
         if (!orders.isEmpty()) {
             return orders.stream().map(this.orderMapper::fromOrderEntity).toList();
         }

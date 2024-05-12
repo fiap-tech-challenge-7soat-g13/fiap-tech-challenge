@@ -5,7 +5,7 @@ import com.fiap.challenge.tastefood.adapter.driven.infra.ProductGateway;
 import com.fiap.challenge.tastefood.core.applications.dtos.Order;
 import com.fiap.challenge.tastefood.core.domain.entities.OrderEntity;
 import com.fiap.challenge.tastefood.core.domain.entities.ProductEntity;
-import com.fiap.challenge.tastefood.core.domain.exception.OrderException;
+import com.fiap.challenge.tastefood.core.domain.exception.InvalidDataException;
 import com.fiap.challenge.tastefood.core.domain.mapper.OrderMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ public class AddItemIntoOrderUseCase {
     private final ProductGateway productGateway;
     private final OrderMapper orderMapper;
 
-    public Order execute(Long orderId, Long productId) throws OrderException {
+    public Order execute(Long orderId, Long productId) throws InvalidDataException {
         Optional<ProductEntity> product = productGateway.findById(productId);
         OrderEntity order = gateway.findbyId(orderId);
         if (product.isPresent()) {
@@ -33,7 +33,7 @@ public class AddItemIntoOrderUseCase {
             order.getProducts().add(product.get());
             return this.orderMapper.fromOrderEntityToOrderDTO(this.gateway.update(order));
         } else {
-            throw new OrderException("Produto não existe!");
+            throw new InvalidDataException("Produto não existe!");
         }
     }
 
