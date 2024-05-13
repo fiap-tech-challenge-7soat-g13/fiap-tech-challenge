@@ -1,8 +1,8 @@
 package com.fiap.challenge.tastefood.core.domain.mapper;
 
-import com.fiap.challenge.tastefood.adapter.driver.formsDto.ClientFormDto;
-import com.fiap.challenge.tastefood.core.applications.dtos.Client;
-import com.fiap.challenge.tastefood.core.domain.entities.ClientEntity;
+import com.fiap.challenge.tastefood.adapter.driver.dto.ClientFormDto;
+import com.fiap.challenge.tastefood.core.application.dto.Client;
+import com.fiap.challenge.tastefood.core.domain.entity.ClientEntity;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValuePropertyMappingStrategy;

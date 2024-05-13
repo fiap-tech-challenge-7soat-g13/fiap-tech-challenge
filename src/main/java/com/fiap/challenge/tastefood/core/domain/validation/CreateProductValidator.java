@@ -1,6 +1,6 @@
 package com.fiap.challenge.tastefood.core.domain.validation;
 
-import com.fiap.challenge.tastefood.core.applications.dtos.Product;
+import com.fiap.challenge.tastefood.core.domain.entity.Product;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

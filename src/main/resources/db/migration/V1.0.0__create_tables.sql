@@ -8,10 +8,11 @@ CREATE TABLE "clients" (
 
 CREATE TABLE "products" (
     id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255),
 	description VARCHAR(255),
 	brand VARCHAR(255),
 	category VARCHAR(255),
-	value NUMERIC
+	price NUMERIC
 );
 
 CREATE TABLE "orders" (
