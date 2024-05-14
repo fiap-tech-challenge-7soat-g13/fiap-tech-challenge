@@ -22,11 +22,10 @@ public class OrderEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatusEnum status;
 
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> products;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Customer customer;
 
-    @ManyToOne(cascade=CascadeType.PERSIST)
-    private ClientEntity client;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderProduct> products;
 
 }

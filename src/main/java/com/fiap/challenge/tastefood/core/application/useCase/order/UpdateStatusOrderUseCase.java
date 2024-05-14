@@ -4,6 +4,7 @@ import com.fiap.challenge.tastefood.adapter.driver.infra.OrderGateway;
 import com.fiap.challenge.tastefood.core.application.dto.Order;
 import com.fiap.challenge.tastefood.core.application.dto.OrderStatusEnum;
 import com.fiap.challenge.tastefood.core.domain.entity.OrderEntity;
+import com.fiap.challenge.tastefood.core.domain.exception.EntityNotFoundException;
 import com.fiap.challenge.tastefood.core.domain.exception.InvalidDataException;
 import com.fiap.challenge.tastefood.core.domain.mapper.OrderMapper;
 import lombok.AllArgsConstructor;
@@ -21,9 +22,7 @@ public class UpdateStatusOrderUseCase {
     public Order execute(Order order) throws InvalidDataException {
         try {
             OrderStatusEnum orderStatusEnum = order.getStatus();
-            OrderEntity orderEntity = gateway.findbyId(order.getId());
-            if(orderEntity.getId() == null)
-                throw new InvalidDataException(String.format("Pedido informado não existe: %s!", order.getId()));
+            OrderEntity orderEntity = gateway.findbyId(order.getId()).orElseThrow(EntityNotFoundException::new);
 
             OrderStatusEnum.isValidUpdateStatus(OrderStatusEnum.getById(orderEntity.getStatus().getName()), orderStatusEnum);
 

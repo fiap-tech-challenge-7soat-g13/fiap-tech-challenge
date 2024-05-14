@@ -40,9 +40,8 @@ public class OrderGatewayImpl implements OrderGateway {
         }
     }
 
-    public OrderEntity findbyId(Long idOrder) {
-        Optional<OrderEntity> orderRepositoryDb = orderRepository.findById(idOrder);
-        return orderRepositoryDb.orElseGet(OrderEntity::new);
+    public Optional<OrderEntity> findbyId(Long idOrder) {
+        return orderRepository.findById(idOrder);
     }
 
     public OrderEntity updateStatusOrder(Long id, OrderStatusEnum orderStatusEnum) {

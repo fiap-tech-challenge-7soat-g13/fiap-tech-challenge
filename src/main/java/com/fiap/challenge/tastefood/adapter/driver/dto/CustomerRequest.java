@@ -7,11 +7,10 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientFormDto {
+public class CustomerRequest {
 
 	private String name;
-	private int age;
-	private String mail;
+	private String email;
 	private String document;
 
 }

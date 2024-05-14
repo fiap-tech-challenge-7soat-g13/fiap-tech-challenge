@@ -7,8 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "clients")
-public class ClientEntity {
+@Table(name = "customers")
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,9 +16,7 @@ public class ClientEntity {
 
     private String name;
 
-    private int age;
-
-    private String mail;
+    private String email;
 
     private String document;
 

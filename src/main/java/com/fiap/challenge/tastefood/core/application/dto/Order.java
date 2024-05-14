@@ -16,6 +16,6 @@ public class Order {
     private OrderStatusEnum status;
     private LocalDateTime date;
     private List<ProductResponse> products;
-    private Client client;
+    private CustomerResponse customer;
 
 }

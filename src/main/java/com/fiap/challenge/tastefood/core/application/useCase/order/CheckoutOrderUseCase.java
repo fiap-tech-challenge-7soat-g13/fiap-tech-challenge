@@ -3,7 +3,6 @@ package com.fiap.challenge.tastefood.core.application.useCase.order;
 import com.fiap.challenge.tastefood.adapter.driver.infra.OrderGateway;
 import com.fiap.challenge.tastefood.core.application.dto.Checkout;
 import com.fiap.challenge.tastefood.core.application.dto.ProductResponse;
-import com.fiap.challenge.tastefood.core.domain.mapper.ClientMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +13,12 @@ import java.math.BigDecimal;
 public class CheckoutOrderUseCase {
 
     private final OrderGateway gateway;
-    private final ClientMapper clientMapper;
 
     public Checkout execute(Checkout checkout) {
         return Checkout.builder()
                 .products(checkout.getProducts())
                 .valueTotalOrder(calcTotalCostOrder(checkout))
-                .client(checkout.getClient())
+                .customer(checkout.getCustomer())
                 .build();
     }
 

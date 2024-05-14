@@ -1,8 +1,7 @@
-CREATE TABLE "clients" (
+CREATE TABLE "customers" (
 	id BIGSERIAL PRIMARY KEY,
 	name VARCHAR(255),
-	age INT,
-	mail VARCHAR(255),
+	email VARCHAR(255),
 	document VARCHAR(255)
 );
 
@@ -19,11 +18,13 @@ CREATE TABLE "orders" (
     id BIGSERIAL PRIMARY KEY,
 	date TIMESTAMP,
 	status VARCHAR(255),
-	client_id BIGINT NOT NULL REFERENCES clients (id)
+	customer_id BIGINT NOT NULL REFERENCES customers (id)
 );
 
 CREATE TABLE "orders_products" (
+    id BIGSERIAL PRIMARY KEY,
 	order_id BIGINT NOT NULL REFERENCES orders (id),
 	product_id BIGINT NOT NULL REFERENCES products (id),
-	PRIMARY KEY (order_id, product_id)
+	quantity INT NOT NULL,
+	price NUMERIC NOT NULL
 );

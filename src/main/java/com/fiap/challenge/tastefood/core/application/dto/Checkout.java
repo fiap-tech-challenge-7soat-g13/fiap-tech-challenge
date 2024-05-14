@@ -13,7 +13,7 @@ import java.util.List;
 public class Checkout {
 
     private List<ProductResponse> products;
-    private Client client;
+    private CustomerResponse customer;
     private BigDecimal valueTotalOrder;
 
 }

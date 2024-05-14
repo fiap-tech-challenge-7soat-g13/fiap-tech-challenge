@@ -10,6 +10,6 @@ import java.util.List;
 public class OrderFormDto {
 
 	private List<ProductRequest> products;
-	private ClientFormDto client;
+	private CustomerRequest customer;
 
 }

@@ -4,6 +4,7 @@ import com.fiap.challenge.tastefood.core.domain.entity.OrderEntity;
 import com.fiap.challenge.tastefood.core.domain.entity.OrderStatusEnum;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderGateway {
 
@@ -13,7 +14,7 @@ public interface OrderGateway {
 
 	List<OrderEntity> findByStatus(OrderStatusEnum status);
 
-	OrderEntity findbyId(Long idOrder);
+	Optional<OrderEntity> findbyId(Long idOrder);
 
 	OrderEntity updateStatusOrder(Long id, OrderStatusEnum orderStatusEnum);
 
