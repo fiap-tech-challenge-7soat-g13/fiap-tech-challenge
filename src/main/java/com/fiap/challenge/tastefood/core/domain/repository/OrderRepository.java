@@ -1,14 +1,13 @@
 package com.fiap.challenge.tastefood.core.domain.repository;
 
-import com.fiap.challenge.tastefood.core.domain.entity.OrderEntity;
+import com.fiap.challenge.tastefood.core.domain.entity.Order;
 import com.fiap.challenge.tastefood.core.domain.entity.OrderStatusEnum;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface OrderRepository extends CrudRepository<OrderEntity, Long> {
+public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    Optional<List<OrderEntity>> findByStatus(OrderStatusEnum status);
+    List<Order> findByStatus(OrderStatusEnum status);
 
 }

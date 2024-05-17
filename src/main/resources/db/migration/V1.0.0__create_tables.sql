@@ -16,7 +16,7 @@ CREATE TABLE "products" (
 
 CREATE TABLE "orders" (
     id BIGSERIAL PRIMARY KEY,
-	date TIMESTAMP,
+	created_at TIMESTAMP,
 	status VARCHAR(255),
 	customer_id BIGINT NOT NULL REFERENCES customers (id)
 );

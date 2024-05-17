@@ -1,5 +1,6 @@
 package com.fiap.challenge.tastefood.core.application.dto;
 
+import com.fiap.challenge.tastefood.core.domain.entity.OrderStatusEnum;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -10,12 +11,12 @@ import java.util.List;
 @Value
 @Builder(toBuilder = true)
 @AllArgsConstructor
-public class Order {
+public class OrderResponse {
 
     private Long id;
     private OrderStatusEnum status;
-    private LocalDateTime date;
-    private List<ProductResponse> products;
+    private LocalDateTime createdAt;
+    private List<OrderProductResponse> products;
     private CustomerResponse customer;
 
 }

@@ -5,9 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UpdateStatusOrderFormDto {
+public class OrderProductRequest {
 
-    private Long orderId;
-    private String status;
+    private Integer quantity;
+    private Long productId;
 
 }

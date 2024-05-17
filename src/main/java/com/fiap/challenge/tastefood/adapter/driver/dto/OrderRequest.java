@@ -7,9 +7,9 @@ import java.util.List;
 
 @Getter
 @Setter
-public class CheckoutOrderFormDto {
+public class OrderRequest {
 
-    private List<ProductRequest> products;
-    private CustomerRequest customer;
+    private Long customerId;
+    private List<OrderProductRequest> products;
 
 }

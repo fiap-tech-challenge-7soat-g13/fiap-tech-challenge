@@ -1,5 +1,6 @@
 package com.fiap.challenge.tastefood.core.application.dto;
 
+import com.fiap.challenge.tastefood.core.domain.entity.ProductCategoryEnum;
 import lombok.Getter;
 import lombok.Setter;
 

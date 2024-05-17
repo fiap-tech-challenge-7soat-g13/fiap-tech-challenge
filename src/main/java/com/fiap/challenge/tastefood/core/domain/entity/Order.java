@@ -11,13 +11,13 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "orders")
-public class OrderEntity {
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime date;
+    private LocalDateTime createdAt;
 
     @Enumerated(EnumType.STRING)
     private OrderStatusEnum status;
