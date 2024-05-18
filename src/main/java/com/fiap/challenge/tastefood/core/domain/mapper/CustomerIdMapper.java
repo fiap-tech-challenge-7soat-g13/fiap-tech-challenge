@@ -12,6 +12,9 @@ public abstract class CustomerIdMapper {
     private CustomerRepository customerRepository;
 
     public Customer map(Long id) {
+        if (id == null) {
+            return null;
+        }
         return customerRepository.getReferenceById(id);
     }
 

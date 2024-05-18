@@ -3,11 +3,12 @@ package com.fiap.challenge.tastefood.core.domain.validation;
 import com.fiap.challenge.tastefood.core.domain.exception.InvalidDataException;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class Validator {
 
-    private final List<String> messages = new ArrayList<>();
+    private final Set<String> messages = new LinkedHashSet<>();
 
     public void add(Validation validation) {
         validation.getMessage().ifPresent(messages::add);
@@ -15,7 +16,7 @@ public class Validator {
 
     public void assertEmptyMessages() {
         if (!messages.isEmpty()) {
-            throw new InvalidDataException(messages);
+            throw new InvalidDataException(new ArrayList<>(messages));
         }
     }
 

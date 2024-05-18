@@ -12,6 +12,9 @@ public abstract class ProductIdMapper {
     private ProductRepository productRepository;
 
     public Product map(Long id) {
+        if (id == null) {
+            return null;
+        }
         return productRepository.getReferenceById(id);
     }
 

@@ -4,7 +4,9 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.CollectionUtils;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Getter
@@ -21,8 +23,16 @@ public class Validation {
         return assertFalse(value == null, message);
     }
 
+    public static Validation notEmpty(Collection<?> value, String message) {
+        return assertFalse(CollectionUtils.isEmpty(value), message);
+    }
+
     public static <T extends Comparable<T>> Validation greaterThan(T value, T min, String message) {
         return assertFalse(value != null && value.compareTo(min) <= 0, message);
+    }
+
+    public static Validation assertTrue(boolean condition, String message) {
+        return assertFalse(!condition, message);
     }
 
     public static Validation assertFalse(boolean condition, String message) {
