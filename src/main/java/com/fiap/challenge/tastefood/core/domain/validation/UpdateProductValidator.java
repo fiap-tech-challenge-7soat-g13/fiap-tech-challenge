@@ -21,7 +21,6 @@ public class UpdateProductValidator {
         validator.add(Validation.notBlank(product.getName(), "É obrigatório informar o nome"));
         validator.add(Validation.assertFalse(nameAlreadyExists(id, product.getName()), String.format("Já existe um produto com o nome '%s'", product.getName())));
         validator.add(Validation.notBlank(product.getDescription(), "É obrigatório informar a descrição"));
-        validator.add(Validation.notBlank(product.getBrand(), "É obrigatório informar a marca"));
         validator.add(Validation.notNull(product.getCategory(), "É obrigatório informar a categoria"));
         validator.add(Validation.notNull(product.getPrice(), "É obrigatório informar o preço"));
         validator.add(Validation.greaterThan(product.getPrice(), BigDecimal.ZERO, "O preço deve ser maior que zero"));

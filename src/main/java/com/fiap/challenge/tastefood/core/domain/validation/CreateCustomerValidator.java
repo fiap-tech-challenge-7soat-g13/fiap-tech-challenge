@@ -15,7 +15,7 @@ public class CreateCustomerValidator {
 
         Validator validator = new Validator();
 
-        validator.add(Validation.assertFalse(customerRepository.findByDocument(customer.getDocument()).isPresent(), "Cliente já possui cadastro"));
+        validator.add(Validation.assertFalse(customerRepository.existsByDocument(customer.getDocument()), "Cliente já possui cadastro"));
 
         validator.assertEmptyMessages();
     }

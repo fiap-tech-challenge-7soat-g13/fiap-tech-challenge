@@ -20,8 +20,6 @@ public class Product {
 
     private String description;
 
-    private String brand;
-
     @Enumerated(EnumType.STRING)
     private ProductCategoryEnum category;
 

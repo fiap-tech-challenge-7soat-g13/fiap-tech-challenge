@@ -12,7 +12,6 @@ public class ProductRequest {
 
 	private String name;
 	private String description;
-	private String brand;
 	private ProductCategoryEnum category;
 	private BigDecimal price;
 

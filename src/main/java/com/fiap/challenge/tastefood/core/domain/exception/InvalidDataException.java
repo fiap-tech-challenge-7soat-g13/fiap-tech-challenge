@@ -11,8 +11,4 @@ public class InvalidDataException extends RuntimeException {
 
     private List<String> messages;
 
-    public InvalidDataException(String message) {
-        this.messages = List.of(message);
-    }
-
 }

@@ -9,7 +9,6 @@ CREATE TABLE "products" (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255),
 	description VARCHAR(255),
-	brand VARCHAR(255),
 	category VARCHAR(255),
 	price NUMERIC
 );

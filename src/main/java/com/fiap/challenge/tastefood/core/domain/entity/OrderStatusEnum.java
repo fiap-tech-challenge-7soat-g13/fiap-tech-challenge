@@ -6,10 +6,7 @@ import java.util.Map;
 
 public enum OrderStatusEnum {
 
-    RECEBIDO,
-    EM_PREPARACAO,
-    CANCELADO,
-    PRONTO;
+    RECEBIDO, EM_PREPARACAO, CANCELADO, PRONTO;
 
     private static final Map<OrderStatusEnum, List<OrderStatusEnum>> POSSIBLE_STATUS_UPDATES = Map.of(
             RECEBIDO, List.of(EM_PREPARACAO, CANCELADO),

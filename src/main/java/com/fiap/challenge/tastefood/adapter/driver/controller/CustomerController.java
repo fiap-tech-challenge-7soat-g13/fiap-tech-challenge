@@ -2,8 +2,8 @@ package com.fiap.challenge.tastefood.adapter.driver.controller;
 
 import com.fiap.challenge.tastefood.adapter.driver.dto.CustomerRequest;
 import com.fiap.challenge.tastefood.core.application.dto.CustomerResponse;
-import com.fiap.challenge.tastefood.core.application.useCase.customer.CreateCustomerUseCase;
-import com.fiap.challenge.tastefood.core.application.useCase.customer.ListCustomersUseCase;
+import com.fiap.challenge.tastefood.core.application.useCase.customer.CustomerCreateUseCase;
+import com.fiap.challenge.tastefood.core.application.useCase.customer.CustomerListUseCase;
 import com.fiap.challenge.tastefood.core.domain.mapper.CustomerRequestMapper;
 import com.fiap.challenge.tastefood.core.domain.mapper.CustomerResponseMapper;
 import lombok.AllArgsConstructor;
@@ -18,19 +18,19 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomerController {
 
-    private final CreateCustomerUseCase createCustomerUseCase;
-    private final ListCustomersUseCase listCustomersUseCase;
+    private final CustomerCreateUseCase customerCreateUseCase;
+    private final CustomerListUseCase customerListUseCase;
     private final CustomerRequestMapper customerRequestMapper;
     private final CustomerResponseMapper customerResponseMapper;
 
     @PostMapping(path = "/customer")
     public void create(@RequestBody CustomerRequest request) {
-        createCustomerUseCase.execute(customerRequestMapper.map(request));
+        customerCreateUseCase.execute(customerRequestMapper.map(request));
     }
 
     @GetMapping(path = "/customer")
     public List<CustomerResponse> list() {
-        return customerResponseMapper.map(listCustomersUseCase.execute());
+        return customerResponseMapper.map(customerListUseCase.execute());
     }
 
 }

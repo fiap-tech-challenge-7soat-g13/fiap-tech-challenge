@@ -1,16 +1,14 @@
 package com.fiap.challenge.tastefood.adapter.driver.dto;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class CustomerRequest {
 
-	private String name;
-	private String email;
-	private String document;
+    private String name;
+    private String email;
+    private String document;
 
 }

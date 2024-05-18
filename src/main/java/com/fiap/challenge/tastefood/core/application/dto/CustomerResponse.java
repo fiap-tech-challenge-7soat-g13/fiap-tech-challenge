@@ -1,12 +1,10 @@
 package com.fiap.challenge.tastefood.core.application.dto;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class CustomerResponse {
 
     private String name;

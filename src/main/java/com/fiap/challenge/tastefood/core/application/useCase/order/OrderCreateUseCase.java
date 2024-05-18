@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
-public class CreateOrderUseCase {
+public class OrderCreateUseCase {
 
     private final OrderRepository orderRepository;
 
