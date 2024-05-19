@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Service
@@ -26,10 +27,12 @@ public class OrderCreateUseCase {
 
         order.setCreatedAt(LocalDateTime.now());
         order.setStatus(OrderStatusEnum.RECEBIDO);
+        order.setTotal(BigDecimal.ZERO);
 
         for (OrderProduct orderProduct : order.getProducts()) {
             orderProduct.setOrder(order);
             orderProduct.setPrice(orderProduct.getProduct().getPrice());
+            order.setTotal(order.getTotal().add(BigDecimal.valueOf(orderProduct.getQuantity()).multiply(orderProduct.getPrice())));
         }
 
         Order saved = orderRepository.save(order);

@@ -25,4 +25,6 @@ public class Product {
 
     private BigDecimal price;
 
+    private Boolean removed;
+
 }

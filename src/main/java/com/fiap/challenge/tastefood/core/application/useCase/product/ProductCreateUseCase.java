@@ -19,6 +19,8 @@ public class ProductCreateUseCase {
 
         productValidator.validate(product);
 
+        product.setRemoved(false);
+
         Product saved = productRepository.save(product);
 
         return saved.getId();
