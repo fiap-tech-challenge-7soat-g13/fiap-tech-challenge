@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class UpdateStatusOrderValidator {
+public class OrderUpdateStatusValidator {
 
     private final OrderRepository orderRepository;
 

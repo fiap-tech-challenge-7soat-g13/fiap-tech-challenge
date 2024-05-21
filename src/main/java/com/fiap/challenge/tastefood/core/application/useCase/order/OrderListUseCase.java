@@ -13,11 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderListUseCase {
 
-    private final OrderRepository orderRepository;
+    private final OrderRepository repository;
 
     @Transactional
     public List<Order> execute(OrderStatusEnum status) {
-        return status == null ? orderRepository.findAll() : orderRepository.findByStatus(status);
+        return status == null ? repository.findAll() : repository.findByStatus(status);
     }
 
 }

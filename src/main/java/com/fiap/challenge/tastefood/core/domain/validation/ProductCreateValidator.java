@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class CreateProductValidator {
+public class ProductCreateValidator {
 
-    private UpdateProductValidator validator;
+    private ProductUpdateValidator validator;
 
     public void validate(Product product) {
         validator.validate(null, product);

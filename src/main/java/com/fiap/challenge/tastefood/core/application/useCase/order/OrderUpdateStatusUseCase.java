@@ -3,7 +3,7 @@ package com.fiap.challenge.tastefood.core.application.useCase.order;
 import com.fiap.challenge.tastefood.core.domain.entity.Order;
 import com.fiap.challenge.tastefood.core.domain.entity.OrderStatusEnum;
 import com.fiap.challenge.tastefood.core.domain.repository.OrderRepository;
-import com.fiap.challenge.tastefood.core.domain.validation.UpdateStatusOrderValidator;
+import com.fiap.challenge.tastefood.core.domain.validation.OrderUpdateStatusValidator;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,18 +12,18 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class OrderUpdateStatusUseCase {
 
-    private final OrderRepository orderRepository;
+    private final OrderRepository repository;
 
-    private final UpdateStatusOrderValidator validator;
+    private final OrderUpdateStatusValidator validator;
 
     @Transactional
     public void execute(Long id, OrderStatusEnum status) {
 
         validator.validate(id, status);
 
-        Order order = orderRepository.getReferenceById(id);
+        Order order = repository.getReferenceById(id);
         order.setStatus(status);
-        orderRepository.save(order);
+        repository.save(order);
     }
 
 }

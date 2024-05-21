@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductListUseCase {
 
-    private final ProductRepository productRepository;
+    private final ProductRepository repository;
 
     @Transactional
     public List<Product> execute(ProductCategoryEnum category) {
@@ -29,7 +29,7 @@ public class ProductListUseCase {
             predicate.and(QProduct.product.category.eq(category));
         }
 
-        return Streamable.of(productRepository.findAll(predicate)).toList();
+        return Streamable.of(repository.findAll(predicate)).toList();
     }
 
 }

@@ -4,7 +4,7 @@ import com.fiap.challenge.tastefood.core.domain.entity.Order;
 import com.fiap.challenge.tastefood.core.domain.entity.OrderProduct;
 import com.fiap.challenge.tastefood.core.domain.entity.OrderStatusEnum;
 import com.fiap.challenge.tastefood.core.domain.repository.OrderRepository;
-import com.fiap.challenge.tastefood.core.domain.validation.CreateOrderValidator;
+import com.fiap.challenge.tastefood.core.domain.validation.OrderCreateValidator;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,9 +16,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class OrderCreateUseCase {
 
-    private final OrderRepository orderRepository;
+    private final OrderRepository repository;
 
-    private CreateOrderValidator validator;
+    private final OrderCreateValidator validator;
 
     @Transactional
     public Long execute(Order order) {
@@ -35,7 +35,7 @@ public class OrderCreateUseCase {
             order.setTotal(order.getTotal().add(BigDecimal.valueOf(orderProduct.getQuantity()).multiply(orderProduct.getPrice())));
         }
 
-        Order saved = orderRepository.save(order);
+        Order saved = repository.save(order);
 
         return saved.getId();
     }

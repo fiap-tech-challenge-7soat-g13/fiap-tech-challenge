@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class CreateOrderValidator {
+public class OrderCreateValidator {
 
     public void validate(Order order) {
 

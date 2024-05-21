@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class ProductRemoveUseCase {
 
-    private final ProductRepository productRepository;
+    private final ProductRepository repository;
 
     @Transactional
     public void execute(Long id) {
-        Product entity = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        Product entity = repository.findById(id).orElseThrow(EntityNotFoundException::new);
         entity.setRemoved(true);
-        productRepository.save(entity);
+        repository.save(entity);
     }
 
 }

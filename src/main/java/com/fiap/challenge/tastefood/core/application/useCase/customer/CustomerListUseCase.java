@@ -12,11 +12,11 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomerListUseCase {
 
-    private final CustomerRepository customerRepository;
+    private final CustomerRepository repository;
 
     @Transactional
     public List<Customer> execute() {
-        return customerRepository.findAll();
+        return repository.findAll();
     }
 
 }

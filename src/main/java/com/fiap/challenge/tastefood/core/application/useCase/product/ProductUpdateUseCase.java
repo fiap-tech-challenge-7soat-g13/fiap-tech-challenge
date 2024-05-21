@@ -2,9 +2,8 @@ package com.fiap.challenge.tastefood.core.application.useCase.product;
 
 import com.fiap.challenge.tastefood.core.domain.entity.Product;
 import com.fiap.challenge.tastefood.core.domain.exception.EntityNotFoundException;
-import com.fiap.challenge.tastefood.core.domain.exception.InvalidDataException;
 import com.fiap.challenge.tastefood.core.domain.repository.ProductRepository;
-import com.fiap.challenge.tastefood.core.domain.validation.UpdateProductValidator;
+import com.fiap.challenge.tastefood.core.domain.validation.ProductUpdateValidator;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,16 +12,16 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class ProductUpdateUseCase {
 
-    private final ProductRepository productRepository;
+    private final ProductRepository repository;
 
-    private final UpdateProductValidator validator;
+    private final ProductUpdateValidator validator;
 
     @Transactional
-    public void execute(Long id, Product product) throws InvalidDataException {
+    public void execute(Long id, Product product) {
 
         validator.validate(id, product);
 
-        Product entity = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        Product entity = repository.findById(id).orElseThrow(EntityNotFoundException::new);
 
         entity.setName(product.getName());
         entity.setDescription(product.getDescription());
@@ -30,7 +29,7 @@ public class ProductUpdateUseCase {
         entity.setPrice(product.getPrice());
         entity.setImages(product.getImages());
 
-        productRepository.save(entity);
+        repository.save(entity);
     }
 
 }

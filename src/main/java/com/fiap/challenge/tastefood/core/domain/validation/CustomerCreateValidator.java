@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class CreateCustomerValidator {
+public class CustomerCreateValidator {
 
     private final CustomerRepository customerRepository;
 

@@ -12,7 +12,7 @@ import java.util.function.Predicate;
 
 @Component
 @AllArgsConstructor
-public class UpdateProductValidator {
+public class ProductUpdateValidator {
 
     private ProductRepository productRepository;
 
