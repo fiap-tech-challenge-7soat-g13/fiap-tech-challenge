@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,5 +16,6 @@ public class ProductResponse {
     private String description;
     private ProductCategoryEnum category;
     private BigDecimal price;
+    private List<String> images;
 
 }

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,5 +27,7 @@ public class Product {
     private BigDecimal price;
 
     private Boolean removed;
+
+    private List<String> images;
 
 }

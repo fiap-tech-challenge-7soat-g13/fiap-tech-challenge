@@ -11,7 +11,8 @@ CREATE TABLE "products" (
     description VARCHAR(255) NOT NULL,
     category VARCHAR(255) NOT NULL,
     price NUMERIC NOT NULL,
-    removed BOOLEAN NOT NULL
+    removed BOOLEAN NOT NULL,
+    images VARCHAR[] NOT NULL
 );
 
 CREATE TABLE "orders" (

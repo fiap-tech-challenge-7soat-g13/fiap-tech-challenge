@@ -28,6 +28,7 @@ public class ProductUpdateUseCase {
         entity.setDescription(product.getDescription());
         entity.setCategory(product.getCategory());
         entity.setPrice(product.getPrice());
+        entity.setImages(product.getImages());
 
         productRepository.save(entity);
     }
