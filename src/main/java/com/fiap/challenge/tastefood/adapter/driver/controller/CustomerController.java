@@ -1,6 +1,6 @@
 package com.fiap.challenge.tastefood.adapter.driver.controller;
 
-import com.fiap.challenge.tastefood.adapter.driver.dto.CustomerRequest;
+import com.fiap.challenge.tastefood.core.application.dto.CustomerRequest;
 import com.fiap.challenge.tastefood.core.application.dto.CustomerResponse;
 import com.fiap.challenge.tastefood.core.application.useCase.customer.CustomerCreateUseCase;
 import com.fiap.challenge.tastefood.core.application.useCase.customer.CustomerListUseCase;

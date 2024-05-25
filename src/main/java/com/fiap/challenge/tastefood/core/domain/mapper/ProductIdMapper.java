@@ -15,7 +15,7 @@ public abstract class ProductIdMapper {
         if (id == null) {
             return null;
         }
-        return productRepository.getReferenceById(id);
+        return productRepository.findById(id).orElse(null);
     }
 
 }

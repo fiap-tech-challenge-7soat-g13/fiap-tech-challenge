@@ -15,7 +15,7 @@ public abstract class CustomerIdMapper {
         if (id == null) {
             return null;
         }
-        return customerRepository.getReferenceById(id);
+        return customerRepository.findById(id).orElse(null);
     }
 
 }

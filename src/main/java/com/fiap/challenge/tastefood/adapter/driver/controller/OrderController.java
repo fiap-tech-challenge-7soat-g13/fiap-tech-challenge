@@ -1,11 +1,11 @@
 package com.fiap.challenge.tastefood.adapter.driver.controller;
 
-import com.fiap.challenge.tastefood.adapter.driver.dto.OrderRequest;
+import com.fiap.challenge.tastefood.core.application.dto.OrderRequest;
 import com.fiap.challenge.tastefood.core.application.dto.OrderResponse;
 import com.fiap.challenge.tastefood.core.application.useCase.order.OrderCreateUseCase;
 import com.fiap.challenge.tastefood.core.application.useCase.order.OrderListUseCase;
 import com.fiap.challenge.tastefood.core.application.useCase.order.OrderUpdateStatusUseCase;
-import com.fiap.challenge.tastefood.core.domain.entity.OrderStatusEnum;
+import com.fiap.challenge.tastefood.core.domain.valueObject.OrderStatus;
 import com.fiap.challenge.tastefood.core.domain.mapper.OrderRequestMapper;
 import com.fiap.challenge.tastefood.core.domain.mapper.OrderResponseMapper;
 import lombok.AllArgsConstructor;
@@ -29,12 +29,12 @@ public class OrderController {
     }
 
     @GetMapping(path = "/order")
-    public List<OrderResponse> list(@RequestParam(required = false) OrderStatusEnum status) {
+    public List<OrderResponse> list(@RequestParam(required = false) OrderStatus status) {
         return orderResponseMapper.map(orderListUseCase.execute(status));
     }
 
     @PostMapping(path = "/order/{id}/status")
-    public void updateStatus(@PathVariable Long id, @RequestParam OrderStatusEnum status) {
+    public void updateStatus(@PathVariable Long id, @RequestParam OrderStatus status) {
         orderUpdateStatusUseCase.execute(id, status);
     }
 

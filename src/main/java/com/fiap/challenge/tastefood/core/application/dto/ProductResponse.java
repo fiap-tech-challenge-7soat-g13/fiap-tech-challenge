@@ -1,6 +1,6 @@
 package com.fiap.challenge.tastefood.core.application.dto;
 
-import com.fiap.challenge.tastefood.core.domain.entity.ProductCategoryEnum;
+import com.fiap.challenge.tastefood.core.domain.valueObject.ProductCategory;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +14,7 @@ public class ProductResponse {
     private Long id;
     private String name;
     private String description;
-    private ProductCategoryEnum category;
+    private ProductCategory category;
     private BigDecimal price;
     private List<String> images;
 

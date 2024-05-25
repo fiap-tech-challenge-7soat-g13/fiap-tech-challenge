@@ -1,11 +1,21 @@
 package com.fiap.challenge.tastefood.core.domain.repository;
 
 import com.fiap.challenge.tastefood.core.domain.entity.Product;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
-import org.springframework.stereotype.Repository;
+import com.fiap.challenge.tastefood.core.domain.valueObject.ProductCategory;
 
-@Repository
-public interface ProductRepository extends JpaRepository<Product, Long>, QuerydslPredicateExecutor<Product> {
+import java.util.List;
+import java.util.Optional;
+
+public interface ProductRepository {
+
+    Product save(Product product);
+
+    Optional<Product> findById(Long id);
+
+    List<Product> findByActiveTrue();
+
+    List<Product> findByCategoryAndActiveTrue(ProductCategory category);
+
+    Optional<Product> findByNameAndActiveTrue(String name);
 
 }

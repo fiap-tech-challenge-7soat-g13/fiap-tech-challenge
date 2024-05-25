@@ -1,5 +1,6 @@
 package com.fiap.challenge.tastefood.core.domain.entity;
 
+import com.fiap.challenge.tastefood.core.domain.valueObject.OrderStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +22,7 @@ public class Order {
     private LocalDateTime createdAt;
 
     @Enumerated(EnumType.STRING)
-    private OrderStatusEnum status;
+    private OrderStatus status;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Customer customer;

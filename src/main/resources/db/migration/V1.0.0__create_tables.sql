@@ -1,26 +1,26 @@
 CREATE TABLE "customers" (
     id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255),
-    email VARCHAR(255),
-    document VARCHAR(255)
+    name VARCHAR NOT NULL,
+    email VARCHAR NOT NULL,
+    document VARCHAR NOT NULL
 );
 
 CREATE TABLE "products" (
     id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    description VARCHAR(255) NOT NULL,
-    category VARCHAR(255) NOT NULL,
+    name VARCHAR NOT NULL,
+    description VARCHAR NOT NULL,
+    category VARCHAR NOT NULL,
     price NUMERIC NOT NULL,
-    removed BOOLEAN NOT NULL,
+    active BOOLEAN NOT NULL,
     images VARCHAR[] NOT NULL
 );
 
 CREATE TABLE "orders" (
     id BIGSERIAL PRIMARY KEY,
     created_at TIMESTAMP NOT NULL,
-    status VARCHAR(255) NOT NULL,
+    status VARCHAR NOT NULL,
     total NUMERIC NOT NULL,
-    customer_id BIGINT NOT NULL REFERENCES customers (id)
+    customer_id BIGINT REFERENCES customers (id)
 );
 
 CREATE TABLE "orders_products" (

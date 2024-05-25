@@ -16,7 +16,7 @@ public class ProductRemoveUseCase {
     @Transactional
     public void execute(Long id) {
         Product entity = repository.findById(id).orElseThrow(EntityNotFoundException::new);
-        entity.setRemoved(true);
+        entity.setActive(false);
         repository.save(entity);
     }
 

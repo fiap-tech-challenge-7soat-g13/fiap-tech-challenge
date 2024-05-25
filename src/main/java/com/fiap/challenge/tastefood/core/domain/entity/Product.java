@@ -1,5 +1,6 @@
 package com.fiap.challenge.tastefood.core.domain.entity;
 
+import com.fiap.challenge.tastefood.core.domain.valueObject.ProductCategory;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,11 +23,11 @@ public class Product {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    private ProductCategoryEnum category;
+    private ProductCategory category;
 
     private BigDecimal price;
 
-    private Boolean removed;
+    private Boolean active;
 
     private List<String> images;
 

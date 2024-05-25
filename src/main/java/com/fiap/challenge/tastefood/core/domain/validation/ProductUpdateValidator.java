@@ -1,7 +1,6 @@
 package com.fiap.challenge.tastefood.core.domain.validation;
 
 import com.fiap.challenge.tastefood.core.domain.entity.Product;
-import com.fiap.challenge.tastefood.core.domain.entity.QProduct;
 import com.fiap.challenge.tastefood.core.domain.repository.ProductRepository;
 import com.fiap.challenge.tastefood.core.domain.util.StringUtils;
 import lombok.AllArgsConstructor;
@@ -36,7 +35,7 @@ public class ProductUpdateValidator {
     }
 
     private boolean nameAlreadyExists(Long id, String name) {
-        return name != null && productRepository.findOne(QProduct.product.name.equalsIgnoreCase(name).and(QProduct.product.removed.isFalse())).filter(Predicate.not(same(id))).isPresent();
+        return name != null && productRepository.findByNameAndActiveTrue(name).filter(Predicate.not(same(id))).isPresent();
     }
 
     private Predicate<Product> same(Long id) {

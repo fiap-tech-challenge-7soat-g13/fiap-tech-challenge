@@ -2,7 +2,7 @@ package com.fiap.challenge.tastefood.core.application.useCase.order;
 
 import com.fiap.challenge.tastefood.core.domain.entity.Order;
 import com.fiap.challenge.tastefood.core.domain.entity.OrderProduct;
-import com.fiap.challenge.tastefood.core.domain.entity.OrderStatusEnum;
+import com.fiap.challenge.tastefood.core.domain.valueObject.OrderStatus;
 import com.fiap.challenge.tastefood.core.domain.repository.OrderRepository;
 import com.fiap.challenge.tastefood.core.domain.validation.OrderCreateValidator;
 import jakarta.transaction.Transactional;
@@ -26,7 +26,7 @@ public class OrderCreateUseCase {
         validator.validate(order);
 
         order.setCreatedAt(LocalDateTime.now());
-        order.setStatus(OrderStatusEnum.RECEBIDO);
+        order.setStatus(OrderStatus.RECEBIDO);
         order.setTotal(BigDecimal.ZERO);
 
         for (OrderProduct orderProduct : order.getProducts()) {

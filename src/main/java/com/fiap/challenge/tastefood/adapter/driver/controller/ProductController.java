@@ -1,12 +1,12 @@
 package com.fiap.challenge.tastefood.adapter.driver.controller;
 
-import com.fiap.challenge.tastefood.adapter.driver.dto.ProductRequest;
+import com.fiap.challenge.tastefood.core.application.dto.ProductRequest;
 import com.fiap.challenge.tastefood.core.application.dto.ProductResponse;
 import com.fiap.challenge.tastefood.core.application.useCase.product.ProductCreateUseCase;
 import com.fiap.challenge.tastefood.core.application.useCase.product.ProductListUseCase;
 import com.fiap.challenge.tastefood.core.application.useCase.product.ProductRemoveUseCase;
 import com.fiap.challenge.tastefood.core.application.useCase.product.ProductUpdateUseCase;
-import com.fiap.challenge.tastefood.core.domain.entity.ProductCategoryEnum;
+import com.fiap.challenge.tastefood.core.domain.valueObject.ProductCategory;
 import com.fiap.challenge.tastefood.core.domain.mapper.ProductRequestMapper;
 import com.fiap.challenge.tastefood.core.domain.mapper.ProductResponseMapper;
 import lombok.AllArgsConstructor;
@@ -41,7 +41,7 @@ public class ProductController {
     }
 
     @GetMapping(path = "/product")
-    public List<ProductResponse> list(@RequestParam(required = false) ProductCategoryEnum category) {
+    public List<ProductResponse> list(@RequestParam(required = false) ProductCategory category) {
         return productResponseMapper.map(productListUseCase.execute(category));
     }
 

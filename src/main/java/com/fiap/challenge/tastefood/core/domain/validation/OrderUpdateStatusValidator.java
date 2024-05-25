@@ -1,9 +1,9 @@
 package com.fiap.challenge.tastefood.core.domain.validation;
 
 import com.fiap.challenge.tastefood.core.domain.entity.Order;
-import com.fiap.challenge.tastefood.core.domain.entity.OrderStatusEnum;
 import com.fiap.challenge.tastefood.core.domain.exception.EntityNotFoundException;
 import com.fiap.challenge.tastefood.core.domain.repository.OrderRepository;
+import com.fiap.challenge.tastefood.core.domain.valueObject.OrderStatus;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ public class OrderUpdateStatusValidator {
 
     private final OrderRepository orderRepository;
 
-    public void validate(Long id, OrderStatusEnum status) {
+    public void validate(Long id, OrderStatus status) {
 
         Order order = orderRepository.findById(id).orElseThrow(EntityNotFoundException::new);
 

@@ -19,7 +19,7 @@ public class ProductCreateUseCase {
 
         validator.validate(product);
 
-        product.setRemoved(false);
+        product.setActive(true);
 
         Product saved = repository.save(product);
 

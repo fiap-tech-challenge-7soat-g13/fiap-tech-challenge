@@ -1,4 +1,4 @@
-package com.fiap.challenge.tastefood.core.configuration;
+package com.fiap.challenge.tastefood.adapter.driver.controller;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;

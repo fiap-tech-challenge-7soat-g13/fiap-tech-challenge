@@ -15,7 +15,13 @@ public class CustomerCreateValidator {
 
         Validator validator = new Validator();
 
-        validator.add(Validation.assertFalse(customerRepository.existsByDocument(customer.getDocument()), "Cliente já possui cadastro"));
+        validator.add(Validation.notBlank(customer.getName(), "É obrigatório informar o nome"));
+        validator.add(Validation.notBlank(customer.getEmail(), "É obrigatório informar o e-mail"));
+        validator.add(Validation.notBlank(customer.getDocument(), "É obrigatório informar o documento"));
+
+        if (customer.getDocument() != null) {
+            validator.add(Validation.assertFalse(customerRepository.existsByDocument(customer.getDocument()), "Já existe um cliente com o documento '%s'", customer.getDocument()));
+        }
 
         validator.assertEmptyMessages();
     }
