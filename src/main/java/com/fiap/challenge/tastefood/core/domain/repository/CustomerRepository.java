@@ -13,6 +13,6 @@ public interface CustomerRepository {
 
     List<Customer> findAll();
 
-    boolean existsByDocument(String document);
+    List<Customer> findByDocument(String document);
 
 }

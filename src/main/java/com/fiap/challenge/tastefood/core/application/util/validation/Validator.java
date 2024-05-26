@@ -1,6 +1,6 @@
-package com.fiap.challenge.tastefood.core.domain.validation;
+package com.fiap.challenge.tastefood.core.application.util.validation;
 
-import com.fiap.challenge.tastefood.core.domain.exception.InvalidDataException;
+import com.fiap.challenge.tastefood.core.application.exception.InvalidDataException;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;

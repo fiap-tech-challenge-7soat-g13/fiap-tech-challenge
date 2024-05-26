@@ -1,8 +1,10 @@
-package com.fiap.challenge.tastefood.core.domain.validation;
+package com.fiap.challenge.tastefood.core.application.validator;
 
 import com.fiap.challenge.tastefood.core.domain.entity.Order;
-import com.fiap.challenge.tastefood.core.domain.exception.EntityNotFoundException;
+import com.fiap.challenge.tastefood.core.application.exception.EntityNotFoundException;
 import com.fiap.challenge.tastefood.core.domain.repository.OrderRepository;
+import com.fiap.challenge.tastefood.core.application.util.validation.Validation;
+import com.fiap.challenge.tastefood.core.application.util.validation.Validator;
 import com.fiap.challenge.tastefood.core.domain.valueObject.OrderStatus;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

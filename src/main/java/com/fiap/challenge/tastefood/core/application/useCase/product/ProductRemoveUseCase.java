@@ -1,7 +1,7 @@
 package com.fiap.challenge.tastefood.core.application.useCase.product;
 
 import com.fiap.challenge.tastefood.core.domain.entity.Product;
-import com.fiap.challenge.tastefood.core.domain.exception.EntityNotFoundException;
+import com.fiap.challenge.tastefood.core.application.exception.EntityNotFoundException;
 import com.fiap.challenge.tastefood.core.domain.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;

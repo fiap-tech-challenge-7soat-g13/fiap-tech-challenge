@@ -1,8 +1,10 @@
-package com.fiap.challenge.tastefood.core.domain.validation;
+package com.fiap.challenge.tastefood.core.application.validator;
 
+import com.fiap.challenge.tastefood.core.application.dto.ProductRequest;
+import com.fiap.challenge.tastefood.core.application.util.validation.Validation;
+import com.fiap.challenge.tastefood.core.application.util.validation.Validator;
 import com.fiap.challenge.tastefood.core.domain.entity.Product;
 import com.fiap.challenge.tastefood.core.domain.repository.ProductRepository;
-import com.fiap.challenge.tastefood.core.domain.util.StringUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +17,7 @@ public class ProductUpdateValidator {
 
     private ProductRepository productRepository;
 
-    public void validate(Long id, Product product) {
+    public void validate(Long id, ProductRequest product) {
 
         Validator validator = new Validator();
 
@@ -27,8 +29,10 @@ public class ProductUpdateValidator {
         validator.add(Validation.greaterThan(product.getPrice(), BigDecimal.ZERO, "O preço deve ser maior que zero"));
         validator.add(Validation.notEmpty(product.getImages(), "É obrigatório informar as imagens"));
 
-        for (String image : product.getImages()) {
-            validator.add(Validation.assertTrue(StringUtils.isValidUrl(image), "A imagem deve ser uma URL válida"));
+        if (product.getImages() != null) {
+            for (String image : product.getImages()) {
+                validator.add(Validation.notInvalidUrl(image, "A imagem deve ser uma URL válida"));
+            }
         }
 
         validator.assertEmptyMessages();

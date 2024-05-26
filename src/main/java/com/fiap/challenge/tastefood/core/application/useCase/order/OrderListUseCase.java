@@ -1,8 +1,9 @@
 package com.fiap.challenge.tastefood.core.application.useCase.order;
 
-import com.fiap.challenge.tastefood.core.domain.entity.Order;
-import com.fiap.challenge.tastefood.core.domain.valueObject.OrderStatus;
+import com.fiap.challenge.tastefood.core.application.dto.OrderResponse;
+import com.fiap.challenge.tastefood.core.application.mapper.OrderResponseMapper;
 import com.fiap.challenge.tastefood.core.domain.repository.OrderRepository;
+import com.fiap.challenge.tastefood.core.domain.valueObject.OrderStatus;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,11 +14,12 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderListUseCase {
 
+    private final OrderResponseMapper mapper;
     private final OrderRepository repository;
 
     @Transactional
-    public List<Order> execute(OrderStatus status) {
-        return status == null ? repository.findAll() : repository.findByStatus(status);
+    public List<OrderResponse> execute(OrderStatus status) {
+        return mapper.map(status == null ? repository.findAll() : repository.findByStatus(status));
     }
 
 }

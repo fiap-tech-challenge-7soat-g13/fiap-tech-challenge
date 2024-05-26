@@ -1,12 +1,12 @@
-package com.fiap.challenge.tastefood.core.domain.validation;
+package com.fiap.challenge.tastefood.core.application.util.validation;
 
+import com.fiap.challenge.tastefood.core.application.util.Strings;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 
-import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -26,6 +26,18 @@ public class Validation {
 
     public static Validation notEmpty(Collection<?> value, String message, Object... params) {
         return assertFalse(CollectionUtils.isEmpty(value), message, params);
+    }
+
+    public static Validation notInvalidEmail(String value, String message, Object... params) {
+        return assertFalse(value != null && !Strings.isValidEmail(value), message, params);
+    }
+
+    public static Validation notInvalidDocument(String value, String message, Object... params) {
+        return assertFalse(value != null && !Strings.isValidDocument(value), message, params);
+    }
+
+    public static Validation notInvalidUrl(String value, String message, Object... params) {
+        return assertFalse(value != null && !Strings.isValidUrl(value), message, params);
     }
 
     public static <T extends Comparable<T>> Validation greaterThan(T value, T min, String message, Object... params) {

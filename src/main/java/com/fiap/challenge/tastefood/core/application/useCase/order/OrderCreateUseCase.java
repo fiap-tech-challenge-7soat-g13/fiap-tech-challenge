@@ -1,10 +1,12 @@
 package com.fiap.challenge.tastefood.core.application.useCase.order;
 
+import com.fiap.challenge.tastefood.core.application.dto.OrderRequest;
 import com.fiap.challenge.tastefood.core.domain.entity.Order;
 import com.fiap.challenge.tastefood.core.domain.entity.OrderProduct;
-import com.fiap.challenge.tastefood.core.domain.valueObject.OrderStatus;
+import com.fiap.challenge.tastefood.core.application.mapper.OrderRequestMapper;
 import com.fiap.challenge.tastefood.core.domain.repository.OrderRepository;
-import com.fiap.challenge.tastefood.core.domain.validation.OrderCreateValidator;
+import com.fiap.challenge.tastefood.core.application.validator.OrderCreateValidator;
+import com.fiap.challenge.tastefood.core.domain.valueObject.OrderStatus;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,26 +18,28 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class OrderCreateUseCase {
 
+    private final OrderRequestMapper mapper;
     private final OrderRepository repository;
-
     private final OrderCreateValidator validator;
 
     @Transactional
-    public Long execute(Order order) {
+    public Long execute(OrderRequest order) {
 
         validator.validate(order);
 
-        order.setCreatedAt(LocalDateTime.now());
-        order.setStatus(OrderStatus.RECEBIDO);
-        order.setTotal(BigDecimal.ZERO);
+        Order entity = mapper.map(order);
 
-        for (OrderProduct orderProduct : order.getProducts()) {
-            orderProduct.setOrder(order);
+        entity.setCreatedAt(LocalDateTime.now());
+        entity.setStatus(OrderStatus.RECEBIDO);
+        entity.setTotal(BigDecimal.ZERO);
+
+        for (OrderProduct orderProduct : entity.getProducts()) {
+            orderProduct.setOrder(entity);
             orderProduct.setPrice(orderProduct.getProduct().getPrice());
-            order.setTotal(order.getTotal().add(BigDecimal.valueOf(orderProduct.getQuantity()).multiply(orderProduct.getPrice())));
+            entity.setTotal(entity.getTotal().add(BigDecimal.valueOf(orderProduct.getQuantity()).multiply(orderProduct.getPrice())));
         }
 
-        Order saved = repository.save(order);
+        Order saved = repository.save(entity);
 
         return saved.getId();
     }

@@ -1,6 +1,6 @@
-package com.fiap.challenge.tastefood.core.domain.validation;
+package com.fiap.challenge.tastefood.core.application.validator;
 
-import com.fiap.challenge.tastefood.core.domain.entity.Product;
+import com.fiap.challenge.tastefood.core.application.dto.ProductRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ public class ProductCreateValidator {
 
     private ProductUpdateValidator validator;
 
-    public void validate(Product product) {
+    public void validate(ProductRequest product) {
         validator.validate(null, product);
     }
 

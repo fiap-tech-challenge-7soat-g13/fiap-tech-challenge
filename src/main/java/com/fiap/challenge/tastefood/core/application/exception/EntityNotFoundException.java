@@ -1,4 +1,4 @@
-package com.fiap.challenge.tastefood.core.domain.exception;
+package com.fiap.challenge.tastefood.core.application.exception;
 
 public class EntityNotFoundException extends RuntimeException {
 

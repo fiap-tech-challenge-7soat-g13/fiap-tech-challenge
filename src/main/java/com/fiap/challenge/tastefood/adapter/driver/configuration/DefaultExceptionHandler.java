@@ -1,7 +1,7 @@
-package com.fiap.challenge.tastefood.adapter.driver.controller;
+package com.fiap.challenge.tastefood.adapter.driver.configuration;
 
-import com.fiap.challenge.tastefood.core.domain.exception.EntityNotFoundException;
-import com.fiap.challenge.tastefood.core.domain.exception.InvalidDataException;
+import com.fiap.challenge.tastefood.core.application.exception.EntityNotFoundException;
+import com.fiap.challenge.tastefood.core.application.exception.InvalidDataException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

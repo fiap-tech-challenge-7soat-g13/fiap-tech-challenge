@@ -1,4 +1,4 @@
-package com.fiap.challenge.tastefood.core.domain.mapper;
+package com.fiap.challenge.tastefood.core.application.mapper;
 
 import com.fiap.challenge.tastefood.core.application.dto.OrderProductRequest;
 import com.fiap.challenge.tastefood.core.domain.entity.OrderProduct;
