@@ -16,4 +16,6 @@ public interface OrderRepository {
 
     List<Order> findByStatus(OrderStatus status);
 
+    List<Order> findAllByStatusInOrderByCreatedAt(List<String> orderStatus);
+
 }

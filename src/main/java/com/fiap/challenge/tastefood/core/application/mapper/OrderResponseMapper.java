@@ -9,6 +9,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface OrderResponseMapper {
 
+    OrderResponse map(Order order);
+
     List<OrderResponse> map(List<Order> orders);
 
 }

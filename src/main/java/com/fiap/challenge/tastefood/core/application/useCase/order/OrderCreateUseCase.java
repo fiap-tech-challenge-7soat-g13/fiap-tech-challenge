@@ -30,7 +30,7 @@ public class OrderCreateUseCase {
         Order entity = mapper.map(order);
 
         entity.setCreatedAt(LocalDateTime.now());
-        entity.setStatus(OrderStatus.RECEBIDO);
+        entity.setStatus(OrderStatus.CRIADO);
         entity.setTotal(BigDecimal.ZERO);
 
         for (OrderProduct orderProduct : entity.getProducts()) {
