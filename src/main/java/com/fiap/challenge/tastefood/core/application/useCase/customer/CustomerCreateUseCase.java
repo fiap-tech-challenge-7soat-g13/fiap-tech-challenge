@@ -22,7 +22,7 @@ public class CustomerCreateUseCase {
 
         validator.validate(customerInput);
 
-        Customer entity = mapper.map(customerInput);
+        Customer entity = mapper.toCustomer(customerInput);
 
         Customer saved = repository.save(entity);
 

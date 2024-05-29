@@ -19,7 +19,7 @@ public class CustomerListUseCase {
 
     @Transactional
     public List<CustomerOutput> execute(String document) {
-        return mapper.map(StringUtils.isBlank(document) ? repository.findAll() : repository.findByDocument(document));
+        return mapper.toCustomerOutput(StringUtils.isBlank(document) ? repository.findAll() : repository.findByDocument(document));
     }
 
 }

@@ -19,7 +19,7 @@ public class ProductListUseCase {
 
     @Transactional
     public List<ProductOutput> execute(ProductCategory category) {
-        return mapper.map(category == null ? repository.findByActiveTrue() : repository.findByCategoryAndActiveTrue(category));
+        return mapper.toProductOutput(category == null ? repository.findByActiveTrue() : repository.findByCategoryAndActiveTrue(category));
     }
 
 }

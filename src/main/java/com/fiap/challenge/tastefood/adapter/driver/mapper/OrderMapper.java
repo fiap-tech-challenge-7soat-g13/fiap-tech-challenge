@@ -15,6 +15,6 @@ public interface OrderMapper {
 
     OrderResponse toOrderResponse(OrderOutput orderOutput);
 
-    List<OrderResponse> toOrderResponse(List<OrderOutput> orderOutput);
+    List<OrderResponse> toOrderResponse(List<OrderOutput> ordersOutput);
 
 }

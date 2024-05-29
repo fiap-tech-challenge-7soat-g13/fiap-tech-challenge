@@ -47,7 +47,7 @@ public class OrderController {
     }
 
     @GetMapping(path = "/order/status")
-    public ResponseEntity<?> list() {
+    public ResponseEntity<List<String>> list() {
         return ResponseEntity
                 .status(OK)
                 .body(statusListUseCase.execute());
@@ -68,7 +68,7 @@ public class OrderController {
     }
 
     @GetMapping(path = "/order/queue")
-    public ResponseEntity<?> ordersQueue() {
+    public ResponseEntity<List<OrderResponse>> ordersQueue() {
         List<OrderOutput> ordersOutput = orderQueueListUseCase.execute(List.of(OrderStatus.RECEBIDO.name(), OrderStatus.EM_PREPARACAO.name()));
         return ResponseEntity
                 .status(OK)

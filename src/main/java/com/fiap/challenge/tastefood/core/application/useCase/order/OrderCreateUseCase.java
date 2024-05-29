@@ -27,7 +27,7 @@ public class OrderCreateUseCase {
 
         validator.validate(orderInput);
 
-        Order entity = mapper.map(orderInput);
+        Order entity = mapper.toOrder(orderInput);
 
         entity.setCreatedAt(LocalDateTime.now());
         entity.setStatus(OrderStatus.CRIADO);

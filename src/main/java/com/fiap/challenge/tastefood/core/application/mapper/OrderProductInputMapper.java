@@ -9,6 +9,6 @@ import org.mapstruct.Mapping;
 public interface OrderProductInputMapper {
 
     @Mapping(source = "productId", target = "product")
-    OrderProduct map(OrderProductInput orderProduct);
+    OrderProduct toOrderProduct(OrderProductInput orderProduct);
 
 }

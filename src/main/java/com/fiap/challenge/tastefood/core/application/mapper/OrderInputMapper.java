@@ -9,6 +9,6 @@ import org.mapstruct.Mapping;
 public interface OrderInputMapper {
 
     @Mapping(source = "customerId", target = "customer")
-    Order map(OrderInput order);
+    Order toOrder(OrderInput order);
 
 }

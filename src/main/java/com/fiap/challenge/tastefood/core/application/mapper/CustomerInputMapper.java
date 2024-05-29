@@ -7,6 +7,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface CustomerInputMapper {
 
-    Customer map(CustomerInput customerInput);
+    Customer toCustomer(CustomerInput customerInput);
 
 }

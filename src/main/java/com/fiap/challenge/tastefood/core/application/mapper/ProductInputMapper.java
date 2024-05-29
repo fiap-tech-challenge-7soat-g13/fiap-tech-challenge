@@ -10,6 +10,6 @@ public interface ProductInputMapper {
 
     Product toProduct(ProductInput productInput);
 
-    void update(ProductInput product, @MappingTarget Product entity);
+    void update(ProductInput productInput, @MappingTarget Product product);
 
 }

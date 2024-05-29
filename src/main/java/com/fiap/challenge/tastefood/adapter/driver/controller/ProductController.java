@@ -63,7 +63,7 @@ public class ProductController {
     }
 
     @GetMapping(path = "/product/category")
-    public ResponseEntity<?> list() {
+    public ResponseEntity<List<String>> list() {
         return ResponseEntity
                 .status(OK)
                 .body(categoryListUseCase.execute());
