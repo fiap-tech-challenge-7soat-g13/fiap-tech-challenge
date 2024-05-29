@@ -1,4 +1,4 @@
-package com.fiap.challenge.tastefood.core.application.dto;
+package com.fiap.challenge.tastefood.adapter.driver.dto;
 
 import com.fiap.challenge.tastefood.core.domain.valueObject.OrderStatus;
 import lombok.Getter;

@@ -1,10 +1,10 @@
 package com.fiap.challenge.tastefood.core.application.useCase.product;
 
-import com.fiap.challenge.tastefood.core.application.dto.ProductRequest;
-import com.fiap.challenge.tastefood.core.domain.entity.Product;
-import com.fiap.challenge.tastefood.core.application.mapper.ProductRequestMapper;
-import com.fiap.challenge.tastefood.core.domain.repository.ProductRepository;
+import com.fiap.challenge.tastefood.core.application.mapper.ProductInputMapper;
 import com.fiap.challenge.tastefood.core.application.validator.ProductCreateValidator;
+import com.fiap.challenge.tastefood.core.application.vo.ProductInput;
+import com.fiap.challenge.tastefood.core.domain.entity.Product;
+import com.fiap.challenge.tastefood.core.domain.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,16 +13,16 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class ProductCreateUseCase {
 
-    private final ProductRequestMapper mapper;
+    private final ProductInputMapper mapper;
     private final ProductRepository repository;
     private final ProductCreateValidator validator;
 
     @Transactional
-    public Long execute(ProductRequest product) {
+    public Long execute(ProductInput productInput) {
 
-        validator.validate(product);
+        validator.validate(productInput);
 
-        Product entity = mapper.map(product);
+        Product entity = mapper.toProduct(productInput);
 
         entity.setActive(true);
 

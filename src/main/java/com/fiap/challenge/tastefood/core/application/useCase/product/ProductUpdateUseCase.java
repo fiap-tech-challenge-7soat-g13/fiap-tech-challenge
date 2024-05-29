@@ -1,11 +1,11 @@
 package com.fiap.challenge.tastefood.core.application.useCase.product;
 
-import com.fiap.challenge.tastefood.core.application.dto.ProductRequest;
-import com.fiap.challenge.tastefood.core.domain.entity.Product;
 import com.fiap.challenge.tastefood.core.application.exception.EntityNotFoundException;
-import com.fiap.challenge.tastefood.core.application.mapper.ProductRequestMapper;
-import com.fiap.challenge.tastefood.core.domain.repository.ProductRepository;
+import com.fiap.challenge.tastefood.core.application.mapper.ProductInputMapper;
 import com.fiap.challenge.tastefood.core.application.validator.ProductUpdateValidator;
+import com.fiap.challenge.tastefood.core.application.vo.ProductInput;
+import com.fiap.challenge.tastefood.core.domain.entity.Product;
+import com.fiap.challenge.tastefood.core.domain.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,18 +14,18 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class ProductUpdateUseCase {
 
-    private final ProductRequestMapper mapper;
+    private final ProductInputMapper mapper;
     private final ProductRepository repository;
     private final ProductUpdateValidator validator;
 
     @Transactional
-    public void execute(Long id, ProductRequest product) {
+    public void execute(Long id, ProductInput productInput) {
 
-        validator.validate(id, product);
+        validator.validate(id, productInput);
 
         Product entity = repository.findById(id).orElseThrow(EntityNotFoundException::new);
 
-        mapper.update(product, entity);
+        mapper.update(productInput, entity);
 
         repository.save(entity);
     }

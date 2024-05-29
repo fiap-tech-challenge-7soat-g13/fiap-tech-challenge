@@ -1,11 +1,11 @@
 package com.fiap.challenge.tastefood.core.application.useCase.order;
 
-import com.fiap.challenge.tastefood.core.application.dto.OrderRequest;
+import com.fiap.challenge.tastefood.core.application.mapper.OrderInputMapper;
+import com.fiap.challenge.tastefood.core.application.validator.OrderCreateValidator;
+import com.fiap.challenge.tastefood.core.application.vo.OrderInput;
 import com.fiap.challenge.tastefood.core.domain.entity.Order;
 import com.fiap.challenge.tastefood.core.domain.entity.OrderProduct;
-import com.fiap.challenge.tastefood.core.application.mapper.OrderRequestMapper;
 import com.fiap.challenge.tastefood.core.domain.repository.OrderRepository;
-import com.fiap.challenge.tastefood.core.application.validator.OrderCreateValidator;
 import com.fiap.challenge.tastefood.core.domain.valueObject.OrderStatus;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -18,16 +18,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class OrderCreateUseCase {
 
-    private final OrderRequestMapper mapper;
+    private final OrderInputMapper mapper;
     private final OrderRepository repository;
     private final OrderCreateValidator validator;
 
     @Transactional
-    public Long execute(OrderRequest order) {
+    public Long execute(OrderInput orderInput) {
 
-        validator.validate(order);
+        validator.validate(orderInput);
 
-        Order entity = mapper.map(order);
+        Order entity = mapper.map(orderInput);
 
         entity.setCreatedAt(LocalDateTime.now());
         entity.setStatus(OrderStatus.CRIADO);

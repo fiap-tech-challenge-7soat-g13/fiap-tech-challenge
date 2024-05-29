@@ -1,4 +1,4 @@
-package com.fiap.challenge.tastefood.core.application.dto;
+package com.fiap.challenge.tastefood.core.application.vo;
 
 import com.fiap.challenge.tastefood.core.domain.valueObject.ProductCategory;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class ProductResponse {
+public class ProductOutput {
 
     private Long id;
     private String name;

@@ -1,7 +1,7 @@
 package com.fiap.challenge.tastefood.core.application.useCase.order;
 
-import com.fiap.challenge.tastefood.core.application.dto.OrderResponse;
-import com.fiap.challenge.tastefood.core.application.mapper.OrderResponseMapper;
+import com.fiap.challenge.tastefood.core.application.mapper.OrderOutputMapper;
+import com.fiap.challenge.tastefood.core.application.vo.OrderOutput;
 import com.fiap.challenge.tastefood.core.domain.repository.OrderRepository;
 import com.fiap.challenge.tastefood.core.domain.valueObject.OrderStatus;
 import jakarta.transaction.Transactional;
@@ -14,12 +14,12 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderListUseCase {
 
-    private final OrderResponseMapper mapper;
+    private final OrderOutputMapper mapper;
     private final OrderRepository repository;
 
     @Transactional
-    public List<OrderResponse> execute(OrderStatus status) {
-        return mapper.map(status == null ? repository.findAll() : repository.findByStatus(status));
+    public List<OrderOutput> execute(OrderStatus status) {
+        return mapper.toOrderOutput(status == null ? repository.findAll() : repository.findByStatus(status));
     }
 
 }

@@ -1,7 +1,7 @@
 package com.fiap.challenge.tastefood.core.application.useCase.customer;
 
-import com.fiap.challenge.tastefood.core.application.dto.CustomerResponse;
-import com.fiap.challenge.tastefood.core.application.mapper.CustomerResponseMapper;
+import com.fiap.challenge.tastefood.core.application.mapper.CustomerOutputMapper;
+import com.fiap.challenge.tastefood.core.application.vo.CustomerOutput;
 import com.fiap.challenge.tastefood.core.domain.repository.CustomerRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -14,11 +14,11 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomerListUseCase {
 
-    private final CustomerResponseMapper mapper;
+    private final CustomerOutputMapper mapper;
     private final CustomerRepository repository;
 
     @Transactional
-    public List<CustomerResponse> execute(String document) {
+    public List<CustomerOutput> execute(String document) {
         return mapper.map(StringUtils.isBlank(document) ? repository.findAll() : repository.findByDocument(document));
     }
 

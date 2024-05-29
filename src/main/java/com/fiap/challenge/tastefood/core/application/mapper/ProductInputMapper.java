@@ -1,15 +1,15 @@
 package com.fiap.challenge.tastefood.core.application.mapper;
 
-import com.fiap.challenge.tastefood.core.application.dto.ProductRequest;
+import com.fiap.challenge.tastefood.core.application.vo.ProductInput;
 import com.fiap.challenge.tastefood.core.domain.entity.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
-public interface ProductRequestMapper {
+public interface ProductInputMapper {
 
-    Product map(ProductRequest product);
+    Product toProduct(ProductInput productInput);
 
-    void update(ProductRequest product, @MappingTarget Product entity);
+    void update(ProductInput product, @MappingTarget Product entity);
 
 }

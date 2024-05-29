@@ -1,10 +1,10 @@
 package com.fiap.challenge.tastefood.core.application.useCase.customer;
 
-import com.fiap.challenge.tastefood.core.application.dto.CustomerRequest;
-import com.fiap.challenge.tastefood.core.domain.entity.Customer;
-import com.fiap.challenge.tastefood.core.application.mapper.CustomerRequestMapper;
-import com.fiap.challenge.tastefood.core.domain.repository.CustomerRepository;
+import com.fiap.challenge.tastefood.core.application.mapper.CustomerInputMapper;
 import com.fiap.challenge.tastefood.core.application.validator.CustomerCreateValidator;
+import com.fiap.challenge.tastefood.core.application.vo.CustomerInput;
+import com.fiap.challenge.tastefood.core.domain.entity.Customer;
+import com.fiap.challenge.tastefood.core.domain.repository.CustomerRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,16 +13,16 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class CustomerCreateUseCase {
 
-    private final CustomerRequestMapper mapper;
+    private final CustomerInputMapper mapper;
     private final CustomerRepository repository;
     private final CustomerCreateValidator validator;
 
     @Transactional
-    public Long execute(CustomerRequest customer) {
+    public Long execute(CustomerInput customerInput) {
 
-        validator.validate(customer);
+        validator.validate(customerInput);
 
-        Customer entity = mapper.map(customer);
+        Customer entity = mapper.map(customerInput);
 
         Customer saved = repository.save(entity);
 

@@ -1,13 +1,12 @@
-package com.fiap.challenge.tastefood.core.application.dto;
+package com.fiap.challenge.tastefood.adapter.driver.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class CustomerResponse {
+public class CustomerRequest {
 
-    private Long id;
     private String name;
     private String email;
     private String document;
