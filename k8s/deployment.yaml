@@ -22,6 +22,11 @@ spec:
           envFrom:
             - configMapRef:
                 name: taste-food
+          startupProbe:
+            httpGet:
+              port: http
+              path: /actuator/health
+            failureThreshold: 30
           readinessProbe:
             httpGet:
               port: http
@@ -32,8 +37,8 @@ spec:
               path: /actuator/health
           resources:
             requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
               cpu: 1000m
               memory: 1Gi
-            limits:
-              cpu: 2000m
-              memory: 2Gi
