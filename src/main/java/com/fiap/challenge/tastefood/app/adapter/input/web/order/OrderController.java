@@ -21,6 +21,7 @@ import static org.springframework.http.HttpStatus.*;
 public class OrderController {
 
     private final OrderCreateUseCase orderCreateUseCase;
+    private final OrderGetUseCase orderGetUseCase;
     private final OrderListUseCase orderListUseCase;
     private final OrderUpdateStatusUseCase orderUpdateStatusUseCase;
     private final StatusListUseCase statusListUseCase;
@@ -30,12 +31,18 @@ public class OrderController {
     private final OrderResponseMapper orderResponseMapper;
 
     @PostMapping(path = "/order")
-    public ResponseEntity<?> create(@RequestBody OrderRequest orderRequest) {
+    public ResponseEntity<OrderResponse> create(@RequestBody OrderRequest orderRequest) {
         Order orderInput = orderRequestMapper.toOrder(orderRequest);
         Order orderSaved = orderCreateUseCase.execute(orderInput);
         return ResponseEntity
                 .status(CREATED)
                 .body(orderResponseMapper.toOrderResponse(orderSaved));
+    }
+
+    @GetMapping(path = "/order/{id}")
+    public OrderResponse get(@PathVariable Long id) {
+        Order order = orderGetUseCase.execute(id);
+        return orderResponseMapper.toOrderResponse(order);
     }
 
     @GetMapping(path = "/order")
