@@ -17,9 +17,6 @@ public class OrderProductEntity {
     private Long id;
 
     @ManyToOne
-    private OrderEntity order;
-
-    @ManyToOne
     private ProductEntity product;
 
     private Integer quantity;

@@ -24,10 +24,11 @@ public class OrderEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private CustomerEntity customer;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id", nullable = false)
     private List<OrderProductEntity> products;
 
     private BigDecimal total;

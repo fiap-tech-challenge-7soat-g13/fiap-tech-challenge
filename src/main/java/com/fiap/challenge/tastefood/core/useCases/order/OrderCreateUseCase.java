@@ -4,7 +4,6 @@ import com.fiap.challenge.tastefood.core.common.validator.OrderCreateValidator;
 import com.fiap.challenge.tastefood.core.domain.Order;
 import com.fiap.challenge.tastefood.core.domain.OrderProduct;
 import com.fiap.challenge.tastefood.core.domain.enums.OrderStatus;
-import com.fiap.challenge.tastefood.core.gateways.CustomerGateway;
 import com.fiap.challenge.tastefood.core.gateways.OrderGateway;
 import com.fiap.challenge.tastefood.core.gateways.ProductGateway;
 import lombok.AllArgsConstructor;
@@ -17,7 +16,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class OrderCreateUseCase {
 
-    private final CustomerGateway customerGateway;
     private final ProductGateway productGateway;
     private final OrderGateway orderGateway;
     private final OrderCreateValidator validator;
@@ -30,7 +28,7 @@ public class OrderCreateUseCase {
         order.setTotal(BigDecimal.ZERO);
 
         for (OrderProduct orderProduct : order.getProducts()) {
-            orderProduct.setOrder(order);
+            orderProduct.setProduct(productGateway.findById(orderProduct.getProduct().getId()).get());
             orderProduct.setPrice(orderProduct.getProduct().getPrice());
             order.setTotal(order.getTotal().add(BigDecimal.valueOf(orderProduct.getQuantity()).multiply(orderProduct.getPrice())));
         }

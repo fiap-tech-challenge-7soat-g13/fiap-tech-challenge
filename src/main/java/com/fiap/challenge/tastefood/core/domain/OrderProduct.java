@@ -12,6 +12,5 @@ public class OrderProduct {
     private Integer quantity;
     private BigDecimal price;
     private Product product;
-    private Order order;
 
 }
