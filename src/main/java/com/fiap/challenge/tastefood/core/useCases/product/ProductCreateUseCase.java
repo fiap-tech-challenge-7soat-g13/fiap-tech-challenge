@@ -13,13 +13,11 @@ public class ProductCreateUseCase {
     private final ProductGateway productGateway;
     private final ProductCreateValidator validator;
 
-    public Long execute(Product product) {
+    public Product execute(Product product) {
         validator.validate(product);
         product.setActive(true);
 
-        Product saved = productGateway.save(product);
-
-        return saved.getId();
+        return productGateway.save(product);
     }
 
 }

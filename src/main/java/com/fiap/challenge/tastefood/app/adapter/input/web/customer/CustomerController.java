@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.NO_CONTENT;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @AllArgsConstructor
@@ -27,9 +26,18 @@ public class CustomerController {
     private final CustomerResponseMapper customerResponseMapper;
 
     @PostMapping(path = "/customer")
-    public void create(@RequestBody CustomerRequest customerRequest) {
-        Customer customer = customerRequestMapper.toCustomer(customerRequest);
-        customerCreateUseCase.execute(customer);
+    public ResponseEntity<?> create(@RequestBody CustomerRequest customerRequest) {
+        try {
+            Customer customer = customerRequestMapper.toCustomer(customerRequest);
+            Customer customerSave = customerCreateUseCase.execute(customer);
+            return ResponseEntity
+                    .status(CREATED)
+                    .body(customerResponseMapper.toCustomerResponse(customerSave));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(BAD_REQUEST)
+                    .body("Error: " + e.getMessage());
+        }
     }
 
     @GetMapping(path = "/customer")

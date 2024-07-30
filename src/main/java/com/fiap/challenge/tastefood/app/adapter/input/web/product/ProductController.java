@@ -3,8 +3,8 @@ package com.fiap.challenge.tastefood.app.adapter.input.web.product;
 import com.fiap.challenge.tastefood.app.adapter.input.web.order.dto.ProductRequest;
 import com.fiap.challenge.tastefood.app.adapter.input.web.product.mapper.ProductRequestMapper;
 import com.fiap.challenge.tastefood.app.adapter.input.web.product.mapper.ProductResponseMapper;
-import com.fiap.challenge.tastefood.core.domain.enums.ProductCategory;
 import com.fiap.challenge.tastefood.core.domain.Product;
+import com.fiap.challenge.tastefood.core.domain.enums.ProductCategory;
 import com.fiap.challenge.tastefood.core.useCases.category.CategoryListUseCase;
 import com.fiap.challenge.tastefood.core.useCases.product.ProductCreateUseCase;
 import com.fiap.challenge.tastefood.core.useCases.product.ProductListUseCase;
@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.NO_CONTENT;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @AllArgsConstructor
@@ -33,15 +32,33 @@ public class ProductController {
     private final ProductResponseMapper productResponseMapper;
 
     @PostMapping(path = "/product")
-    public void create(@RequestBody ProductRequest productRequest) {
-        Product product = productRequestMapper.toProduct(productRequest);
-        productCreateUseCase.execute(product);
+    public ResponseEntity<?> create(@RequestBody ProductRequest productRequest) {
+        try {
+            Product product = productRequestMapper.toProduct(productRequest);
+            Product productSaved = productCreateUseCase.execute(product);
+            return ResponseEntity
+                    .status(CREATED)
+                    .body(productResponseMapper.toProductResponse(productSaved));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(BAD_REQUEST)
+                    .body("Error: " + e.getMessage());
+        }
     }
 
     @PutMapping(path = "/product/{id}")
-    public void update(@PathVariable Long id, @RequestBody ProductRequest productRequest) {
-        Product product = productRequestMapper.toProduct(productRequest);
-        productUpdateUseCase.execute(id, product);
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ProductRequest productRequest) {
+        try {
+            Product product = productRequestMapper.toProduct(productRequest);
+            Product productSaved = productUpdateUseCase.execute(id, product);
+            return ResponseEntity
+                    .status(OK)
+                    .body(productResponseMapper.toProductResponse(productSaved));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(BAD_REQUEST)
+                    .body("Error: " + e.getMessage());
+        }
     }
 
     @DeleteMapping(path = "/product/{id}")
