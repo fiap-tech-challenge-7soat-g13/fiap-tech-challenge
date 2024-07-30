@@ -1,5 +1,6 @@
 package com.fiap.challenge.tastefood.core.domain;
 
+import com.fiap.challenge.tastefood.core.domain.enums.OrderPaymentStatus;
 import com.fiap.challenge.tastefood.core.domain.enums.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,7 @@ public class Order {
 
     private Long id;
     private OrderStatus status;
+    private OrderPaymentStatus paymentStatus;
     private LocalDateTime createdAt;
     private Customer customer;
     private BigDecimal total;

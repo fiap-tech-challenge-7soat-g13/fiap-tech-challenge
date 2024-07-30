@@ -19,6 +19,7 @@ CREATE TABLE "orders" (
     id BIGSERIAL PRIMARY KEY,
     created_at TIMESTAMP NOT NULL,
     status VARCHAR NOT NULL,
+    payment_status VARCHAR,
     total NUMERIC NOT NULL,
     customer_id BIGINT REFERENCES customers (id)
 );

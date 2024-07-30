@@ -12,7 +12,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.*;
@@ -25,7 +24,7 @@ public class OrderController {
     private final OrderListUseCase orderListUseCase;
     private final OrderUpdateStatusUseCase orderUpdateStatusUseCase;
     private final StatusListUseCase statusListUseCase;
-    private final CheckoutOrderUseCase checkoutOrderUseCase;
+    private final OrderCheckoutUseCase orderCheckoutUseCase;
     private final OrderQueueListUseCase orderQueueListUseCase;
     private final OrderRequestMapper orderRequestMapper;
     private final OrderResponseMapper orderResponseMapper;
@@ -42,12 +41,7 @@ public class OrderController {
     @GetMapping(path = "/order")
     public List<OrderResponse> list(@RequestParam(required = false) OrderStatus status) {
         List<Order> orders = orderListUseCase.execute(status);
-        List<OrderResponse> ordersOutput = new ArrayList<>();
-
-        if (orders.isEmpty())
-            orderResponseMapper.toOrderResponse(orders);
-
-        return ordersOutput;
+        return orderResponseMapper.toOrderResponse(orders);
     }
 
     @PutMapping(path = "/order/{id}/status")
@@ -65,7 +59,7 @@ public class OrderController {
     @PostMapping(path = "/order/checkout/{id}")
     public ResponseEntity<?> checkout(@PathVariable Long id) {
         try {
-            Order order = checkoutOrderUseCase.execute(id);
+            Order order = orderCheckoutUseCase.execute(id);
             return ResponseEntity
                     .status(OK)
                     .body(orderResponseMapper.toOrderResponse(order));
