@@ -1,0 +1,46 @@
+package com.fiap.challenge.tastefood.core.common.validator;
+
+import com.fiap.challenge.tastefood.app.adapter.output.persistence.repository.CustomerRepository;
+import com.fiap.challenge.tastefood.app.adapter.output.persistence.repository.ProductRepository;
+import com.fiap.challenge.tastefood.core.common.util.validation.Validation;
+import com.fiap.challenge.tastefood.core.common.util.validation.Validator;
+import com.fiap.challenge.tastefood.core.domain.Order;
+import com.fiap.challenge.tastefood.core.domain.OrderProduct;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
+
+@Component
+@AllArgsConstructor
+public class OrderCreateValidator {
+
+    private final CustomerRepository customerRepository;
+    private final ProductRepository productRepository;
+
+    public void validate(Order order) {
+
+        Validator validator = new Validator();
+
+        validator.add(Validation.assertFalse(customerNotFound(order.getCustomer().getId()), "Cliente com ID %s não encontrado", order.getCustomer().getId()));
+        validator.add(Validation.notEmpty(order.getProducts(), "É obrigatório informar os produtos"));
+
+        if (order.getProducts() != null) {
+            for (OrderProduct orderProduct : order.getProducts()) {
+                validator.add(Validation.notNull(orderProduct.getQuantity(), "É obrigatório informar a quantidade"));
+                validator.add(Validation.greaterThan(orderProduct.getQuantity(), 0, "A quantidade deve ser maior que zero"));
+                validator.add(Validation.notNull(orderProduct.getProduct().getId(), "É obrigatório informar o produto"));
+                validator.add(Validation.assertFalse(productNotFound(orderProduct.getProduct().getId()), "Produto com ID %s não encontrado", orderProduct.getProduct().getId()));
+            }
+        }
+
+        validator.assertEmptyMessages();
+    }
+
+    private boolean customerNotFound(Long customerId) {
+        return customerId != null && customerRepository.findById(customerId).isEmpty();
+    }
+
+    private boolean productNotFound(Long productId) {
+        return productId != null && productRepository.findById(productId).isEmpty();
+    }
+
+}
