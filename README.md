@@ -58,6 +58,84 @@ minikube ip
 k6 run -e HOSTNAME=192.168.49.2:30000 --vus 100 --duration 30s script.js
 ```
 
+## Passos para testar API
+Abaixo iremos realizar os passos necessários para simular o fluxo básico do sistema. Os comandos estão utilizando o endereço IP do Minikube 192.168.49.2. Esse IP poderá ser diferente na sua máquina e talvez seja necessário substituí-lo, conforme explicamos na seção [Execução local pelo Minikube](#execução-local-pelo-minikube).
+1. Cadastrar produtos
+```bash
+curl --location 'http://192.168.49.2:30000/product' \
+--header 'Content-Type: application/json' \
+--data '{
+  "name": "X-Bacon",
+  "description": "Um delicioso hamburguer, com bacon, queijo, tomate, alface e maionese",
+  "category": "LANCHE",
+  "price": 15.99,
+  "images": [
+    "https://embutidosbonatti.ind.br/temp/BIN_57_V9Fb0BwK.jpg"
+  ]
+}'
+```
+```bash
+curl --location 'http://192.168.49.2:30000/product' \
+--header 'Content-Type: application/json' \
+--data '{
+  "name": "Coca-Cola Original 350ml Lata",
+  "description": "Coca-cola em lata contendo 350ml, sabor original",
+  "category": "BEBIDA",
+  "price": 7.99,
+  "images": [
+    "https://andinacocacola.vtexassets.com/arquivos/ids/158149-1600-auto"
+  ]
+}'
+```
+2. Cadastrar cliente (opcional)
+```
+curl --location 'http://192.168.49.2:30000/customer' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "name": "Bill Gates",
+  "email": "bill.gates@microsoft.com",
+  "document": "44867508020"
+}'
+```
+3. Cadastrar pedido (customerId é opcional)
+```bash
+curl --location 'http://192.168.49.2:30000/order' \
+--header 'Content-Type: application/json' \
+--data '{
+  "customerId": 1,
+  "products": [
+    {
+      "productId": 1,
+      "quantity": 2
+    },
+    {
+      "productId": 2,
+      "quantity": 1
+    }
+  ]
+}'
+```
+4. Realizar o pagamento do pedido
+```bash
+curl --location --request POST 'http://192.168.49.2:30000/order/checkout/1'
+```
+5. Visualizar fila de pedidos pendentes
+```bash
+curl --location 'http://192.168.49.2:30000/order/queue'
+```
+6. Atualizar o status do pedido quando preparação for iniciada
+```bash
+curl --location --request PUT 'http://192.168.49.2:30000/order/1/status?status=EM_PREPARACAO'
+```
+7. Atualizar o status do pedido quando estiver pronto
+```bash
+curl --location --request PUT 'http://192.168.49.2:30000/order/1/status?status=PRONTO'
+```
+8. Atualizar o status do pedido quando for entregue
+```bash
+curl --location --request PUT 'http://192.168.49.2:30000/order/1/status?status=FINALIZADO'
+```
+Existem outros endpoints no sistema, como alteração e exclusão de produto, listagem de clientes, etc. Para visualização completa sugerimos a acessar o Swagger ou a utilização da collection do Postman.
 ## Autores
 * Cristiano de Barros
 * Graziela Göedert de Souza
