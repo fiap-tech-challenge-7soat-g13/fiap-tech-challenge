@@ -1,18 +1,18 @@
 package com.fiap.challenge.tastefood.core.gateways;
 
-import com.fiap.challenge.tastefood.app.adapter.output.persistence.entity.CustomerEntity;
+import com.fiap.challenge.tastefood.core.domain.Customer;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface CustomerGateway {
 
-	CustomerEntity save(CustomerEntity customerEntity);
+	Customer save(Customer customer);
 
-	Optional<CustomerEntity> findById(Long id);
+	Optional<Customer> findById(Long id);
 
-	List<CustomerEntity> findAll();
+	List<Customer> findAll();
 
-	List<CustomerEntity> findByDocument(String document);
+	List<Customer> findByDocument(String document);
 
 }

@@ -1,9 +1,12 @@
 package com.fiap.challenge.tastefood.app.adapter.output.persistence.gateway;
 
 import com.fiap.challenge.tastefood.app.adapter.output.persistence.entity.OrderEntity;
+import com.fiap.challenge.tastefood.app.adapter.output.persistence.mapper.OrderMapper;
 import com.fiap.challenge.tastefood.app.adapter.output.persistence.repository.OrderRepository;
+import com.fiap.challenge.tastefood.core.domain.Order;
 import com.fiap.challenge.tastefood.core.domain.enums.OrderStatus;
 import com.fiap.challenge.tastefood.core.gateways.OrderGateway;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -12,26 +15,38 @@ import java.util.Optional;
 @AllArgsConstructor
 public class OrderGatewayImpl implements OrderGateway {
 
+	private final OrderMapper orderMapper;
 	private final OrderRepository repository;
 
-	public OrderEntity save(OrderEntity orderEntity) {
-		return repository.save(orderEntity);
+	@Transactional
+	public Order save(Order order) {
+		OrderEntity orderEntity = orderMapper.toOrderEntity(order);
+		OrderEntity orderSave = repository.save(orderEntity);
+		return orderMapper.toOrder(orderSave);
 	}
 
-	public Optional<OrderEntity> findById(Long id) {
-		return repository.findById(id);
+	@Transactional
+	public Optional<Order> findById(Long id) {
+		Optional<OrderEntity> orderEntity = repository.findById(id);
+		return orderEntity.isPresent() ? orderEntity.map(orderMapper::toOrder) : Optional.empty();
 	}
 
-	public List<OrderEntity> findAll() {
-		return repository.findAll();
+	@Transactional
+	public List<Order> findAll() {
+		List<OrderEntity> orderList = repository.findAll();
+		return orderMapper.toOrder(orderList);
 	}
 
-	public List<OrderEntity> findByStatus(OrderStatus status) {
-		return repository.findByStatus(status);
+	@Transactional
+	public List<Order> findByStatus(OrderStatus status) {
+		List<OrderEntity> orderList = repository.findByStatus(status);
+		return orderMapper.toOrder(orderList);
 	}
 
-	public List<OrderEntity> findAllByStatusInOrderByCreatedAt(List<String> orderStatus) {
-		return repository.findAllByStatusInOrderByCreatedAt(orderStatus);
+	@Transactional
+	public List<Order> findAllByStatusInOrderByCreatedAt(List<String> orderStatus) {
+		List<OrderEntity> orderList = repository.findAllByStatusInOrderByCreatedAt(orderStatus);
+		return orderMapper.toOrder(orderList);
 	}
 
 }

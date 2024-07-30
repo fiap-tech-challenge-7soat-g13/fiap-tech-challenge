@@ -34,13 +34,13 @@ public class ProductController {
 
     @PostMapping(path = "/product")
     public void create(@RequestBody ProductRequest productRequest) {
-        Product product = productResponseMapper.toProduct(productRequest);
+        Product product = productRequestMapper.toProduct(productRequest);
         productCreateUseCase.execute(product);
     }
 
     @PutMapping(path = "/product/{id}")
     public void update(@PathVariable Long id, @RequestBody ProductRequest productRequest) {
-        Product product = productResponseMapper.toProduct(productRequest);
+        Product product = productRequestMapper.toProduct(productRequest);
         productUpdateUseCase.execute(id, product);
     }
 

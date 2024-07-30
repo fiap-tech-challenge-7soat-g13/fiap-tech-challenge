@@ -1,8 +1,11 @@
 package com.fiap.challenge.tastefood.app.adapter.output.persistence.gateway;
 
 import com.fiap.challenge.tastefood.app.adapter.output.persistence.entity.CustomerEntity;
+import com.fiap.challenge.tastefood.app.adapter.output.persistence.mapper.CustomerMapper;
 import com.fiap.challenge.tastefood.app.adapter.output.persistence.repository.CustomerRepository;
+import com.fiap.challenge.tastefood.core.domain.Customer;
 import com.fiap.challenge.tastefood.core.gateways.CustomerGateway;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -11,22 +14,31 @@ import java.util.Optional;
 @AllArgsConstructor
 public class CustomerGatewayImpl implements CustomerGateway {
 
+	private final CustomerMapper mapper;
 	private final CustomerRepository repository;
 
-	public CustomerEntity save(CustomerEntity customerEntity) {
-		return repository.save(customerEntity);
+	@Transactional
+	public Customer save(Customer customer) {
+		CustomerEntity customerEntity = mapper.toCustomerEntity(customer);
+		CustomerEntity customerSave = repository.save(customerEntity);
+
+		return mapper.toCustomer(customerSave);
 	}
 
-	public Optional<CustomerEntity> findById(Long id) {
-		return repository.findById(id);
+	public Optional<Customer> findById(Long id) {
+		Optional<CustomerEntity> customerEntity = repository.findById(id);
+		return customerEntity.isPresent() ? customerEntity.map(mapper::toCustomer) : Optional.empty();
 	}
 
-	public List<CustomerEntity> findAll() {
-		return repository.findAll();
+	public List<Customer> findAll() {
+		List<CustomerEntity> customerList = repository.findAll();
+		return customerList.isEmpty() ? List.of() : mapper.toCustomer(customerList);
 	}
 
-	public List<CustomerEntity> findByDocument(String document) {
-		return repository.findByDocument(document);
+	@Transactional
+	public List<Customer> findByDocument(String document) {
+		List<CustomerEntity> customerList = repository.findByDocument(document);
+		return customerList.isEmpty() ? List.of() : mapper.toCustomer(customerList);
 	}
 
 }

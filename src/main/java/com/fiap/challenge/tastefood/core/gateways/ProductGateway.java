@@ -1,6 +1,6 @@
 package com.fiap.challenge.tastefood.core.gateways;
 
-import com.fiap.challenge.tastefood.app.adapter.output.persistence.entity.ProductEntity;
+import com.fiap.challenge.tastefood.core.domain.Product;
 import com.fiap.challenge.tastefood.core.domain.enums.ProductCategory;
 
 import java.util.List;
@@ -8,14 +8,16 @@ import java.util.Optional;
 
 public interface ProductGateway {
 
-	ProductEntity save(ProductEntity productEntity);
+	Product save(Product product);
 
-	Optional<ProductEntity> findById(Long id);
+	Optional<Product> findById(Long id);
 
-	List<ProductEntity> findByActiveTrue();
+	List<Product> findByActiveTrue();
 
-	List<ProductEntity> findByCategoryAndActiveTrue(ProductCategory category);
+	List<Product> findByCategoryAndActiveTrue(ProductCategory category);
 
-	Optional<ProductEntity> findByNameAndActiveTrue(String name);
+	Optional<Product> findByNameAndActiveTrue(String name);
+
+	Product update(Long id, Product product);
 
 }

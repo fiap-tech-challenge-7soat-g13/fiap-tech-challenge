@@ -17,5 +17,6 @@ public class Product {
 	private ProductCategory category;
 	private BigDecimal price;
 	private List<String> images;
+	private Boolean active;
 
 }

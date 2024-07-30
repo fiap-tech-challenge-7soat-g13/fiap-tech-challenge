@@ -14,7 +14,7 @@ public interface ProductMapper {
 
     Product toProduct(ProductEntity productEntity);
 
-    void update(Product product, @MappingTarget ProductEntity productEntity);
+    void update(Product product, @MappingTarget Product productSave);
 
     List<Product> toProduct(List<ProductEntity> productEntities);
 

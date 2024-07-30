@@ -1,9 +1,9 @@
 package com.fiap.challenge.tastefood.core.common.validator;
 
-import com.fiap.challenge.tastefood.app.adapter.output.persistence.repository.CustomerRepository;
 import com.fiap.challenge.tastefood.core.common.util.validation.Validation;
 import com.fiap.challenge.tastefood.core.common.util.validation.Validator;
 import com.fiap.challenge.tastefood.core.domain.Customer;
+import com.fiap.challenge.tastefood.core.gateways.CustomerGateway;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,9 +11,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class CustomerCreateValidator {
 
-    private final CustomerRepository customerRepository;
-
-    public void validate(Customer customer) {
+    public void validate(Customer customer, CustomerGateway customerGateway) {
 
         Validator validator = new Validator();
 
@@ -22,13 +20,13 @@ public class CustomerCreateValidator {
         validator.add(Validation.notInvalidEmail(customer.getEmail(), "O e-mail informado é inválido"));
         validator.add(Validation.notBlank(customer.getDocument(), "É obrigatório informar o documento"));
         validator.add(Validation.notInvalidDocument(customer.getDocument(), "O documento informado é inválido"));
-        validator.add(Validation.assertFalse(documentAlreadyExists(customer.getDocument()), "Já existe um cliente com o documento '%s'", customer.getDocument()));
+        validator.add(Validation.assertFalse(documentAlreadyExists(customer.getDocument(), customerGateway), "Já existe um cliente com o documento '%s'", customer.getDocument()));
 
         validator.assertEmptyMessages();
     }
 
-    private boolean documentAlreadyExists(String document) {
-        return document != null && !customerRepository.findByDocument(document).isEmpty();
+    private boolean documentAlreadyExists(String document, CustomerGateway customerGateway) {
+        return document != null && !customerGateway.findByDocument(document).isEmpty();
     }
 
 }
