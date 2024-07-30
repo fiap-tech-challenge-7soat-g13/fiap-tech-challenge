@@ -20,7 +20,7 @@ public class OrderCreateUseCase {
     private final OrderGateway orderGateway;
     private final OrderCreateValidator validator;
 
-    public Long execute(Order order) {
+    public Order execute(Order order) {
         validator.validate(order);
 
         order.setCreatedAt(LocalDateTime.now());
@@ -33,9 +33,7 @@ public class OrderCreateUseCase {
             order.setTotal(order.getTotal().add(BigDecimal.valueOf(orderProduct.getQuantity()).multiply(orderProduct.getPrice())));
         }
 
-        Order saved = orderGateway.save(order);
-
-        return saved.getId();
+        return orderGateway.save(order);
     }
 
 }

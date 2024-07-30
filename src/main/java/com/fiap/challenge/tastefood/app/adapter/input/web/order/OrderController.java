@@ -4,8 +4,8 @@ import com.fiap.challenge.tastefood.app.adapter.input.web.order.mapper.OrderRequ
 import com.fiap.challenge.tastefood.app.adapter.input.web.order.mapper.OrderResponseMapper;
 import com.fiap.challenge.tastefood.app.adapter.input.web.product.dto.OrderRequest;
 import com.fiap.challenge.tastefood.app.adapter.input.web.product.dto.OrderResponse;
-import com.fiap.challenge.tastefood.core.domain.enums.OrderStatus;
 import com.fiap.challenge.tastefood.core.domain.Order;
+import com.fiap.challenge.tastefood.core.domain.enums.OrderStatus;
 import com.fiap.challenge.tastefood.core.useCases.order.*;
 import com.fiap.challenge.tastefood.core.useCases.status.StatusListUseCase;
 import lombok.AllArgsConstructor;
@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @AllArgsConstructor
@@ -32,9 +31,18 @@ public class OrderController {
     private final OrderResponseMapper orderResponseMapper;
 
     @PostMapping(path = "/order")
-    public void create(@RequestBody OrderRequest orderRequest) {
-        Order orderInput = orderRequestMapper.toOrder(orderRequest);
-        orderCreateUseCase.execute(orderInput);
+    public ResponseEntity<?> create(@RequestBody OrderRequest orderRequest) {
+        try {
+            Order orderInput = orderRequestMapper.toOrder(orderRequest);
+            Order orderSaved = orderCreateUseCase.execute(orderInput);
+            return ResponseEntity
+                    .status(CREATED)
+                    .body(orderResponseMapper.toOrderResponse(orderSaved));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(BAD_REQUEST)
+                    .body("Error: " + e.getMessage());
+        }
     }
 
     @GetMapping(path = "/order")
