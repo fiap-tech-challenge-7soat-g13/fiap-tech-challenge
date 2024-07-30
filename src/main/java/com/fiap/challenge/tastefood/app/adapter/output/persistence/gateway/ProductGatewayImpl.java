@@ -50,8 +50,9 @@ public class ProductGatewayImpl implements ProductGateway {
 		return productEntity.isPresent() ? productEntity.map(productMapper::toProduct) : Optional.empty();
 	}
 
-	public Product update(Long id, Product product) {
-		Product productSave = findById(id).orElseThrow(EntityNotFoundException::new);
+	public Product update(Product product) {
+		Product productSave = findById(product.getId()).orElseThrow(EntityNotFoundException::new);
+		product.setActive(productSave.getActive());
 		productMapper.update(product, productSave);
 		return save(productSave);
 	}

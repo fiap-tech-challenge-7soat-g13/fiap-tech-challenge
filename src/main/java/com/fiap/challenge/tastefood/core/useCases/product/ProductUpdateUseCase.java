@@ -13,10 +13,10 @@ public class ProductUpdateUseCase {
     private final ProductGateway productGateway;
     private final ProductUpdateValidator validator;
 
-    public Product execute(Long id, Product product) {
-        validator.validate(id, product);
+    public Product execute(Product product) {
+        validator.validate(product);
 
-        return productGateway.update(id, product);
+        return productGateway.update(product);
     }
 
 }

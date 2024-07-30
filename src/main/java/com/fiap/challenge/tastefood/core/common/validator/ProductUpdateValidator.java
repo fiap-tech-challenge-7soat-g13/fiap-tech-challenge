@@ -16,12 +16,12 @@ public class ProductUpdateValidator {
 
     private final ProductGateway productGateway;
 
-    public void validate(Long id, Product product) {
+    public void validate(Product product) {
 
         Validator validator = new Validator();
 
         validator.add(Validation.notBlank(product.getName(), "É obrigatório informar o nome"));
-        validator.add(Validation.assertFalse(nameAlreadyExists(id, product.getName()), "Já existe um produto com o nome '%s'", product.getName()));
+        validator.add(Validation.assertFalse(nameAlreadyExists(product.getId(), product.getName()), "Já existe um produto com o nome '%s'", product.getName()));
         validator.add(Validation.notBlank(product.getDescription(), "É obrigatório informar a descrição"));
         validator.add(Validation.notNull(product.getCategory(), "É obrigatório informar a categoria"));
         validator.add(Validation.notNull(product.getPrice(), "É obrigatório informar o preço"));

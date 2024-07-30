@@ -18,6 +18,6 @@ public interface ProductGateway {
 
 	Optional<Product> findByNameAndActiveTrue(String name);
 
-	Product update(Long id, Product product);
+	Product update(Product product);
 
 }

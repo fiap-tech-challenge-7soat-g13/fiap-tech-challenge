@@ -11,7 +11,7 @@ public class ProductCreateValidator {
     private ProductUpdateValidator validator;
 
     public void validate(Product product) {
-        validator.validate(null, product);
+        validator.validate(product);
     }
 
 }

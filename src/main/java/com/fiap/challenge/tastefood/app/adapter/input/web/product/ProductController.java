@@ -43,7 +43,8 @@ public class ProductController {
     @PutMapping(path = "/product/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ProductRequest productRequest) {
         Product product = productRequestMapper.toProduct(productRequest);
-        Product productSaved = productUpdateUseCase.execute(id, product);
+        product.setId(id);
+        Product productSaved = productUpdateUseCase.execute(product);
         return ResponseEntity
                 .status(OK)
                 .body(productResponseMapper.toProductResponse(productSaved));
