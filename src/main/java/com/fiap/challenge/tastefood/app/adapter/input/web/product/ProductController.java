@@ -33,32 +33,20 @@ public class ProductController {
 
     @PostMapping(path = "/product")
     public ResponseEntity<?> create(@RequestBody ProductRequest productRequest) {
-        try {
-            Product product = productRequestMapper.toProduct(productRequest);
-            Product productSaved = productCreateUseCase.execute(product);
-            return ResponseEntity
-                    .status(CREATED)
-                    .body(productResponseMapper.toProductResponse(productSaved));
-        } catch (Exception e) {
-            return ResponseEntity
-                    .status(BAD_REQUEST)
-                    .body("Error: " + e.getMessage());
-        }
+        Product product = productRequestMapper.toProduct(productRequest);
+        Product productSaved = productCreateUseCase.execute(product);
+        return ResponseEntity
+                .status(CREATED)
+                .body(productResponseMapper.toProductResponse(productSaved));
     }
 
     @PutMapping(path = "/product/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ProductRequest productRequest) {
-        try {
-            Product product = productRequestMapper.toProduct(productRequest);
-            Product productSaved = productUpdateUseCase.execute(id, product);
-            return ResponseEntity
-                    .status(OK)
-                    .body(productResponseMapper.toProductResponse(productSaved));
-        } catch (Exception e) {
-            return ResponseEntity
-                    .status(BAD_REQUEST)
-                    .body("Error: " + e.getMessage());
-        }
+        Product product = productRequestMapper.toProduct(productRequest);
+        Product productSaved = productUpdateUseCase.execute(id, product);
+        return ResponseEntity
+                .status(OK)
+                .body(productResponseMapper.toProductResponse(productSaved));
     }
 
     @DeleteMapping(path = "/product/{id}")

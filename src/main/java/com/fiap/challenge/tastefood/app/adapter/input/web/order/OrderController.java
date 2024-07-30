@@ -32,17 +32,11 @@ public class OrderController {
 
     @PostMapping(path = "/order")
     public ResponseEntity<?> create(@RequestBody OrderRequest orderRequest) {
-        try {
-            Order orderInput = orderRequestMapper.toOrder(orderRequest);
-            Order orderSaved = orderCreateUseCase.execute(orderInput);
-            return ResponseEntity
-                    .status(CREATED)
-                    .body(orderResponseMapper.toOrderResponse(orderSaved));
-        } catch (Exception e) {
-            return ResponseEntity
-                    .status(BAD_REQUEST)
-                    .body("Error: " + e.getMessage());
-        }
+        Order orderInput = orderRequestMapper.toOrder(orderRequest);
+        Order orderSaved = orderCreateUseCase.execute(orderInput);
+        return ResponseEntity
+                .status(CREATED)
+                .body(orderResponseMapper.toOrderResponse(orderSaved));
     }
 
     @GetMapping(path = "/order")

@@ -27,17 +27,11 @@ public class CustomerController {
 
     @PostMapping(path = "/customer")
     public ResponseEntity<?> create(@RequestBody CustomerRequest customerRequest) {
-        try {
-            Customer customer = customerRequestMapper.toCustomer(customerRequest);
-            Customer customerSave = customerCreateUseCase.execute(customer);
-            return ResponseEntity
-                    .status(CREATED)
-                    .body(customerResponseMapper.toCustomerResponse(customerSave));
-        } catch (Exception e) {
-            return ResponseEntity
-                    .status(BAD_REQUEST)
-                    .body("Error: " + e.getMessage());
-        }
+        Customer customer = customerRequestMapper.toCustomer(customerRequest);
+        Customer customerSave = customerCreateUseCase.execute(customer);
+        return ResponseEntity
+                .status(CREATED)
+                .body(customerResponseMapper.toCustomerResponse(customerSave));
     }
 
     @GetMapping(path = "/customer")
