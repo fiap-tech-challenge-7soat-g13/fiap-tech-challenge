@@ -15,12 +15,12 @@ public class OrderUpdateStatusUseCase {
 
     private final OrderUpdateStatusValidator validator;
 
-    public void execute(Long id, OrderStatus status) {
+    public Order execute(Long id, OrderStatus status) {
         validator.validate(id, status);
 
         Order orderEntity = orderGateway.findById(id).orElseThrow();
         orderEntity.setStatus(status);
-        orderGateway.save(orderEntity);
+        return orderGateway.save(orderEntity);
     }
 
 }
