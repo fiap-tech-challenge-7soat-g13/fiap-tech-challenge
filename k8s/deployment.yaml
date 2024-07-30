@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taste-food
+  labels:
+    app: taste-food
+spec:
+  selector:
+    matchLabels:
+      app: taste-food
+  template:
+    metadata:
+      labels:
+        app: taste-food
+    spec:
+      containers:
+        - name: taste-food
+          image: cristianobarros/taste-food
+          ports:
+            - name: http
+              containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: taste-food
+          startupProbe:
+            httpGet:
+              port: http
+              path: /actuator/health
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              port: http
+              path: /actuator/health
+          livenessProbe:
+            httpGet:
+              port: http
+              path: /actuator/health
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
