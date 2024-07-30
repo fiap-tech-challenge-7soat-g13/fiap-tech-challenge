@@ -13,11 +13,14 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class OrderCreateValidator {
 
-    public void validate(Order order, CustomerGateway customerGateway, ProductGateway productGateway) {
+    private final CustomerGateway customerGateway;
+    private final ProductGateway productGateway;
+
+    public void validate(Order order) {
 
         Validator validator = new Validator();
 
-        validator.add(Validation.assertFalse(customerNotFound(order.getCustomer().getId(), customerGateway), "Cliente com ID %s não encontrado", order.getCustomer().getId()));
+        validator.add(Validation.assertFalse(customerNotFound(order.getCustomer().getId()), "Cliente com ID %s não encontrado", order.getCustomer().getId()));
         validator.add(Validation.notEmpty(order.getProducts(), "É obrigatório informar os produtos"));
 
         if (order.getProducts() != null) {
@@ -25,18 +28,18 @@ public class OrderCreateValidator {
                 validator.add(Validation.notNull(orderProduct.getQuantity(), "É obrigatório informar a quantidade"));
                 validator.add(Validation.greaterThan(orderProduct.getQuantity(), 0, "A quantidade deve ser maior que zero"));
                 validator.add(Validation.notNull(orderProduct.getProduct().getId(), "É obrigatório informar o produto"));
-                validator.add(Validation.assertFalse(productNotFound(orderProduct.getProduct().getId(), productGateway), "Produto com ID %s não encontrado", orderProduct.getProduct().getId()));
+                validator.add(Validation.assertFalse(productNotFound(orderProduct.getProduct().getId()), "Produto com ID %s não encontrado", orderProduct.getProduct().getId()));
             }
         }
 
         validator.assertEmptyMessages();
     }
 
-    private boolean customerNotFound(Long customerId, CustomerGateway customerGateway) {
+    private boolean customerNotFound(Long customerId) {
         return customerId != null && customerGateway.findById(customerId).isEmpty();
     }
 
-    private boolean productNotFound(Long productId, ProductGateway productGateway) {
+    private boolean productNotFound(Long productId) {
         return productId != null && productGateway.findById(productId).isEmpty();
     }
 

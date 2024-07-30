@@ -23,7 +23,7 @@ public class OrderCreateUseCase {
     private final OrderCreateValidator validator;
 
     public Long execute(Order order) {
-        validator.validate(order, customerGateway, productGateway);
+        validator.validate(order);
 
         order.setCreatedAt(LocalDateTime.now());
         order.setStatus(OrderStatus.CRIADO);

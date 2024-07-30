@@ -14,12 +14,14 @@ import java.util.function.Predicate;
 @AllArgsConstructor
 public class ProductUpdateValidator {
 
-    public void validate(Long id, Product product, ProductGateway productGateway) {
+    private final ProductGateway productGateway;
+
+    public void validate(Long id, Product product) {
 
         Validator validator = new Validator();
 
         validator.add(Validation.notBlank(product.getName(), "É obrigatório informar o nome"));
-        validator.add(Validation.assertFalse(nameAlreadyExists(id, product.getName(), productGateway), "Já existe um produto com o nome '%s'", product.getName()));
+        validator.add(Validation.assertFalse(nameAlreadyExists(id, product.getName()), "Já existe um produto com o nome '%s'", product.getName()));
         validator.add(Validation.notBlank(product.getDescription(), "É obrigatório informar a descrição"));
         validator.add(Validation.notNull(product.getCategory(), "É obrigatório informar a categoria"));
         validator.add(Validation.notNull(product.getPrice(), "É obrigatório informar o preço"));
@@ -35,7 +37,7 @@ public class ProductUpdateValidator {
         validator.assertEmptyMessages();
     }
 
-    private boolean nameAlreadyExists(Long id, String name, ProductGateway productGateway) {
+    private boolean nameAlreadyExists(Long id, String name) {
         return name != null && productGateway.findByNameAndActiveTrue(name).filter(Predicate.not(same(id))).isPresent();
     }
 

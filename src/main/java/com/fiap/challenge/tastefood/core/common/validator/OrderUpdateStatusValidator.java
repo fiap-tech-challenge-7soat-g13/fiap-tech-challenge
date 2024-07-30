@@ -13,7 +13,9 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class OrderUpdateStatusValidator {
 
-    public void validate(Long id, OrderStatus status, OrderGateway orderGateway) {
+    private final OrderGateway orderGateway;
+
+    public void validate(Long id, OrderStatus status) {
 
         Order order = orderGateway.findById(id).orElseThrow(EntityNotFoundException::new);
 

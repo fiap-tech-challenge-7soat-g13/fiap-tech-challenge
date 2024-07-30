@@ -14,7 +14,7 @@ public class ProductUpdateUseCase {
     private final ProductUpdateValidator validator;
 
     public void execute(Long id, Product product) {
-        validator.validate(id, product, productGateway);
+        validator.validate(id, product);
 
         productGateway.update(id, product);
     }

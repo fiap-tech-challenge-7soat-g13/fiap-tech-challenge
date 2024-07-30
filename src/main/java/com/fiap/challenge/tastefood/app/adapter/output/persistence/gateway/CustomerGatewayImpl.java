@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Component
+@AllArgsConstructor
 public class CustomerGatewayImpl implements CustomerGateway {
 
 	private final CustomerMapper mapper;

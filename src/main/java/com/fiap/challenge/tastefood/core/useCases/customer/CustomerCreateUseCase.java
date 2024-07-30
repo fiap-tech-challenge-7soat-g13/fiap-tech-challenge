@@ -14,7 +14,7 @@ public class CustomerCreateUseCase {
     private final CustomerCreateValidator validator;
 
     public Long execute(Customer customer) {
-        validator.validate(customer, customerGateway);
+        validator.validate(customer);
 
         Customer saved = customerGateway.save(customer);
 

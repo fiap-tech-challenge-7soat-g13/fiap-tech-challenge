@@ -11,7 +11,9 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class CustomerCreateValidator {
 
-    public void validate(Customer customer, CustomerGateway customerGateway) {
+    private final CustomerGateway customerGateway;
+
+    public void validate(Customer customer) {
 
         Validator validator = new Validator();
 
@@ -20,12 +22,12 @@ public class CustomerCreateValidator {
         validator.add(Validation.notInvalidEmail(customer.getEmail(), "O e-mail informado é inválido"));
         validator.add(Validation.notBlank(customer.getDocument(), "É obrigatório informar o documento"));
         validator.add(Validation.notInvalidDocument(customer.getDocument(), "O documento informado é inválido"));
-        validator.add(Validation.assertFalse(documentAlreadyExists(customer.getDocument(), customerGateway), "Já existe um cliente com o documento '%s'", customer.getDocument()));
+        validator.add(Validation.assertFalse(documentAlreadyExists(customer.getDocument()), "Já existe um cliente com o documento '%s'", customer.getDocument()));
 
         validator.assertEmptyMessages();
     }
 
-    private boolean documentAlreadyExists(String document, CustomerGateway customerGateway) {
+    private boolean documentAlreadyExists(String document) {
         return document != null && !customerGateway.findByDocument(document).isEmpty();
     }
 

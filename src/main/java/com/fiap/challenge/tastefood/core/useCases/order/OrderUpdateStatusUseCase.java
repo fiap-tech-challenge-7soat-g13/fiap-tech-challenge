@@ -16,7 +16,7 @@ public class OrderUpdateStatusUseCase {
     private final OrderUpdateStatusValidator validator;
 
     public void execute(Long id, OrderStatus status) {
-        validator.validate(id, status, orderGateway);
+        validator.validate(id, status);
 
         Order orderEntity = orderGateway.findById(id).orElseThrow();
         orderEntity.setStatus(status);

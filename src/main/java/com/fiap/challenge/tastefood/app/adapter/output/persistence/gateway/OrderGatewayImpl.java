@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Component
+@AllArgsConstructor
 public class OrderGatewayImpl implements OrderGateway {
 
 	private final OrderMapper orderMapper;
