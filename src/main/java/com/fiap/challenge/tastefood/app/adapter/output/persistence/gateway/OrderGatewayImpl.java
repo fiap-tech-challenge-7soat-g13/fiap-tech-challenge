@@ -8,11 +8,13 @@ import com.fiap.challenge.tastefood.core.domain.enums.OrderStatus;
 import com.fiap.challenge.tastefood.core.gateways.OrderGateway;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
+@Component
 public class OrderGatewayImpl implements OrderGateway {
 
 	private final OrderMapper orderMapper;

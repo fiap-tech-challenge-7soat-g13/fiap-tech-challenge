@@ -7,11 +7,13 @@ import com.fiap.challenge.tastefood.core.domain.Customer;
 import com.fiap.challenge.tastefood.core.gateways.CustomerGateway;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
+@Component
 public class CustomerGatewayImpl implements CustomerGateway {
 
 	private final CustomerMapper mapper;
