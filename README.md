@@ -115,23 +115,27 @@ curl --location 'http://192.168.49.2:30000/order' \
   ]
 }'
 ```
-4. Realizar o pagamento do pedido
+4. Realizar o checkout do pedido
 ```bash
-curl --location --request POST 'http://192.168.49.2:30000/order/checkout/1'
+curl --location --request POST 'http://192.168.49.2:30000/order/1/checkout'
 ```
-5. Visualizar fila de pedidos pendentes
+5. Simular pagamento do pedido aprovado
+```bash
+curl --location --request PUT 'http://192.168.49.2:30000/order/1/paymentStatus?paymentStatus=APROVADO'
+```
+6. Visualizar fila de pedidos não finalizados
 ```bash
 curl --location 'http://192.168.49.2:30000/order/queue'
 ```
-6. Atualizar o status do pedido quando preparação for iniciada
+7. Atualizar o status do pedido quando preparação for iniciada
 ```bash
 curl --location --request PUT 'http://192.168.49.2:30000/order/1/status?status=EM_PREPARACAO'
 ```
-7. Atualizar o status do pedido quando estiver pronto
+8. Atualizar o status do pedido quando estiver pronto
 ```bash
 curl --location --request PUT 'http://192.168.49.2:30000/order/1/status?status=PRONTO'
 ```
-8. Atualizar o status do pedido quando for entregue
+9. Atualizar o status do pedido quando for finalizado
 ```bash
 curl --location --request PUT 'http://192.168.49.2:30000/order/1/status?status=FINALIZADO'
 ```
