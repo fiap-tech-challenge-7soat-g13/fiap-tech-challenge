@@ -14,7 +14,7 @@ public class OrderQueueListUseCase {
     private final OrderGateway orderGateway;
 
     public List<Order> execute(List<String> orderStatus) {
-        return orderGateway.findAllByStatusInOrderByCreatedAt(orderStatus);
+        return orderGateway.findAllByStatusInOrderByStatusDesc(orderStatus);
     }
 
 }

@@ -46,8 +46,8 @@ public class OrderGatewayImpl implements OrderGateway {
 	}
 
 	@Transactional
-	public List<Order> findAllByStatusInOrderByCreatedAt(List<String> orderStatus) {
-		List<OrderEntity> orderList = repository.findAllByStatusInOrderByCreatedAt(orderStatus);
+	public List<Order> findAllByStatusInOrderByStatusDesc(List<String> orderStatus) {
+		List<OrderEntity> orderList = repository.findAllByStatusInOrderByStatusDesc(orderStatus);
 		return orderMapper.toOrder(orderList);
 	}
 

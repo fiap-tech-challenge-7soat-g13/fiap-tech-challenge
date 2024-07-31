@@ -22,7 +22,7 @@ public class OrderEntity {
 
     private LocalDateTime createdAt;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private OrderStatus status;
 
     @Enumerated(EnumType.STRING)

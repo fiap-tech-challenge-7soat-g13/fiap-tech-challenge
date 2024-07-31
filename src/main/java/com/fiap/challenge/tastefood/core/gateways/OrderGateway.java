@@ -16,6 +16,6 @@ public interface OrderGateway {
 
 	List<Order> findByStatus(OrderStatus status);
 
-	List<Order> findAllByStatusInOrderByCreatedAt(List<String> orderStatus);
+	List<Order> findAllByStatusInOrderByStatusDesc(List<String> orderStatus);
 
 }

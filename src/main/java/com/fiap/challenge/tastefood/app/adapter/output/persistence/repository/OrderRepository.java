@@ -19,6 +19,6 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
     List<OrderEntity> findByStatus(OrderStatus status);
 
-    List<OrderEntity> findAllByStatusInOrderByCreatedAt(List<String> orderStatus);
+    List<OrderEntity> findAllByStatusInOrderByStatusDesc(List<String> orderStatus);
 
 }

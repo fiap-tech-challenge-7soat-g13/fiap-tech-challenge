@@ -88,7 +88,8 @@ public class OrderController {
 
     @GetMapping(path = "/order/queue")
     public ResponseEntity<List<OrderResponse>> ordersQueue() {
-        List<Order> orders = orderQueueListUseCase.execute(List.of(OrderStatus.RECEBIDO.name(), OrderStatus.EM_PREPARACAO.name()));
+        List<Order> orders = orderQueueListUseCase.execute(List.of(OrderStatus.RECEBIDO.name(),
+                OrderStatus.EM_PREPARACAO.name(), OrderStatus.PRONTO.name()));
         return ResponseEntity
                 .status(OK)
                 .body(orderResponseMapper.toOrderResponse(orders));
