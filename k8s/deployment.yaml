@@ -20,7 +20,7 @@ spec:
             - name: http
               containerPort: 8080
           envFrom:
-            - configMapRef:
+            - secretRef:
                 name: taste-food
           startupProbe:
             httpGet:

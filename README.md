@@ -39,7 +39,7 @@ minikube addons enable metrics-server
 4. Instale o Helm, seguindo as instruções do site oficial: https://helm.sh/docs/intro/install/
 5. Utilizando o Helm, instale o PostgreSQL no Kubernetes:
 ```bash
-helm install database oci://registry-1.docker.io/bitnamicharts/postgresql --set auth.database=taste_food --set auth.password=postgres
+helm install database oci://registry-1.docker.io/bitnamicharts/postgresql --set auth.database=taste_food --set auth.username=taste_food --set auth.password=nSKcUf5Ms9CYQT8jz7kpNA
 ```
 6. Dentro do diretório do projeto, execute o comando passando o diretório `k8s` como parâmetro, assim todos os arquivos dentro dele serão aplicados no Kubernetes:
 ```bash
