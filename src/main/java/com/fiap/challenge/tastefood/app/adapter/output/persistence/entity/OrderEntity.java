@@ -1,6 +1,5 @@
 package com.fiap.challenge.tastefood.app.adapter.output.persistence.entity;
 
-import com.fiap.challenge.tastefood.core.domain.enums.OrderPaymentStatus;
 import com.fiap.challenge.tastefood.core.domain.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -24,9 +23,6 @@ public class OrderEntity {
 
     @Enumerated(EnumType.ORDINAL)
     private OrderStatus status;
-
-    @Enumerated(EnumType.STRING)
-    private OrderPaymentStatus paymentStatus;
 
     @ManyToOne
     private CustomerEntity customer;

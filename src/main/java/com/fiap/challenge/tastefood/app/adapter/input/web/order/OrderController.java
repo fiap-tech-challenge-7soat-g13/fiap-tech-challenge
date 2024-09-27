@@ -5,7 +5,6 @@ import com.fiap.challenge.tastefood.app.adapter.input.web.order.mapper.OrderResp
 import com.fiap.challenge.tastefood.app.adapter.input.web.product.dto.OrderRequest;
 import com.fiap.challenge.tastefood.app.adapter.input.web.product.dto.OrderResponse;
 import com.fiap.challenge.tastefood.core.domain.Order;
-import com.fiap.challenge.tastefood.core.domain.enums.OrderPaymentStatus;
 import com.fiap.challenge.tastefood.core.domain.enums.OrderStatus;
 import com.fiap.challenge.tastefood.core.useCases.order.*;
 import com.fiap.challenge.tastefood.core.useCases.status.StatusListUseCase;
@@ -25,7 +24,6 @@ public class OrderController {
     private final OrderGetUseCase orderGetUseCase;
     private final OrderListUseCase orderListUseCase;
     private final OrderUpdateStatusUseCase orderUpdateStatusUseCase;
-    private final OrderUpdatePaymentStatusUseCase orderUpdatePaymentStatusUseCase;
     private final StatusListUseCase statusListUseCase;
     private final OrderCheckoutUseCase orderCheckoutUseCase;
     private final OrderQueueListUseCase orderQueueListUseCase;
@@ -56,12 +54,6 @@ public class OrderController {
     @PutMapping(path = "/order/{id}/status")
     public OrderResponse updateStatus(@PathVariable Long id, @RequestParam OrderStatus status) {
         Order order = orderUpdateStatusUseCase.execute(id, status);
-        return orderResponseMapper.toOrderResponse(order);
-    }
-
-    @PutMapping(path = "/order/{id}/paymentStatus")
-    public OrderResponse updatePaymentStatus(@PathVariable Long id, @RequestParam OrderPaymentStatus paymentStatus) {
-        Order order = orderUpdatePaymentStatusUseCase.execute(id, paymentStatus);
         return orderResponseMapper.toOrderResponse(order);
     }
 
