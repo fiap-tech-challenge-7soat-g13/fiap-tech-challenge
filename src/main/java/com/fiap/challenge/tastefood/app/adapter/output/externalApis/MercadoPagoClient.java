@@ -1,12 +1,12 @@
 package com.fiap.challenge.tastefood.app.adapter.output.externalApis;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fiap.challenge.tastefood.app.adapter.output.externalApis.dto.MercadoPagoRequestDTO;
 import com.fiap.challenge.tastefood.app.adapter.output.externalApis.dto.MercadoPagoResponseDTO;
 import com.fiap.challenge.tastefood.app.adapter.output.externalApis.exceptions.MercadoPagoAPIException;
 import com.fiap.challenge.tastefood.app.configuration.ClientHttpConfig;
 import com.fiap.challenge.tastefood.app.configuration.RetryTemplateFactory;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -20,10 +20,10 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class MercadoPagoClient implements QRClient {
 
-	private final String ACCESS_TOKEN = "Bearer APP_USR-6155129762548657-102711-6c6e3574529dbc4e6d5944056bb132db-700064145";
+	private final String ACCESS_TOKEN = "Bearer APP_USR-2659235849140414-092818-e0a76741f123f3849e32f2af69c3d644-89659806";
 	private final String MERCADO_PAGO_URL = "https://api.mercadopago.com";
 	private final String CAIXA_PAGAMENTO_ID = "CAIXA001";
-	private final String USER_ID = "700064145";
+	private final String USER_ID = "89659806";
 
 	private final ObjectMapper objectMapper;
 
