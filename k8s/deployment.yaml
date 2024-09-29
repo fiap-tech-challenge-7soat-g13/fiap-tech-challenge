@@ -16,6 +16,7 @@ spec:
       containers:
         - name: taste-food
           image: cristianobarros/taste-food
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 8080
@@ -38,7 +39,7 @@ spec:
           resources:
             requests:
               cpu: 500m
-              memory: 512Mi
+              memory: 256Mi
             limits:
               cpu: 1000m
-              memory: 1Gi
+              memory: 512Mi
