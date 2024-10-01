@@ -14,16 +14,16 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.Bucket;
 import org.json.JSONObject;
+import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
 
-/**
- * The CognitoHelper class abstracts the functionality of connecting to the Cognito user pool and Federated Identities.
- */
+@Configuration
 public class CognitoHelper {
+
 	private String POOL_ID;
 	private String CLIENTAPP_ID;
 	private String CLIENT_SECRET;
@@ -32,7 +32,6 @@ public class CognitoHelper {
 	private String REGION;
 
 	public CognitoHelper() {
-
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -63,13 +62,13 @@ public class CognitoHelper {
 		}
 	}
 
-	String GetHostedSignInURL() {
+	public String getHostedSignInURL() {
 		String customurl = "https://%s.auth.%s.amazoncognito.com/login?response_type=code&client_id=%s&redirect_uri=%s";
 
 		return String.format(customurl, CUSTOMDOMAIN, REGION, CLIENTAPP_ID, Constants.REDIRECT_URL);
 	}
 
-	String GetTokenURL() {
+	public String getTokenURL() {
 		String customurl = "https://%s.auth.%s.amazoncognito.com/oauth2/token";
 
 		return String.format(customurl, CUSTOMDOMAIN, REGION);
@@ -207,7 +206,7 @@ public class CognitoHelper {
 			httpBodyParams.put(Constants.TOKEN_AUTH_TYPE_CODE, accesscode);
 
 			AuthHttpClient httpClient = new AuthHttpClient();
-			URL url = new URL(GetTokenURL());
+			URL url = new URL(getTokenURL());
 			String result = httpClient.httpPost(url, httpBodyParams);
 			System.out.println(result);
 

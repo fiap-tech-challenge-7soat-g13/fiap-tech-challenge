@@ -21,7 +21,7 @@ public class CustomerGatewayImpl implements CustomerGateway {
 
 	private final CustomerMapper mapper;
 	private final CustomerRepository repository;
-	private final CognitoHelper helper = new CognitoHelper();
+	private final CognitoHelper helper;
 
 	@Transactional
 	public Customer save(Customer customer) {
