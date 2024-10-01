@@ -17,8 +17,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
-        run: mvn clean compile
+        run: mvn clean package -DskipTests
   docker:
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -37,6 +38,7 @@ jobs:
           push: true
           tags: cristianobarros/taste-food
   deploy:
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     needs: docker
     runs-on: ubuntu-latest
     steps:
