@@ -59,3 +59,5 @@ jobs:
           sed -i 's/${SPRING_DATASOURCE_PASSWORD}/${{ secrets.SPRING_DATASOURCE_PASSWORD }}/g' k8s/secret.yaml
       - name: Deploy to EKS
         run: kubectl apply -f k8s
+      - name: Rollout Restart
+        run: kubectl rollout restart -f k8s/deployment.yaml
