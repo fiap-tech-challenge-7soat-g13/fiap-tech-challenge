@@ -12,11 +12,11 @@ import com.fiap.challenge.tastefood.app.adapter.output.persistence.mapper.Paymen
 import com.fiap.challenge.tastefood.app.adapter.output.persistence.repository.OrderRepository;
 import com.fiap.challenge.tastefood.app.adapter.output.persistence.repository.PaymentRepository;
 import com.fiap.challenge.tastefood.core.domain.Payment;
+import com.fiap.challenge.tastefood.core.domain.enums.PaymentStatus;
 import com.fiap.challenge.tastefood.core.gateways.PaymentGateway;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -52,6 +52,8 @@ public class PaymentGatewayImpl implements PaymentGateway {
 		} else {
 			payment = new PaymentEntity();
 			payment.setOrder(orderEntity);
+			payment.setTotal(orderEntity.getTotal());
+			payment.setPaymentStatus(PaymentStatus.PENDENTE);
 		}
 		return payment;
 	}
@@ -77,7 +79,7 @@ public class PaymentGatewayImpl implements PaymentGateway {
 				.externalReference(orderEntity.getId().toString())
 				.title(String.format("Order: %s", orderEntity.getId()))
 				.description(String.format("Payment: %s - Order: %s", payment.getId(), orderEntity.getId()))
-				.totalAmount(payment.getTotal().multiply(BigDecimal.valueOf(2L)))
+				.totalAmount(payment.getTotal())
 				.items(items)
 				.cashOut(CashOutDTO.builder().amount(payment.getTotal()).build())
 				.build();
