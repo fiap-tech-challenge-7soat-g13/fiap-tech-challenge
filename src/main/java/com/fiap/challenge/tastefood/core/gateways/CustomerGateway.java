@@ -15,8 +15,4 @@ public interface CustomerGateway {
 
 	List<Customer> findByDocument(String document);
 
-	Customer saveAdmin(String email, String password);
-
-	Customer login(String email, String password);
-
 }
