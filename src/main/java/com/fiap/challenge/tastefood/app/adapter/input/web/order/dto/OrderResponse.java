@@ -1,8 +1,8 @@
-package com.fiap.challenge.tastefood.app.adapter.input.web.product.dto;
+package com.fiap.challenge.tastefood.app.adapter.input.web.order.dto;
 
 import com.fiap.challenge.tastefood.app.adapter.input.web.customer.dto.CustomerResponse;
+import com.fiap.challenge.tastefood.app.adapter.input.web.payment.dto.PaymentResponse;
 import com.fiap.challenge.tastefood.core.domain.enums.OrderStatus;
-import com.fiap.challenge.tastefood.core.domain.enums.PaymentStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +16,7 @@ public class OrderResponse {
 
     private Long id;
     private OrderStatus status;
-    private PaymentStatus paymentStatus;
+    private PaymentResponse payment;
     private LocalDateTime createdAt;
     private List<OrderProductResponse> products;
     private CustomerResponse customer;

@@ -1,6 +1,6 @@
-package com.fiap.challenge.tastefood.app.adapter.input.web.product.dto;
+package com.fiap.challenge.tastefood.app.adapter.input.web.order.dto;
 
-import com.fiap.challenge.tastefood.app.adapter.input.web.order.dto.ProductResponse;
+import com.fiap.challenge.tastefood.app.adapter.input.web.product.dto.ProductResponse;
 import lombok.Getter;
 import lombok.Setter;
 

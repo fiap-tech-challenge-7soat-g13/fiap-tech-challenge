@@ -1,4 +1,4 @@
-package com.fiap.challenge.tastefood.app.adapter.input.web.order.dto;
+package com.fiap.challenge.tastefood.app.adapter.input.web.product.dto;
 
 import com.fiap.challenge.tastefood.core.domain.enums.ProductCategory;
 import lombok.Getter;
