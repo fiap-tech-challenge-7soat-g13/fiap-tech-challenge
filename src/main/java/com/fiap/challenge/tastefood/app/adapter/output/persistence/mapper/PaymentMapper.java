@@ -9,4 +9,6 @@ public interface PaymentMapper {
 
     Payment toPayment(PaymentEntity paymentEntity);
 
+    PaymentEntity toPaymentEntity(Payment payment);
+
 }
