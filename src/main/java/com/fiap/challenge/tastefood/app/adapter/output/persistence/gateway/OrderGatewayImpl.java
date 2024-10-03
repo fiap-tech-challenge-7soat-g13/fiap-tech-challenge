@@ -30,7 +30,7 @@ public class OrderGatewayImpl implements OrderGateway {
 	@Transactional
 	public Optional<Order> findById(Long id) {
 		Optional<OrderEntity> orderEntity = repository.findById(id);
-		return orderEntity.isPresent() ? orderEntity.map(orderMapper::toOrder) : Optional.empty();
+		return orderEntity.map(orderMapper::toOrder);
 	}
 
 	@Transactional

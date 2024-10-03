@@ -5,8 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -14,24 +13,21 @@ import java.time.LocalDateTime;
 @Table(name = "payments")
 public class PaymentEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "order_id", referencedColumnName = "id")
-	private OrderEntity order;
+    private UUID uuid;
 
-	@Column(name = "payment_at")
-	private LocalDateTime paymentAt;
+    @OneToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    private OrderEntity order;
 
-	private BigDecimal total;
+    private String qrCode;
 
-	@Column(name = "qr_data")
-	private String qrData;
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus status;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "status")
-	private PaymentStatus paymentStatus;
+    private String externalId;
 
 }

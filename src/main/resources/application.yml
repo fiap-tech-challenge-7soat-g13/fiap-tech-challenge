@@ -3,6 +3,14 @@ server:
 spring:
   application:
     name: taste-food
+  cloud:
+    openfeign:
+      client:
+        config:
+          mercadopago:
+            defaultRequestHeaders:
+              authorization: Bearer ${mercadopago.api.access-token}
+            url: ${mercadopago.api.url}
   datasource:
     url: jdbc:postgresql://localhost:5432/taste_food
     username: postgres
@@ -13,3 +21,10 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: validate
+mercadopago:
+  api:
+    url: https://api.mercadopago.com
+    user-id: ${MERCADOPAGO_API_USER-ID}
+    pos-id: ${MERCADOPAGO_API_POS-ID}
+    access-token: ${MERCADOPAGO_API_ACCESS-TOKEN}
+    notification-url: ${MERCADOPAGO_API_NOTIFICATION-URL}

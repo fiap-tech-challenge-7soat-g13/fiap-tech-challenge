@@ -30,7 +30,7 @@ public class ProductGatewayImpl implements ProductGateway {
 
 	public Optional<Product> findById(Long id) {
 		Optional<ProductEntity> productEntity = repository.findById(id);
-		return productEntity.isPresent() ? productEntity.map(productMapper::toProduct) : Optional.empty();
+		return productEntity.map(productMapper::toProduct);
 	}
 
 	@Transactional
