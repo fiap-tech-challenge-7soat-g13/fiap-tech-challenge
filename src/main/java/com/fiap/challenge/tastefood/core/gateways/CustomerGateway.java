@@ -15,4 +15,6 @@ public interface CustomerGateway {
 
 	List<Customer> findByDocument(String document);
 
+	List<Customer> findByEmail(String email);
+
 }
