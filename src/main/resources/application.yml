@@ -9,7 +9,7 @@ spring:
         config:
           mercadopago:
             defaultRequestHeaders:
-              authorization: Bearer ${mercadopago.api.access-token}
+              authorization: Bearer ${mercadopago.api.accessToken}
             url: ${mercadopago.api.url}
   datasource:
     url: jdbc:postgresql://localhost:5432/taste_food
@@ -24,7 +24,7 @@ spring:
 mercadopago:
   api:
     url: https://api.mercadopago.com
-    user-id: ${MERCADOPAGO_API_USER-ID}
-    pos-id: ${MERCADOPAGO_API_POS-ID}
-    access-token: ${MERCADOPAGO_API_ACCESS-TOKEN}
-    notification-url: ${MERCADOPAGO_API_NOTIFICATION-URL}
+    userId: ${MERCADOPAGO_API_USERID}
+    posId: ${MERCADOPAGO_API_POSID}
+    accessToken: ${MERCADOPAGO_API_ACCESSTOKEN}
+    callbackUrl: ${MERCADOPAGO_API_CALLBACKURL}
