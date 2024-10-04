@@ -57,6 +57,10 @@ jobs:
           sed -i 's/${SPRING_DATASOURCE_URL}/${{ secrets.SPRING_DATASOURCE_URL }}/g' k8s/secret.yaml
           sed -i 's/${SPRING_DATASOURCE_USERNAME}/${{ secrets.SPRING_DATASOURCE_USERNAME }}/g' k8s/secret.yaml
           sed -i 's/${SPRING_DATASOURCE_PASSWORD}/${{ secrets.SPRING_DATASOURCE_PASSWORD }}/g' k8s/secret.yaml
+          sed -i 's/${MERCADOPAGO_API_USERID}/${{ secrets.MERCADOPAGO_API_USERID }}/g' k8s/secret.yaml
+          sed -i 's/${MERCADOPAGO_API_POSID}/${{ secrets.MERCADOPAGO_API_POSID }}/g' k8s/secret.yaml
+          sed -i 's/${MERCADOPAGO_API_ACCESSTOKEN}/${{ secrets.MERCADOPAGO_API_ACCESSTOKEN }}/g' k8s/secret.yaml
+          sed -i 's/${MERCADOPAGO_API_CALLBACKURL}/${{ secrets.MERCADOPAGO_API_CALLBACKURL }}/g' k8s/secret.yaml
       - name: Deploy to EKS
         run: kubectl apply -f k8s
       - name: Rollout Restart

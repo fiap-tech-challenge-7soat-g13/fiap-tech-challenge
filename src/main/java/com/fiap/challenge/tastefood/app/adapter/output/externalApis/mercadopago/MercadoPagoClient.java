@@ -20,13 +20,13 @@ public class MercadoPagoClient implements PaymentClient {
 
     private static final String CALLBACK_PATH = "/payment/%s/callback";
 
-    @Value("${mercadopago.api.user-id}")
+    @Value("${mercadopago.api.userId}")
     private String userId;
 
-    @Value("${mercadopago.api.pos-id}")
+    @Value("${mercadopago.api.posId}")
     private String posId;
 
-    @Value("${mercadopago.api.callback-url}")
+    @Value("${mercadopago.api.callbackUrl}")
     private String callbackUrl;
 
     private final MercadoPagoFeignClient client;
