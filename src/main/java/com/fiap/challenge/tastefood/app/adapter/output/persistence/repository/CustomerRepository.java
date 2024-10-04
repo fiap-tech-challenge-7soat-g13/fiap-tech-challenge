@@ -18,4 +18,6 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> 
 
     List<CustomerEntity> findByDocument(String document);
 
+    List<CustomerEntity> findByEmail(String email);
+
 }

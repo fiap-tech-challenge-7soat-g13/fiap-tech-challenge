@@ -94,7 +94,8 @@ curl --location 'http://192.168.49.2:30000/customer' \
 --data-raw '{
   "name": "Bill Gates",
   "email": "bill.gates@microsoft.com",
-  "document": "44867508020"
+  "document": "44867508020",
+  "password": "abc1@XYZ"
 }'
 ```
 3. Cadastrar pedido (customerId é opcional)
