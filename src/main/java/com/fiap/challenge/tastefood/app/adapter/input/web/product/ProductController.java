@@ -1,6 +1,6 @@
 package com.fiap.challenge.tastefood.app.adapter.input.web.product;
 
-import com.fiap.challenge.tastefood.app.adapter.input.web.order.dto.ProductRequest;
+import com.fiap.challenge.tastefood.app.adapter.input.web.product.dto.ProductRequest;
 import com.fiap.challenge.tastefood.app.adapter.input.web.product.mapper.ProductRequestMapper;
 import com.fiap.challenge.tastefood.app.adapter.input.web.product.mapper.ProductResponseMapper;
 import com.fiap.challenge.tastefood.core.domain.Product;

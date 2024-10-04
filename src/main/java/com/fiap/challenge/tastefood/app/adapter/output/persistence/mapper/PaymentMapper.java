@@ -4,7 +4,7 @@ import com.fiap.challenge.tastefood.app.adapter.output.persistence.entity.Paymen
 import com.fiap.challenge.tastefood.core.domain.Payment;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {OrderProductMapper.class})
+@Mapper(componentModel = "spring", uses = {OrderMapper.class})
 public interface PaymentMapper {
 
     Payment toPayment(PaymentEntity paymentEntity);

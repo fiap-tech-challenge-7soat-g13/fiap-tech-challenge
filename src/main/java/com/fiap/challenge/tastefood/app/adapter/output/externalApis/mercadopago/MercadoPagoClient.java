@@ -18,14 +18,16 @@ import java.util.UUID;
 @Service
 public class MercadoPagoClient implements PaymentClient {
 
+    private static final String CALLBACK_PATH = "/payment/%s/callback";
+
     @Value("${mercadopago.api.user-id}")
     private String userId;
 
     @Value("${mercadopago.api.pos-id}")
     private String posId;
 
-    @Value("${mercadopago.api.notification-url}")
-    private String notificationUrl;
+    @Value("${mercadopago.api.callback-url}")
+    private String callbackUrl;
 
     private final MercadoPagoFeignClient client;
 
@@ -62,7 +64,7 @@ public class MercadoPagoClient implements PaymentClient {
                 .description(String.format("Order created at %s by customer %s", order.getCreatedAt(), order.getCustomer().getDocument()))
                 .totalAmount(order.getTotal())
                 .externalReference(order.getId().toString())
-                .notificationUrl(String.format(notificationUrl, paymentUuid))
+                .notificationUrl(callbackUrl + String.format(CALLBACK_PATH, paymentUuid))
                 .items(order.getProducts().stream().map(this::toCreateOrderItemRequest).toList())
                 .build();
     }
