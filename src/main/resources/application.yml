@@ -24,7 +24,7 @@ spring:
 mercadopago:
   api:
     url: https://api.mercadopago.com
-    userId: ${MERCADOPAGO_API_USERID}
-    posId: ${MERCADOPAGO_API_POSID}
-    accessToken: ${MERCADOPAGO_API_ACCESSTOKEN}
-    callbackUrl: ${MERCADOPAGO_API_CALLBACKURL}
+    userId: fake
+    posId: fake
+    accessToken: fake
+    callbackUrl: fake

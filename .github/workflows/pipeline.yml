@@ -7,6 +7,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: taste_food
+        ports:
+          - 5432:5432
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -16,8 +25,8 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-      - name: Build with Maven
-        run: mvn clean package -DskipTests
+      - name: Run the Maven verify phase
+        run: mvn verify -Dspring.profiles.active=test
   docker:
     if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     needs: build
