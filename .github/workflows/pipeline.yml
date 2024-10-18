@@ -25,8 +25,11 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-      - name: Run the Maven verify phase
-        run: mvn verify -Dspring.profiles.active=test
+      - name: Build and analyze
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=fiap-tech-challenge-7soat-g13_fiap-tech-challenge -Dspring.profiles.active=test -Dsonar.qualitygate.wait=true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   docker:
     if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     needs: build
