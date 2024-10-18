@@ -1,4 +1,4 @@
-package com.fiap.challenge.tastefood.app.adapter.output.externalApis.mercadopago.feign;
+package com.fiap.challenge.tastefood.app.adapter.output.external.mercadopago.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

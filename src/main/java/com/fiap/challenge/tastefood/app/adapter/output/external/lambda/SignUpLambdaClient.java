@@ -1,6 +1,6 @@
-package com.fiap.challenge.tastefood.app.adapter.output.externalApis.lambda;
+package com.fiap.challenge.tastefood.app.adapter.output.external.lambda;
 
-import com.fiap.challenge.tastefood.app.adapter.output.externalApis.SignUpClient;
+import com.fiap.challenge.tastefood.app.adapter.output.external.SignUpClient;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import lombok.AllArgsConstructor;

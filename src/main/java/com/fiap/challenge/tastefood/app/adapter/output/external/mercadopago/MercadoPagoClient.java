@@ -1,7 +1,7 @@
-package com.fiap.challenge.tastefood.app.adapter.output.externalApis.mercadopago;
+package com.fiap.challenge.tastefood.app.adapter.output.external.mercadopago;
 
-import com.fiap.challenge.tastefood.app.adapter.output.externalApis.PaymentClient;
-import com.fiap.challenge.tastefood.app.adapter.output.externalApis.mercadopago.feign.*;
+import com.fiap.challenge.tastefood.app.adapter.output.external.PaymentClient;
+import com.fiap.challenge.tastefood.app.adapter.output.external.mercadopago.feign.*;
 import com.fiap.challenge.tastefood.core.domain.Order;
 import com.fiap.challenge.tastefood.core.domain.OrderProduct;
 import com.fiap.challenge.tastefood.core.domain.enums.PaymentStatus;

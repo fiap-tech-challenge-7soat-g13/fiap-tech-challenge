@@ -1,4 +1,4 @@
-package com.fiap.challenge.tastefood.app.adapter.output.externalApis.mercadopago.feign;
+package com.fiap.challenge.tastefood.app.adapter.output.external.mercadopago.feign;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -8,9 +8,10 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class CreateOrderResponse {
+public class GetOrderResponse {
 
-    private String qrData;
-    private String inStoreOrderId;
+    private String id;
+    private String externalReference;
+    private String orderStatus;
 
 }
