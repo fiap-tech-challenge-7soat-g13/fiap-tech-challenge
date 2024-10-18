@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.services.lambda.LambdaClient;
@@ -14,7 +13,6 @@ import software.amazon.awssdk.services.lambda.model.InvokeResponse;
 
 @Slf4j
 @Service
-@Profile("!test")
 @AllArgsConstructor
 public class SignUpLambdaClient implements SignUpClient {
 

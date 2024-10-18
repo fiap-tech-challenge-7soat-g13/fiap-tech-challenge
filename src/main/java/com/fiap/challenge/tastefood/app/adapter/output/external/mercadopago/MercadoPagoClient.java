@@ -6,19 +6,15 @@ import com.fiap.challenge.tastefood.core.domain.Order;
 import com.fiap.challenge.tastefood.core.domain.OrderProduct;
 import com.fiap.challenge.tastefood.core.domain.enums.PaymentStatus;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-@Slf4j
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class MercadoPagoClient implements PaymentClient {
-
-    private static final String CALLBACK_PATH = "/payment/%s/callback";
 
     @Value("${mercadopago.api.userId}")
     private String userId;
@@ -33,29 +29,19 @@ public class MercadoPagoClient implements PaymentClient {
 
     @Override
     public String createPayment(UUID paymentUuid, Order order) {
-        try {
-            CreateOrderRequest request = toCreateOrderRequest(paymentUuid, order);
-            CreateOrderResponse response = client.createOrder(userId, posId, request);
-            return response.getQrData();
-        } catch (Exception e) {
-            log.error("An error has occurred when creating the payment", e);
-            throw new RuntimeException(e);
-        }
+        CreateOrderRequest request = toCreateOrderRequest(paymentUuid, order);
+        CreateOrderResponse response = client.createOrder(userId, posId, request);
+        return response.getQrData();
     }
 
     @Override
     public PaymentStatus verifyPayment(String paymentId) {
-        try {
-            GetOrderResponse res = this.client.getOrder(paymentId);
-            return switch (res.getOrderStatus()) {
-                case "paid" -> PaymentStatus.APROVADO;
-                case "payment_required", "payment_in_process" -> PaymentStatus.PENDENTE;
-                default -> PaymentStatus.FALHADO;
-            };
-        } catch (Exception e) {
-            log.error("An error has occurred when verifying the payment", e);
-            throw new RuntimeException(e);
-        }
+        GetOrderResponse res = this.client.getOrder(paymentId);
+        return switch (res.getOrderStatus()) {
+            case "paid" -> PaymentStatus.APROVADO;
+            case "payment_required", "payment_in_process" -> PaymentStatus.PENDENTE;
+            default -> PaymentStatus.FALHADO;
+        };
     }
 
     private CreateOrderRequest toCreateOrderRequest(UUID paymentUuid, Order order) {
@@ -64,7 +50,7 @@ public class MercadoPagoClient implements PaymentClient {
                 .description(String.format("Order created at %s by customer %s", order.getCreatedAt(), order.getCustomer().getDocument()))
                 .totalAmount(order.getTotal())
                 .externalReference(order.getId().toString())
-                .notificationUrl(callbackUrl + String.format(CALLBACK_PATH, paymentUuid))
+                .notificationUrl(callbackUrl + String.format("/payment/%s/callback", paymentUuid))
                 .items(order.getProducts().stream().map(this::toCreateOrderItemRequest).toList())
                 .build();
     }
