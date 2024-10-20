@@ -25,6 +25,7 @@
 		<sonar.qualitygate.wait>true</sonar.qualitygate.wait>
 		<sonar.coverage.exclusions>
 			**/*Config.java,
+			**/*Entity.java,
 			**/*Request.java,
 			**/*Response.java
 		</sonar.coverage.exclusions>
