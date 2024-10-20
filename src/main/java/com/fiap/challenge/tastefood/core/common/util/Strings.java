@@ -1,10 +1,13 @@
 package com.fiap.challenge.tastefood.core.common.util;
 
 import br.com.caelum.stella.validation.CPFValidator;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.net.URI;
 import java.util.regex.Pattern;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Strings {
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");

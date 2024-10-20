@@ -43,7 +43,7 @@ public class CustomerCreateValidator {
     }
 
     private static boolean weakPassword(String password) {
-        String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*";
+        String pattern = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*";
         return !password.matches(pattern);
     }
 

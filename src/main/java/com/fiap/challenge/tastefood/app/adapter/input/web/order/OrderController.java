@@ -6,16 +6,13 @@ import com.fiap.challenge.tastefood.app.adapter.input.web.order.mapper.OrderRequ
 import com.fiap.challenge.tastefood.app.adapter.input.web.order.mapper.OrderResponseMapper;
 import com.fiap.challenge.tastefood.core.domain.Order;
 import com.fiap.challenge.tastefood.core.domain.enums.OrderStatus;
-import com.fiap.challenge.tastefood.core.useCases.order.*;
-import com.fiap.challenge.tastefood.core.useCases.status.StatusListUseCase;
+import com.fiap.challenge.tastefood.core.usecases.order.*;
+import com.fiap.challenge.tastefood.core.usecases.status.StatusListUseCase;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @AllArgsConstructor
@@ -32,12 +29,11 @@ public class OrderController {
     private final OrderResponseMapper orderResponseMapper;
 
     @PostMapping(path = "/order")
-    public ResponseEntity<OrderResponse> create(@RequestBody OrderRequest orderRequest) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public OrderResponse create(@RequestBody OrderRequest orderRequest) {
         Order orderInput = orderRequestMapper.toOrder(orderRequest);
         Order orderSaved = orderCreateUseCase.execute(orderInput);
-        return ResponseEntity
-                .status(CREATED)
-                .body(orderResponseMapper.toOrderResponse(orderSaved));
+        return orderResponseMapper.toOrderResponse(orderSaved);
     }
 
     @GetMapping(path = "/order/{id}")
@@ -59,27 +55,21 @@ public class OrderController {
     }
 
     @GetMapping(path = "/order/status")
-    public ResponseEntity<List<String>> list() {
-        return ResponseEntity
-                .status(OK)
-                .body(statusListUseCase.execute());
+    public List<String> list() {
+        return statusListUseCase.execute();
     }
 
     @PostMapping(path = "/order/{id}/checkout")
-    public ResponseEntity<?> checkout(@PathVariable Long id) {
+    public OrderResponse checkout(@PathVariable Long id) {
         Order order = orderCheckoutUseCase.execute(id);
-        return ResponseEntity
-                .status(OK)
-                .body(orderResponseMapper.toOrderResponse(order));
+        return orderResponseMapper.toOrderResponse(order);
     }
 
     @GetMapping(path = "/order/queue")
-    public ResponseEntity<List<OrderResponse>> ordersQueue() {
-        List<Order> orders = orderQueueListUseCase.execute(List.of(OrderStatus.RECEBIDO.name(),
-                OrderStatus.EM_PREPARACAO.name(), OrderStatus.PRONTO.name()));
-        return ResponseEntity
-                .status(OK)
-                .body(orderResponseMapper.toOrderResponse(orders));
+    public List<OrderResponse> ordersQueue() {
+        List<String> statuses = List.of(OrderStatus.RECEBIDO.name(), OrderStatus.EM_PREPARACAO.name(), OrderStatus.PRONTO.name());
+        List<Order> orders = orderQueueListUseCase.execute(statuses);
+        return orderResponseMapper.toOrderResponse(orders);
     }
 
 }
