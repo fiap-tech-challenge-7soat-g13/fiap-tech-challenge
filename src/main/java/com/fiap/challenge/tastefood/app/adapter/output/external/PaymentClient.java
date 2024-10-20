@@ -1,4 +1,4 @@
-package com.fiap.challenge.tastefood.app.adapter.output.externalApis;
+package com.fiap.challenge.tastefood.app.adapter.output.external;
 
 import com.fiap.challenge.tastefood.core.domain.Order;
 import com.fiap.challenge.tastefood.core.domain.enums.PaymentStatus;
