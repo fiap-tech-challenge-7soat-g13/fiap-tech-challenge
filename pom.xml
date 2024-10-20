@@ -23,10 +23,11 @@
 		<sonar.organization>fiap-tech-challenge-7soat-g13</sonar.organization>
 		<sonar.projectKey>fiap-tech-challenge-7soat-g13_fiap-tech-challenge</sonar.projectKey>
 		<sonar.qualitygate.wait>true</sonar.qualitygate.wait>
-		<sonar.exclusions>
+		<sonar.coverage.exclusions>
+			**/*Config.java,
 			**/*Request.java,
 			**/*Response.java
-		</sonar.exclusions>
+		</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>

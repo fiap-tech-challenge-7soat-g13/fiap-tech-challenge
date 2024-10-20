@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
-import com.fiap.challenge.tastefood.app.adapter.output.external.PaymentClient;
+import com.fiap.challenge.tastefood.app.adapter.output.externalapis.PaymentClient;
 import com.fiap.challenge.tastefood.app.adapter.output.persistence.entity.PaymentEntity;
 import com.fiap.challenge.tastefood.app.adapter.output.persistence.mapper.PaymentMapper;
 import com.fiap.challenge.tastefood.app.adapter.output.persistence.repository.PaymentRepository;

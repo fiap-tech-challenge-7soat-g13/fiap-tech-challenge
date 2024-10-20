@@ -9,6 +9,6 @@ import java.util.List;
 @AllArgsConstructor
 public class InvalidDataException extends RuntimeException {
 
-    private List<String> messages;
+    private final List<String> messages;
 
 }

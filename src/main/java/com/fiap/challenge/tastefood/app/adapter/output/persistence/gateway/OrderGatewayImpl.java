@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
@@ -58,7 +57,7 @@ public class OrderGatewayImpl implements OrderGateway {
     }
 
     private List<Order> setPayment(List<Order> orders) {
-        return orders.stream().map(this::setPayment).collect(Collectors.toList());
+        return orders.stream().map(this::setPayment).toList();
     }
 
     private Optional<Order> setPayment(Optional<Order> order) {

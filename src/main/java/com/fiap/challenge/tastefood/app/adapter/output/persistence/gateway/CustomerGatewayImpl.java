@@ -1,6 +1,6 @@
 package com.fiap.challenge.tastefood.app.adapter.output.persistence.gateway;
 
-import com.fiap.challenge.tastefood.app.adapter.output.external.SignUpClient;
+import com.fiap.challenge.tastefood.app.adapter.output.externalapis.SignUpClient;
 import com.fiap.challenge.tastefood.app.adapter.output.persistence.entity.CustomerEntity;
 import com.fiap.challenge.tastefood.app.adapter.output.persistence.mapper.CustomerMapper;
 import com.fiap.challenge.tastefood.app.adapter.output.persistence.repository.CustomerRepository;

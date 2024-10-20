@@ -24,7 +24,7 @@ public class DefaultExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(EntityNotFoundException.class)
     public void entityNotFoundException(EntityNotFoundException exception) {
-
+        // Return 404 with empty response.
     }
 
 }
