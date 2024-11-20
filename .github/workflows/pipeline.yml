@@ -73,9 +73,6 @@ jobs:
           sed -i "s/\${MERCADOPAGO_API_POSID}/$(echo -n ${{ secrets.MERCADOPAGO_API_POSID }} | base64 -w 0)/g" k8s/secret.yaml
           sed -i "s/\${MERCADOPAGO_API_ACCESSTOKEN}/$(echo -n ${{ secrets.MERCADOPAGO_API_ACCESSTOKEN }} | base64 -w 0)/g" k8s/secret.yaml
           sed -i "s/\${MERCADOPAGO_API_CALLBACKURL}/$(echo -n ${{ secrets.MERCADOPAGO_API_CALLBACKURL }} | base64 -w 0)/g" k8s/secret.yaml
-          sed -i "s/\${AWS_ACCESS_KEY_ID}/$(echo -n ${{ secrets.AWS_ACCESS_KEY_ID }} | base64 -w 0)/g" k8s/secret.yaml
-          sed -i "s/\${AWS_SECRET_ACCESS_KEY}/$(echo -n ${{ secrets.AWS_SECRET_ACCESS_KEY }} | base64 -w 0)/g" k8s/secret.yaml
-          sed -i "s/\${AWS_REGION}/$(echo -n ${{ secrets.AWS_REGION }} | base64 -w 0)/g" k8s/secret.yaml
       - name: Deploy to EKS
         run: kubectl apply -f k8s
       - name: Rollout Restart

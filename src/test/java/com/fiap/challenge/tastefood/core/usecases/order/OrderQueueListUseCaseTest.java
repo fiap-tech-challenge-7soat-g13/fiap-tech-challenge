@@ -19,7 +19,7 @@ class OrderQueueListUseCaseTest {
     @Test
     void shouldListAll() {
 
-        List<String> statuses = List.of(OrderStatus.PRONTO.name());
+        List<OrderStatus> statuses = List.of(OrderStatus.PRONTO);
         List<Order> expected = List.of(new Order(), new Order());
 
         when(orderGateway.findAllByStatusInOrderByStatusDesc(statuses)).thenReturn(expected);

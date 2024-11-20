@@ -7,6 +7,8 @@ spring:
     openfeign:
       client:
         config:
+          customer:
+            url: ${application.customer-api.url}
           mercadopago:
             defaultRequestHeaders:
               authorization: Bearer ${mercadopago.api.accessToken}
@@ -21,6 +23,11 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: validate
+
+application:
+  customer-api:
+    url: http://localhost:9091
+
 mercadopago:
   api:
     url: https://api.mercadopago.com

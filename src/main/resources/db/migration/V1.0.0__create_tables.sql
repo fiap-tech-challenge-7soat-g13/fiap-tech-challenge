@@ -1,10 +1,3 @@
-CREATE TABLE "customers" (
-    id BIGSERIAL PRIMARY KEY,
-    name VARCHAR NOT NULL,
-    email VARCHAR NOT NULL,
-    document VARCHAR NOT NULL
-);
-
 CREATE TABLE "products" (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR NOT NULL,
@@ -20,7 +13,7 @@ CREATE TABLE "orders" (
     created_at TIMESTAMP NOT NULL,
     status SMALLINT NOT NULL,
     total NUMERIC NOT NULL,
-    customer_id BIGINT REFERENCES customers (id)
+    customer_id BIGINT NOT NULL
 );
 
 CREATE TABLE "orders_products" (

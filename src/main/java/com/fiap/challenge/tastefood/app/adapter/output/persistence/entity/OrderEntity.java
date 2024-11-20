@@ -24,8 +24,7 @@ public class OrderEntity {
     @Enumerated(EnumType.ORDINAL)
     private OrderStatus status;
 
-    @ManyToOne
-    private CustomerEntity customer;
+    private Long customerId;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id", nullable = false)
