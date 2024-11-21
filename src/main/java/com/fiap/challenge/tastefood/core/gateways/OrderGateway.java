@@ -16,6 +16,6 @@ public interface OrderGateway {
 
 	List<Order> findByStatus(OrderStatus status);
 
-	List<Order> findAllByStatusInOrderByStatusDesc(List<String> orderStatus);
+	List<Order> findAllByStatusInOrderByStatusDesc(List<OrderStatus> orderStatus);
 
 }

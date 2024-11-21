@@ -28,14 +28,6 @@ public class Validation {
         return assertFalse(CollectionUtils.isEmpty(value), message, params);
     }
 
-    public static Validation notInvalidEmail(String value, String message, Object... params) {
-        return assertFalse(value != null && !Strings.isValidEmail(value), message, params);
-    }
-
-    public static Validation notInvalidDocument(String value, String message, Object... params) {
-        return assertFalse(value != null && !Strings.isValidDocument(value), message, params);
-    }
-
     public static Validation notInvalidUrl(String value, String message, Object... params) {
         return assertFalse(value != null && !Strings.isValidUrl(value), message, params);
     }

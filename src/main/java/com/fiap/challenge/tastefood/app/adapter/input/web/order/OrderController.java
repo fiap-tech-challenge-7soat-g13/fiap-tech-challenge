@@ -67,7 +67,7 @@ public class OrderController {
 
     @GetMapping(path = "/order/queue")
     public List<OrderResponse> ordersQueue() {
-        List<String> statuses = List.of(OrderStatus.RECEBIDO.name(), OrderStatus.EM_PREPARACAO.name(), OrderStatus.PRONTO.name());
+        List<OrderStatus> statuses = List.of(OrderStatus.RECEBIDO, OrderStatus.EM_PREPARACAO, OrderStatus.PRONTO);
         List<Order> orders = orderQueueListUseCase.execute(statuses);
         return orderResponseMapper.toOrderResponse(orders);
     }
