@@ -1,12 +1,10 @@
-package com.fiap.challenge.tastefood.core.domain;
+package com.fiap.challenge.tastefood.app.adapter.input.queue.payment.dto;
 
 import com.fiap.challenge.tastefood.core.domain.enums.PaymentStatus;
 import lombok.Getter;
-import lombok.Setter;
 
-@Setter
 @Getter
-public class Payment {
+public class PaymentStatusChangedEvent {
 
     private Long id;
     private String qrCode;

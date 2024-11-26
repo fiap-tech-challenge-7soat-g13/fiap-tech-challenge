@@ -55,6 +55,10 @@ public class OrderGatewayImpl implements OrderGateway {
         return setFields(orderMapper.toOrder(orderList));
     }
 
+    public Order findByPaymentId(Long paymentId) {
+        return orderMapper.toOrder(orderRepository.findByPaymentId(paymentId));
+    }
+
     private List<Order> setFields(List<Order> orders) {
         return orders.stream().map(this::setFields).toList();
     }
@@ -64,7 +68,9 @@ public class OrderGatewayImpl implements OrderGateway {
     }
 
     private Order setFields(Order order) {
-        paymentGateway.findByOrderId(order.getId()).ifPresent(order::setPayment);
+        if (order.getPayment() != null && order.getPayment().getId() != null) {
+            order.setPayment(paymentGateway.findById(order.getPayment().getId()));
+        }
         customerGateway.findById(order.getCustomer().getId()).ifPresent(order::setCustomer);
         return order;
     }

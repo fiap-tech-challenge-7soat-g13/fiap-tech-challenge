@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 9093
 spring:
   application:
     name: taste-food
@@ -9,10 +9,8 @@ spring:
         config:
           customer:
             url: ${application.customer-api.url}
-          mercadopago:
-            defaultRequestHeaders:
-              authorization: Bearer ${mercadopago.api.accessToken}
-            url: ${mercadopago.api.url}
+          payment:
+            url: ${application.payment-api.url}
   datasource:
     url: jdbc:postgresql://localhost:5432/taste_food
     username: postgres
@@ -23,15 +21,20 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: validate
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        default-requeue-rejected: false
 
 application:
   customer-api:
     url: http://localhost:9091
-
-mercadopago:
-  api:
-    url: https://api.mercadopago.com
-    userId: fake
-    posId: fake
-    accessToken: fake
-    callbackUrl: fake
+  payment-api:
+    url: http://localhost:9092
+  queue:
+    payment-status-changed:
+      name: payment-status-changed

@@ -26,6 +26,8 @@ public class OrderEntity {
 
     private Long customerId;
 
+    private Long paymentId;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id", nullable = false)
     private List<OrderProductEntity> products;

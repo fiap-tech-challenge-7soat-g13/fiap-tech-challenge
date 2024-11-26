@@ -11,12 +11,15 @@ import java.util.List;
 public interface OrderMapper {
 
     @Mapping(source = "customer.id", target = "customerId")
+    @Mapping(source = "payment.id", target = "paymentId")
     OrderEntity toOrderEntity(Order order);
 
     @Mapping(source = "customerId", target = "customer.id")
+    @Mapping(source = "paymentId", target = "payment.id")
     Order toOrder(OrderEntity orderEntity);
 
     @Mapping(source = "customerId", target = "customer.id")
+    @Mapping(source = "paymentId", target = "payment.id")
     List<Order> toOrder(List<OrderEntity> orderEntities);
 
 }

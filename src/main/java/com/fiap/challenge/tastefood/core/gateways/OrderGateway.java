@@ -8,14 +8,16 @@ import java.util.Optional;
 
 public interface OrderGateway {
 
-	Order save(Order order);
+    Order save(Order order);
 
-	Optional<Order> findById(Long id);
+    Optional<Order> findById(Long id);
 
-	List<Order> findAll();
+    List<Order> findAll();
 
-	List<Order> findByStatus(OrderStatus status);
+    List<Order> findByStatus(OrderStatus status);
 
-	List<Order> findAllByStatusInOrderByStatusDesc(List<OrderStatus> orderStatus);
+    List<Order> findAllByStatusInOrderByStatusDesc(List<OrderStatus> orderStatus);
+
+    Order findByPaymentId(Long paymentId);
 
 }
