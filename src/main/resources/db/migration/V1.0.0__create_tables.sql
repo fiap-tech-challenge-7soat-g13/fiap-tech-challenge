@@ -13,7 +13,8 @@ CREATE TABLE "orders" (
     created_at TIMESTAMP NOT NULL,
     status SMALLINT NOT NULL,
     total NUMERIC NOT NULL,
-    customer_id BIGINT NOT NULL
+    customer_id BIGINT NOT NULL,
+    payment_id BIGINT
 );
 
 CREATE TABLE "orders_products" (
@@ -22,13 +23,4 @@ CREATE TABLE "orders_products" (
     product_id BIGINT NOT NULL REFERENCES products (id),
     quantity INT NOT NULL,
     price NUMERIC NOT NULL
-);
-
-CREATE TABLE "payments" (
-    id BIGSERIAL PRIMARY KEY,
-    uuid UUID NOT NULL,
-    order_id BIGINT NOT NULL REFERENCES orders (id),
-    qr_code VARCHAR NOT NULL,
-    status VARCHAR NOT NULL,
-    external_id VARCHAR
 );

@@ -5,6 +5,7 @@ import com.fiap.challenge.tastefood.app.adapter.output.persistence.mapper.OrderM
 import com.fiap.challenge.tastefood.app.adapter.output.persistence.repository.OrderRepository;
 import com.fiap.challenge.tastefood.core.domain.Customer;
 import com.fiap.challenge.tastefood.core.domain.Order;
+import com.fiap.challenge.tastefood.core.domain.Payment;
 import com.fiap.challenge.tastefood.core.domain.enums.OrderStatus;
 import com.fiap.challenge.tastefood.core.gateways.CustomerGateway;
 import com.fiap.challenge.tastefood.core.gateways.PaymentGateway;
@@ -121,11 +122,33 @@ class OrderGatewayImplTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void shouldFindByPaymentId() {
+
+        Long paymentId = 1L;
+
+        OrderEntity orderEntity = new OrderEntity();
+        Order expected = buildOrderWithCustomerId();
+
+        when(orderRepository.findByPaymentId(paymentId)).thenReturn(orderEntity);
+        when(orderMapper.toOrder(orderEntity)).thenReturn(expected);
+
+        Order actual = orderGateway.findByPaymentId(paymentId);
+
+        verify(orderRepository).findByPaymentId(paymentId);
+        verify(orderMapper).toOrder(orderEntity);
+
+        assertEquals(expected, actual);
+    }
+
     private Order buildOrderWithCustomerId() {
         Customer customer = new Customer();
         customer.setId(1L);
+        Payment payment = new Payment();
+        payment.setId(1L);
         Order order = new Order();
         order.setCustomer(customer);
+        order.setPayment(payment);
         return order;
     }
 

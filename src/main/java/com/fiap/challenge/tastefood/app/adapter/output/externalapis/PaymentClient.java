@@ -1,14 +1,12 @@
 package com.fiap.challenge.tastefood.app.adapter.output.externalapis;
 
 import com.fiap.challenge.tastefood.core.domain.Order;
-import com.fiap.challenge.tastefood.core.domain.enums.PaymentStatus;
-
-import java.util.UUID;
+import com.fiap.challenge.tastefood.core.domain.Payment;
 
 public interface PaymentClient {
 
-    String createPayment(UUID paymentUuid, Order order);
+    Payment createPayment(Order order);
 
-    PaymentStatus verifyPayment(String paymentId);
+    Payment getPayment(Long paymentId);
 
 }
