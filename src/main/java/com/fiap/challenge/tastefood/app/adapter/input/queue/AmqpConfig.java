@@ -13,7 +13,7 @@ public class AmqpConfig {
 
     private final String paymentStatusChangedQueue;
 
-    public AmqpConfig(@Value("${application.queue.payment-status-changed.name}") String paymentStatusChangedQueue) {
+    public AmqpConfig(@Value("${application.queue.paymentStatusChanged.name}") String paymentStatusChangedQueue) {
         this.paymentStatusChangedQueue = paymentStatusChangedQueue;
     }
 

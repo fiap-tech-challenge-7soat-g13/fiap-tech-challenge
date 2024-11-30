@@ -8,9 +8,9 @@ spring:
       client:
         config:
           customer:
-            url: ${application.customer-api.url}
+            url: ${application.customer.url}
           payment:
-            url: ${application.payment-api.url}
+            url: ${application.payment.url}
   datasource:
     url: jdbc:postgresql://localhost:5432/taste_food
     username: postgres
@@ -22,8 +22,7 @@ spring:
     hibernate:
       ddl-auto: validate
   rabbitmq:
-    host: localhost
-    port: 5672
+    addresses: amqps://b-6b369879-a388-49f0-8c8b-505e9ee77db3.mq.us-east-1.amazonaws.com:5671
     username: guest
     password: guest
     listener:
@@ -31,10 +30,10 @@ spring:
         default-requeue-rejected: false
 
 application:
-  customer-api:
+  customer:
     url: http://localhost:9091
-  payment-api:
+  payment:
     url: http://localhost:9092
   queue:
-    payment-status-changed:
+    paymentStatusChanged:
       name: payment-status-changed

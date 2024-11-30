@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: taste-food
+data:
+  APPLICATION_CUSTOMER_URL: "http://customer-api.default.svc.cluster.local:9091"
+  APPLICATION_PAYMENT_URL: "http://payment-api.default.svc.cluster.local:9092"

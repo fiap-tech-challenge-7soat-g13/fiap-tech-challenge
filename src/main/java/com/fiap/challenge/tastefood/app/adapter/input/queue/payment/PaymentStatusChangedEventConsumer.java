@@ -17,7 +17,7 @@ public class PaymentStatusChangedEventConsumer {
     private final PaymentVerifyUseCase paymentVerifyUseCase;
 
     @Transactional
-    @RabbitListener(queues = "${application.queue.payment-status-changed.name}")
+    @RabbitListener(queues = "${application.queue.paymentStatusChanged.name}")
     public void consume(PaymentStatusChangedEvent event) {
         Payment payment = paymentStatusChangedEventMapper.toPayment(event);
         paymentVerifyUseCase.execute(payment);
