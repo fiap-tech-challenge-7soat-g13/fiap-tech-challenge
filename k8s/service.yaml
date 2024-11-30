@@ -7,5 +7,5 @@ spec:
     app: taste-food
   type: LoadBalancer
   ports:
-    - port: 8080
-      targetPort: 8080
+    - port: 9093
+      targetPort: 9093

@@ -69,10 +69,9 @@ jobs:
           sed -i "s/\${SPRING_DATASOURCE_URL}/$(echo -n ${{ secrets.SPRING_DATASOURCE_URL }} | base64 -w 0)/g" k8s/secret.yaml
           sed -i "s/\${SPRING_DATASOURCE_USERNAME}/$(echo -n ${{ secrets.SPRING_DATASOURCE_USERNAME }} | base64 -w 0)/g" k8s/secret.yaml
           sed -i "s/\${SPRING_DATASOURCE_PASSWORD}/$(echo -n ${{ secrets.SPRING_DATASOURCE_PASSWORD }} | base64 -w 0)/g" k8s/secret.yaml
-          sed -i "s/\${MERCADOPAGO_API_USERID}/$(echo -n ${{ secrets.MERCADOPAGO_API_USERID }} | base64 -w 0)/g" k8s/secret.yaml
-          sed -i "s/\${MERCADOPAGO_API_POSID}/$(echo -n ${{ secrets.MERCADOPAGO_API_POSID }} | base64 -w 0)/g" k8s/secret.yaml
-          sed -i "s/\${MERCADOPAGO_API_ACCESSTOKEN}/$(echo -n ${{ secrets.MERCADOPAGO_API_ACCESSTOKEN }} | base64 -w 0)/g" k8s/secret.yaml
-          sed -i "s/\${MERCADOPAGO_API_CALLBACKURL}/$(echo -n ${{ secrets.MERCADOPAGO_API_CALLBACKURL }} | base64 -w 0)/g" k8s/secret.yaml
+          sed -i "s/\${SPRING_RABBITMQ_ADDRESSES}/$(echo -n ${{ secrets.SPRING_RABBITMQ_ADDRESSES }} | base64 -w 0)/g" k8s/secret.yaml
+          sed -i "s/\${SPRING_RABBITMQ_USERNAME}/$(echo -n ${{ secrets.SPRING_RABBITMQ_USERNAME }} | base64 -w 0)/g" k8s/secret.yaml
+          sed -i "s/\${SPRING_RABBITMQ_PASSWORD}/$(echo -n ${{ secrets.SPRING_RABBITMQ_PASSWORD }} | base64 -w 0)/g" k8s/secret.yaml
       - name: Deploy to EKS
         run: kubectl apply -f k8s
       - name: Rollout Restart

@@ -3,7 +3,7 @@ services:
   app:
     build: .
     ports:
-      - "8080:8080"
+      - "9093:9093"
     depends_on:
       - postgres
     environment:

@@ -8,7 +8,7 @@ spec:
     kind: Deployment
     name: taste-food
   minReplicas: 1
-  maxReplicas: 4
+  maxReplicas: 2
   metrics:
     - type: Resource
       resource:
