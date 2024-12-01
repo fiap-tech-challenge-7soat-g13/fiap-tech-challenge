@@ -1,11 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: taste-food
+  name: order-api
 spec:
   selector:
-    app: taste-food
-  type: LoadBalancer
+    app: order-api
   ports:
-    - port: 9093
-      targetPort: 9093
+    - port: 80
+      targetPort: 80
