@@ -13,7 +13,7 @@ jobs:
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
-          POSTGRES_DB: taste_food
+          POSTGRES_DB: order_api
         ports:
           - 5432:5432
     steps:
@@ -48,7 +48,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: cristianobarros/taste-food
+          tags: cristianobarros/order-api
   deploy:
     if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     needs: docker

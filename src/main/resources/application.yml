@@ -2,7 +2,7 @@ server:
   port: 9093
 spring:
   application:
-    name: taste-food
+    name: order-api
   cloud:
     openfeign:
       client:
@@ -12,7 +12,7 @@ spring:
           payment:
             url: ${application.payment.url}
   datasource:
-    url: jdbc:postgresql://localhost:5432/taste_food
+    url: jdbc:postgresql://localhost:5432/order_api
     username: postgres
     password: postgres
   flyway:
