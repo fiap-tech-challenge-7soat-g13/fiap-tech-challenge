@@ -1,0 +1,558 @@
+openapi: 3.0.3
+info:
+  title: Taste Food - OpenAPI 3.0
+  description: |-
+    This is a sample API for a fast food store based on the OpenAPI 3.0 specification.
+  version: 1.0.0
+servers:
+  - url: https://xjg1p730j3.execute-api.us-east-1.amazonaws.com/prod
+tags:
+  - name: customer
+    description: Operations about customers
+  - name: order
+    description: Operations about orders
+  - name: payment
+    description: Operations about payments
+  - name: product
+    description: Operations about products
+paths:
+  /customer:
+    post:
+      tags:
+        - customer
+      summary: Add a new customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomerRequest"
+        required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomerResponse"
+        400:
+          description: Invalid data
+    get:
+      summary: List customers
+      tags:
+        - customer
+      parameters:
+        - in: query
+          name: document
+          schema:
+            type: string
+            example: 44867508020
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CustomerResponse"
+  /customer/{id}:
+    get:
+      summary: Get customer by ID
+      tags:
+        - customer
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: integer
+            example: 1
+          required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomerResponse"
+        404:
+          description: Not found
+    delete:
+      summary: Delete customer by ID
+      tags:
+        - customer
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: integer
+            example: 1
+          required: true
+      responses:
+        200:
+          description: Successful operation
+        404:
+          description: Not found
+
+  /product:
+    post:
+      tags:
+        - product
+      summary: Add a new product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductRequest"
+        required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductResponse"
+        400:
+          description: Invalid data
+    get:
+      summary: List products
+      tags:
+        - product
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+            enum: [LANCHE, BEBIDA, ACOMPANHAMENTO, SOBREMESA]
+            example: LANCHE
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ProductResponse"
+  /product/{id}:
+    put:
+      summary: Update a product by ID
+      tags:
+        - product
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: integer
+            example: 1
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductRequest"
+        required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductResponse"
+        400:
+          description: Invalid data
+    delete:
+      summary: Delete product by ID
+      tags:
+        - product
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: integer
+            example: 1
+          required: true
+      responses:
+        200:
+          description: Successful operation
+        404:
+          description: Not found
+  /product/category:
+    get:
+      summary: List products categories
+      tags:
+        - product
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                example: [LANCHE, BEBIDA, ACOMPANHAMENTO, SOBREMESA]
+                items:
+                  type: string
+
+  /order:
+    post:
+      tags:
+        - order
+      summary: Add a new order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderRequest"
+        required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+        400:
+          description: Invalid data
+    get:
+      summary: List orders
+      tags:
+        - order
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [CRIADO, RECEBIDO, EM_PREPARACAO, PRONTO, FINALIZADO, CANCELADO]
+            example: CRIADO
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OrderResponse"
+  /order/{id}:
+    get:
+      summary: Get order by ID
+      tags:
+        - order
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: integer
+            example: 1
+          required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+        404:
+          description: Not found
+  /order/{id}/status:
+    put:
+      summary: Update order status by ID
+      tags:
+        - order
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: integer
+            example: 1
+          required: true
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [CRIADO, RECEBIDO, EM_PREPARACAO, PRONTO, FINALIZADO, CANCELADO]
+            example: CRIADO
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+        404:
+          description: Not found
+  /order/{id}/checkout:
+    post:
+      summary: Checkout order by ID
+      tags:
+        - order
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: integer
+            example: 1
+          required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+        404:
+          description: Not found
+  /order/queue:
+    get:
+      summary: List enqueued orders
+      tags:
+        - order
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OrderResponse"
+  /order/status:
+    get:
+      summary: List orders statuses
+      tags:
+        - order
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                example: [CRIADO, RECEBIDO, EM_PREPARACAO, PRONTO, FINALIZADO, CANCELADO]
+                items:
+                  type: string
+
+
+  /payment:
+    post:
+      tags:
+        - payment
+      summary: Add a new payment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderResponse"
+        required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentResponse"
+  /payment/{id}:
+    get:
+      summary: Get payment by ID
+      tags:
+        - payment
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: integer
+            example: 1
+          required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentResponse"
+        404:
+          description: Not found
+  /payment/{uuid}/callback:
+    post:
+      summary: Receive payment callback by internal UUID
+      tags:
+        - payment
+      parameters:
+        - in: path
+          name: uuid
+          schema:
+            type: string
+            format: uuid
+            example: 9ad62775-aea0-48a4-9e0e-42c7438fd844
+          required: true
+        - in: query
+          name: id
+          schema:
+            type: string
+            example: 123123
+          required: true
+        - in: query
+          name: topic
+          schema:
+            type: string
+            example: payment
+          required: true
+      responses:
+        200:
+          description: Successful operation
+        404:
+          description: Not found
+
+components:
+  schemas:
+    CustomerRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Bill Gates
+        email:
+          type: string
+          example: bill.gates@microsoft.com
+        document:
+          type: string
+          example: 44867508020
+        password:
+          type: string
+          example: abc1@XYZ
+    CustomerResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Bill Gates
+        email:
+          type: string
+          example: bill.gates@microsoft.com
+        document:
+          type: string
+          example: 44867508020
+    ProductRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: X-Bacon
+        description:
+          type: string
+          example: Um delicioso hamburguer, com bacon, queijo, tomate, alface e maionese
+        category:
+          type: string
+          enum: [LANCHE, BEBIDA, ACOMPANHAMENTO, SOBREMESA]
+          example: LANCHE
+        price:
+          type: number
+          example: 15.99
+        images:
+          type: array
+          items:
+            type: string
+            example: "https://embutidosbonatti.ind.br/temp/BIN_57_V9Fb0BwK.jpg"
+    ProductResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: X-Bacon
+        description:
+          type: string
+          example: Um delicioso hamburguer, com bacon, queijo, tomate, alface e maionese
+        category:
+          type: string
+          enum: [LANCHE, BEBIDA, ACOMPANHAMENTO, SOBREMESA]
+          example: LANCHE
+        price:
+          type: number
+          example: 15.99
+        images:
+          type: array
+          items:
+            type: string
+            example: "https://embutidosbonatti.ind.br/temp/BIN_57_V9Fb0BwK.jpg"
+
+    OrderRequest:
+      type: object
+      properties:
+        customerId:
+          type: integer
+          example: 1
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderProductRequest"
+    OrderResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        status:
+          type: string
+          enum: [CRIADO, RECEBIDO, EM_PREPARACAO, PRONTO, FINALIZADO, CANCELADO]
+          example: CRIADO
+        payment:
+          $ref: "#/components/schemas/PaymentResponse"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2024-12-03T18:24:01.379"
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderProductResponse"
+        customer:
+          $ref: "#/components/schemas/CustomerResponse"
+        total:
+          type: number
+          example: 31.98
+    OrderProductRequest:
+      type: object
+      properties:
+        productId:
+          type: integer
+          example: 1
+        quantity:
+          type: integer
+          example: 2
+    OrderProductResponse:
+      type: object
+      properties:
+        quantity:
+          type: integer
+          example: 2
+        price:
+          type: number
+          example: 15.99
+        product:
+          $ref: "#/components/schemas/ProductResponse"
+    PaymentResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        qrCode:
+          type: string
+          example: 00020101021243650016COM.MERCADOLIBRE020130636dc0c2d38-6be5-4959-8a46-5801afd151115204000053039865802BR5909Test Test6009SAO PAULO62070503***6304FCE2
+        status:
+          type: string
+          enum: [PENDENTE, APROVADO, FALHADO]
+          example: PENDENTE
