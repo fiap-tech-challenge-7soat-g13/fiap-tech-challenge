@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -143,7 +144,7 @@ class OrderGatewayImplTest {
 
     private Order buildOrderWithCustomerId() {
         Customer customer = new Customer();
-        customer.setId(1L);
+        customer.setId(UUID.fromString("670104bb-eac6-4bb1-ae7f-df2cdd60d9ba"));
         Payment payment = new Payment();
         payment.setId(1L);
         Order order = new Order();

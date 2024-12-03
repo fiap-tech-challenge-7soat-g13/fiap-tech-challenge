@@ -5,6 +5,7 @@ import feign.FeignException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -19,7 +20,7 @@ class CustomerApiClientTest {
     @Test
     void shouldReturnCustomer() {
 
-        Long id = 1L;
+        UUID id = UUID.fromString("670104bb-eac6-4bb1-ae7f-df2cdd60d9ba");
 
         GetCustomerResponse getCustomerResponse = new GetCustomerResponse();
         Customer customer = new Customer();
@@ -38,7 +39,7 @@ class CustomerApiClientTest {
     @Test
     void shouldNotReturnCustomer() {
 
-        Long id = 1L;
+        UUID id = UUID.fromString("670104bb-eac6-4bb1-ae7f-df2cdd60d9ba");
 
         when(customerApiFeignClient.getCustomer(id)).thenThrow(FeignException.NotFound.class);
 
