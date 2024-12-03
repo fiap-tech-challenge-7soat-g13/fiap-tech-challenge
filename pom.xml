@@ -28,7 +28,10 @@
 			**/*Entity.java,
 			**/*Request.java,
 			**/*Response.java,
-			**/dto/*
+			**/domain/*,
+			**/dto/*,
+			src/main/java/com/fiap/challenge/tastefood/Application.java,
+			src/main/java/com/fiap/challenge/tastefood/app/adapter/input/web/advice
 		</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
