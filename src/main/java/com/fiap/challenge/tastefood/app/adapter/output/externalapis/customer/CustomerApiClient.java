@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -16,7 +17,7 @@ public class CustomerApiClient implements CustomerClient {
     private final GetCustomerResponseMapper mapper;
 
     @Override
-    public Optional<Customer> getCustomer(Long id) {
+    public Optional<Customer> getCustomer(UUID id) {
         try {
             return Optional.of(mapper.toCustomer(client.getCustomer(id)));
         } catch (FeignException.NotFound e) {

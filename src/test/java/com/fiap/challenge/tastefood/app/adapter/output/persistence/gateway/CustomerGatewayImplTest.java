@@ -5,6 +5,7 @@ import com.fiap.challenge.tastefood.core.domain.Customer;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -18,7 +19,7 @@ class CustomerGatewayImplTest {
     @Test
     void shouldFindById() {
 
-        Long id = 1L;
+        UUID id = UUID.fromString("670104bb-eac6-4bb1-ae7f-df2cdd60d9ba");
 
         Optional<Customer> expected = Optional.of(new Customer());
 
