@@ -31,7 +31,7 @@
 			**/domain/*,
 			**/dto/*,
 			src/main/java/com/fiap/challenge/tastefood/Application.java,
-			src/main/java/com/fiap/challenge/tastefood/app/adapter/input/web/advice
+			src/main/java/com/fiap/challenge/tastefood/app/adapter/input/web/advice/DefaultExceptionHandler.java
 		</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
