@@ -9,6 +9,8 @@ import com.fiap.challenge.tastefood.core.gateways.ProductGateway;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 @AllArgsConstructor
 public class OrderCreateValidator {
@@ -35,7 +37,7 @@ public class OrderCreateValidator {
         validator.assertEmptyMessages();
     }
 
-    private boolean customerNotFound(Long customerId) {
+    private boolean customerNotFound(UUID customerId) {
         return customerId != null && customerGateway.findById(customerId).isEmpty();
     }
 

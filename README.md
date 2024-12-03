@@ -103,7 +103,7 @@ curl --location 'http://192.168.49.2:30000/customer' \
 curl --location 'http://192.168.49.2:30000/order' \
 --header 'Content-Type: application/json' \
 --data '{
-  "customerId": 1,
+  "customerId": "670104bb-eac6-4bb1-ae7f-df2cdd60d9ba",
   "products": [
     {
       "productId": 1,

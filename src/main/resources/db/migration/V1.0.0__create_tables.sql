@@ -13,7 +13,7 @@ CREATE TABLE "orders" (
     created_at TIMESTAMP NOT NULL,
     status SMALLINT NOT NULL,
     total NUMERIC NOT NULL,
-    customer_id BIGINT NOT NULL,
+    customer_id uuid NOT NULL,
     payment_id BIGINT
 );
 
