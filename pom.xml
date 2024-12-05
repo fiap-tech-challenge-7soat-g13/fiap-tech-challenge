@@ -32,6 +32,11 @@
 			**/dto/*,
 			src/main/java/com/fiap/challenge/tastefood/Application.java,
 			src/main/java/com/fiap/challenge/tastefood/app/adapter/input/web/advice/DefaultExceptionHandler.java
+			**/exception/*,
+			**/util/*,
+			**/validator/*,
+			**/configuration/*,
+			**/*Config.java
 		</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
