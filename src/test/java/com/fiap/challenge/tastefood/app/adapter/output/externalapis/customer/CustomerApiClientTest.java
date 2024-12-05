@@ -18,11 +18,30 @@ class CustomerApiClientTest {
     private final CustomerApiClient customerApiClient = new CustomerApiClient(customerApiFeignClient, getCustomerResponseMapper);
 
     @Test
-    void shouldReturnCustomer() {
+    void shouldReturnEmptyCustomer() {
 
         UUID id = UUID.fromString("670104bb-eac6-4bb1-ae7f-df2cdd60d9ba");
 
         GetCustomerResponse getCustomerResponse = new GetCustomerResponse();
+        Customer customer = new Customer();
+
+        when(customerApiFeignClient.getCustomer(id)).thenReturn(getCustomerResponse);
+        when(getCustomerResponseMapper.toCustomer(getCustomerResponse)).thenReturn(customer);
+
+        Optional<Customer> actual = customerApiClient.getCustomer(id);
+
+        verify(customerApiFeignClient).getCustomer(id);
+        verify(getCustomerResponseMapper).toCustomer(getCustomerResponse);
+
+        assertEquals(Optional.of(customer), actual);
+    }
+
+    @Test
+    void shouldReturnCustomer() {
+
+        UUID id = UUID.fromString("670104bb-eac6-4bb1-ae7f-df2cdd60d9ba");
+        GetCustomerResponse getCustomerResponse = new GetCustomerResponse(id, "Nome de Teste",
+                "teste@teste.com.br", "01234567890");
         Customer customer = new Customer();
 
         when(customerApiFeignClient.getCustomer(id)).thenReturn(getCustomerResponse);
