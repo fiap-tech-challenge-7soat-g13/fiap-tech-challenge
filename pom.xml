@@ -28,20 +28,15 @@
 			**/*Entity.java,
 			**/*Request.java,
 			**/*Response.java,
-<<<<<<< Updated upstream
 			**/domain/*,
 			**/dto/*,
 			src/main/java/com/fiap/challenge/tastefood/Application.java,
 			src/main/java/com/fiap/challenge/tastefood/app/adapter/input/web/advice/DefaultExceptionHandler.java
-=======
-			**/dto/*,
 			**/exception/*,
 			**/util/*,
 			**/validator/*,
 			**/configuration/*,
 			**/*Config.java
-			**/Application.java
->>>>>>> Stashed changes
 		</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
