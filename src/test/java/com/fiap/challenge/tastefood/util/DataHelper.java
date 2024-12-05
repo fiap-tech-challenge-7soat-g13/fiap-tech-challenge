@@ -8,6 +8,7 @@ import com.fiap.challenge.tastefood.app.adapter.input.web.order.dto.OrderRespons
 import com.fiap.challenge.tastefood.app.adapter.input.web.payment.dto.PaymentResponse;
 import com.fiap.challenge.tastefood.app.adapter.input.web.product.dto.ProductRequest;
 import com.fiap.challenge.tastefood.app.adapter.input.web.product.dto.ProductResponse;
+import com.fiap.challenge.tastefood.app.adapter.output.persistence.entity.ProductEntity;
 import com.fiap.challenge.tastefood.core.domain.*;
 import com.fiap.challenge.tastefood.core.domain.enums.OrderStatus;
 import com.fiap.challenge.tastefood.core.domain.enums.PaymentStatus;
@@ -188,6 +189,23 @@ public class DataHelper {
         productRequest.setImages(List.of(""));
 
         return productRequest;
+    }
+
+    public static ProductEntity getProductEntityMock(Long id) {
+        ProductEntity product = new ProductEntity();
+
+        if (id != null)
+            product.setId(id);
+
+        product.setName("Produto Teste");
+        product.setName("Produto Teste");
+        product.setDescription("Descrição do produto");
+        product.setPrice(BigDecimal.valueOf(10));
+        product.setCategory(ProductCategory.LANCHE);
+        product.setActive(Boolean.TRUE);
+        product.setImages(List.of(""));
+
+        return product;
     }
 
 }
