@@ -2,6 +2,7 @@ package com.fiap.challenge.tastefood.app.adapter.output.externalapis.payment;
 
 import com.fiap.challenge.tastefood.core.domain.Order;
 import com.fiap.challenge.tastefood.core.domain.Payment;
+import com.fiap.challenge.tastefood.util.DataHelper;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,9 +18,8 @@ class PaymentApiClientTest {
 
     @Test
     void shouldCreatePayment() {
-
         Order order = new Order();
-        CreatePaymentOrderRequest createPaymentOrderRequest = new CreatePaymentOrderRequest();
+        CreatePaymentOrderRequest createPaymentOrderRequest = DataHelper.getCreatePaymentOrderRequestMock(1L);
         GetPaymentResponse getPaymentResponse = new GetPaymentResponse();
         Payment expected = new Payment();
 
@@ -38,7 +38,6 @@ class PaymentApiClientTest {
 
     @Test
     void shouldGetPayment() {
-
         Long id = 1L;
 
         GetPaymentResponse getPaymentResponse = new GetPaymentResponse();
