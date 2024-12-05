@@ -5,7 +5,7 @@ info:
     This is a sample API for a fast food store based on the OpenAPI 3.0 specification.
   version: 1.0.0
 servers:
-  - url: https://y7996anp4a.execute-api.us-east-1.amazonaws.com/dev
+  - url: https://challenge.dev.br
 tags:
   - name: customer
     description: Operations about customers
