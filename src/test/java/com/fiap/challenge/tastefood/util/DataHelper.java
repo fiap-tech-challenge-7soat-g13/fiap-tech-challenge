@@ -8,6 +8,8 @@ import com.fiap.challenge.tastefood.app.adapter.input.web.order.dto.OrderRespons
 import com.fiap.challenge.tastefood.app.adapter.input.web.payment.dto.PaymentResponse;
 import com.fiap.challenge.tastefood.app.adapter.input.web.product.dto.ProductRequest;
 import com.fiap.challenge.tastefood.app.adapter.input.web.product.dto.ProductResponse;
+import com.fiap.challenge.tastefood.app.adapter.output.externalapis.payment.CreatePaymentOrderRequest;
+import com.fiap.challenge.tastefood.app.adapter.output.externalapis.payment.CustomerRequest;
 import com.fiap.challenge.tastefood.app.adapter.output.persistence.entity.ProductEntity;
 import com.fiap.challenge.tastefood.core.domain.*;
 import com.fiap.challenge.tastefood.core.domain.enums.OrderStatus;
@@ -175,6 +177,21 @@ public class DataHelper {
 
         payment.setStatus(PaymentStatus.APROVADO);
         payment.setQrCode("");
+
+        return payment;
+    }
+
+    public static CreatePaymentOrderRequest getCreatePaymentOrderRequestMock(Long id) {
+        CreatePaymentOrderRequest payment = new CreatePaymentOrderRequest();
+
+        if (id != null)
+            payment.setId(id);
+
+        payment.setTotal(BigDecimal.valueOf(100));
+        payment.setProducts(List.of(new com.fiap.challenge.tastefood.app.adapter.output.externalapis.payment.OrderProductRequest()));
+        payment.setCustomer(new CustomerRequest());
+        payment.setStatus(OrderStatus.CRIADO);
+        payment.setCreatedAt(LocalDateTime.of(2024, 1, 1, 10, 10));
 
         return payment;
     }
