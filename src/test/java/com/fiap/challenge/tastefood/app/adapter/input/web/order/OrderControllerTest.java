@@ -58,7 +58,6 @@ public class OrderControllerTest {
 		Order expectedWithId = DataHelper.getOrderMock(id);
 		OrderResponse orderResponseMock = DataHelper.getOrderResponseMock(id);
 
-
 		when(orderRequestMapper.toOrder(orderRequestMock)).thenReturn(expected);
 		when(orderCreateUseCase.execute(expected)).thenReturn(expectedWithId);
 		when(orderResponseMapper.toOrderResponse(expectedWithId)).thenReturn(orderResponseMock);
