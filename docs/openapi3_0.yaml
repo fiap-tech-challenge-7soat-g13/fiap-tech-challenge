@@ -5,7 +5,7 @@ info:
     This is a sample API for a fast food store based on the OpenAPI 3.0 specification.
   version: 1.0.0
 servers:
-  - url: https://xjg1p730j3.execute-api.us-east-1.amazonaws.com/prod
+  - url: https://y7996anp4a.execute-api.us-east-1.amazonaws.com/dev
 tags:
   - name: customer
     description: Operations about customers
@@ -16,6 +16,7 @@ tags:
   - name: product
     description: Operations about products
 paths:
+
   /customer:
     post:
       tags:
@@ -65,8 +66,8 @@ paths:
           name: id
           schema:
             type: string
-            format: integer
-            example: 1
+            format: uuid
+            example: 67afa839-3a73-4134-b0c2-aa54a3555fa4
           required: true
       responses:
         200:
@@ -86,8 +87,8 @@ paths:
           name: id
           schema:
             type: string
-            format: integer
-            example: 1
+            format: uuid
+            example: 67afa839-3a73-4134-b0c2-aa54a3555fa4
           required: true
       responses:
         200:
@@ -338,7 +339,6 @@ paths:
                 items:
                   type: string
 
-
   /payment:
     post:
       tags:
@@ -431,8 +431,9 @@ components:
       type: object
       properties:
         id:
-          type: integer
-          example: 1
+          type: string
+          format: uuid
+          example: 67afa839-3a73-4134-b0c2-aa54a3555fa4
         name:
           type: string
           example: Bill Gates
@@ -487,13 +488,13 @@ components:
           items:
             type: string
             example: "https://embutidosbonatti.ind.br/temp/BIN_57_V9Fb0BwK.jpg"
-
     OrderRequest:
       type: object
       properties:
         customerId:
-          type: integer
-          example: 1
+          type: string
+          format: uuid
+          example: 67afa839-3a73-4134-b0c2-aa54a3555fa4
         products:
           type: array
           items:
