@@ -1,7 +1,7 @@
 # FIAP Tech Challenge | Pós Tech
 
 ## Propósito
-Fornecer um sistema para gestão de clientes, produtos e pedidos para uma lanchonete.
+Sistema para gestão de produtos e pedidos.
 
 ## Stack utilizada
 * PostgreSQL
@@ -16,9 +16,6 @@ Fornecer um sistema para gestão de clientes, produtos e pedidos para uma lancho
 
 ## Documentação da API REST
 Com a aplicação em execução, a documentação da API REST pode ser acessada através da URL: http://localhost:8080/swagger-ui/index.html
-
-## Collection do Postman
-Visando facilitar a realização de testes, uma collection pode ser importada no Postman através do link: https://api.postman.com/collections/37309561-f4eb7963-4a27-4ce5-ac50-2ebf33648b2e?access_key=PMAT-01J40SE1N63N1JBX14PBPG5GS8
 
 ## Execução local pelo Docker
 Para realizar o build e iniciar a aplicação basta executar o comando abaixo na raiz do projeto:
@@ -87,18 +84,8 @@ curl --location 'http://192.168.49.2:30000/product' \
   ]
 }'
 ```
-2. Cadastrar cliente (opcional)
-```
-curl --location 'http://192.168.49.2:30000/customer' \
---header 'Content-Type: application/json' \
---data-raw '{
-  "name": "Bill Gates",
-  "email": "bill.gates@microsoft.com",
-  "document": "44867508020",
-  "password": "abc1@XYZ"
-}'
-```
-3. Cadastrar pedido (customerId é opcional)
+
+2. Cadastrar pedido (customerId é opcional)
 ```bash
 curl --location 'http://192.168.49.2:30000/order' \
 --header 'Content-Type: application/json' \
@@ -116,30 +103,37 @@ curl --location 'http://192.168.49.2:30000/order' \
   ]
 }'
 ```
-4. Realizar o checkout do pedido
+3. Realizar o checkout do pedido
 ```bash
 curl --location --request POST 'http://192.168.49.2:30000/order/1/checkout'
 ```
-5. Simular pagamento do pedido aprovado
+4. Simular pagamento do pedido aprovado
 ```bash
 curl --location --request PUT 'http://192.168.49.2:30000/order/1/paymentStatus?paymentStatus=APROVADO'
 ```
-6. Visualizar fila de pedidos não finalizados
+5. Visualizar fila de pedidos não finalizados
 ```bash
 curl --location 'http://192.168.49.2:30000/order/queue'
 ```
-7. Atualizar o status do pedido quando preparação for iniciada
+6. Atualizar o status do pedido quando preparação for iniciada
 ```bash
 curl --location --request PUT 'http://192.168.49.2:30000/order/1/status?status=EM_PREPARACAO'
 ```
-8. Atualizar o status do pedido quando estiver pronto
+7. Atualizar o status do pedido quando estiver pronto
 ```bash
 curl --location --request PUT 'http://192.168.49.2:30000/order/1/status?status=PRONTO'
 ```
-9. Atualizar o status do pedido quando for finalizado
+8. Atualizar o status do pedido quando for finalizado
 ```bash
 curl --location --request PUT 'http://192.168.49.2:30000/order/1/status?status=FINALIZADO'
 ```
+
+## Cobertura de código do sistema
+
+Pode ser analisado melhor a cobertura no seguinte link: https://sonarcloud.io/project/overview?id=fiap-tech-challenge-7soat-g13_order-api
+
+![img.png](img.png)
+
 Existem outros endpoints no sistema, como alteração e exclusão de produto, listagem de clientes, etc. Para visualização completa sugerimos a acessar o Swagger ou a utilização da collection do Postman.
 ## Autores
 * Cristiano de Barros
